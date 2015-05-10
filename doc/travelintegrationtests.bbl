@@ -1,0 +1,426 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{Amazon.com_-_Wikipedia_the_free_encyclopedia_2014-11-15}{online}{}
+  \field{sortinit}{A}
+  \field{title}{Amazon.com - Wikipedia, the free encyclopedia}
+  \verb{url}
+  \verb http://en.wikipedia.org/wiki/Amazon.com
+  \endverb
+  \verb{file}
+  \verb :./references/Amazon.com - Wikipedia, the free encyclopedia.html:html
+  \endverb
+  \field{urlday}{15}
+  \field{urlmonth}{11}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Announcing_Amazon_Elastic_Compute_Cloud_(Amazon_EC2)_-_beta_2014-10-31}{online}{}
+  \field{sortinit}{A}
+  \field{title}{Announcing Amazon Elastic Compute Cloud (Amazon EC2) - beta}
+  \verb{url}
+  \verb https://aws.amazon.com/de/about-aws/whats-new/2006/08/24/announcing-ama
+  \verb zon-elastic-compute-cloud-amazon-ec2---beta/
+  \endverb
+  \verb{file}
+  \verb :./references/Announcing Amazon Elastic Compute Cloud (Amazon EC2) - be
+  \verb ta.html:html
+  \endverb
+  \field{urlday}{31}
+  \field{urlmonth}{10}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{AWS_Amazon_WorkSpaces_2014-11-03}{online}{}
+  \field{sortinit}{A}
+  \field{title}{AWS | Amazon WorkSpaces}
+  \verb{url}
+  \verb http://aws.amazon.com/de/workspaces/
+  \endverb
+  \verb{file}
+  \verb :./references/AWS | Amazon WorkSpaces.html:html
+  \endverb
+  \field{urlday}{03}
+  \field{urlmonth}{11}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{AWS_Amazon_WorkSpaces_Preise_2014-11-15}{online}{}
+  \field{sortinit}{A}
+  \field{title}{AWS | Amazon WorkSpaces | Preise}
+  \verb{url}
+  \verb http://aws.amazon.com/de/workspaces/pricing/
+  \endverb
+  \verb{file}
+  \verb :./references/AWS | Amazon WorkSpaces | Preise.html:html
+  \endverb
+  \field{urlday}{15}
+  \field{urlmonth}{11}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Building_VDI_for_100000_users_Why_huge_DaaS_providers_dont_use_Dell_and_HP_and_why_they_can_do_VDI_cheaper_than_you}{online}{}
+  \field{sortinit}{B}
+  \field{title}{Building VDI for 100,000 users: Why huge DaaS providers don't
+  use Dell and HP, and why they can do VDI cheaper than you! - Brian Madden -
+  BrianMadden.com}
+  \verb{url}
+  \verb http://www.brianmadden.com/blogs/brianmadden/archive/2014/01/27/buildin
+  \verb g-vdi-for-100-000-users-why-huge-daas-providers-don-t-use-dell-and-hp-a
+  \verb nd-why-they-can-do-vdi-cheaper-than-you.aspx
+  \endverb
+  \verb{file}
+  \verb :./references/Building VDI for 100,000 users: Why huge DaaS providers d
+  \verb on't use Dell and HP, and why they can do VDI cheaper than you! - Brian
+  \verb  Madden - BrianMadden.com.html:html
+  \endverb
+  \field{urlday}{22}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Chromebook_Wikipedia_2014-12-27}{online}{}
+  \field{sortinit}{C}
+  \field{title}{Chromebook – Wikipedia}
+  \verb{url}
+  \verb http://de.wikipedia.org/wiki/Chromebook
+  \endverb
+  \verb{file}
+  \verb :./references/Chromebook – Wikipedia.html:html
+  \endverb
+  \field{urlday}{27}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Chromebooks_bersicht_2014-12-27}{online}{}
+  \field{sortinit}{C}
+  \field{title}{Chromebooks: \"Ubersicht}
+  \verb{url}
+  \verb https://www.google.ch/chrome/devices/chromebooks.html
+  \endverb
+  \verb{file}
+  \verb :./references/Chromebooks: Übersicht.html:html
+  \endverb
+  \field{urlday}{27}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Chromebooks_und_Chromeboxes_for_Education_2014-12-27}{online}{}
+  \field{sortinit}{C}
+  \field{title}{Chromebooks und Chromeboxes for Education}
+  \verb{url}
+  \verb https://www.google.ch/intl/de/chrome/education/devices/
+  \endverb
+  \verb{file}
+  \verb :./references/Chromebooks und Chromeboxes for Education.html:html
+  \endverb
+  \field{urlday}{27}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Cloud-Based_VDI_vs_DaaS__Is_There_a_Difference_VirtualQube}{online}{}
+  \field{sortinit}{C}
+  \field{title}{Cloud-Based VDI vs. DaaS – Is There a Difference? |
+  VirtualQube Blog}
+  \verb{url}
+  \verb http://www.virtualqube.com/blog/cloud-based-vdi-vs-daas-is-there-a-diff
+  \verb erence/
+  \endverb
+  \verb{file}
+  \verb :./references/Cloud-Based VDI vs. DaaS – Is There a Difference? | Vir
+  \verb tualQube Blog.html:html
+  \endverb
+  \field{urlday}{22}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Cloud_computing_-_Wikipedia_the_free_encyclopedia_2014-10-31}{online}{}
+  \field{sortinit}{C}
+  \field{title}{Cloud computing - Wikipedia, the free encyclopedia}
+  \verb{url}
+  \verb http://en.wikipedia.org/wiki/Cloud_computing#Origin_of_the_term
+  \endverb
+  \verb{file}
+  \verb :./references/Cloud computing - Wikipedia, the free encyclopedia.html:h
+  \verb tml
+  \endverb
+  \field{urlday}{31}
+  \field{urlmonth}{10}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Cloud_Computing__Wikipedia_2014-10-03}{online}{}
+  \field{sortinit}{C}
+  \field{title}{Cloud Computing – Wikipedia}
+  \verb{url}
+  \verb http://de.wikipedia.org/wiki/Cloud_Computing
+  \endverb
+  \verb{file}
+  \verb :./references/Cloud Computing – Wikipedia.html:html
+  \endverb
+  \field{urlday}{03}
+  \field{urlmonth}{10}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Comparing_cloud_vs_on-premise_Six_hidden_costs_people_always_forget_about}{online}{}
+  \field{sortinit}{C}
+  \field{title}{Comparing cloud vs on-premise? Six hidden costs people always
+  forget about}
+  \verb{url}
+  \verb http://betanews.com/2013/11/04/comparing-cloud-vs-on-premise-six-hidden
+  \verb -costs-people-always-forget-about/
+  \endverb
+  \verb{file}
+  \verb :./references/Comparing cloud vs on-premise? Six hidden costs people al
+  \verb ways forget about.html:html
+  \endverb
+  \field{urlday}{16}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{DaaS_vs_VDI_comparison_highlights_benefits_of_cloud_desktops}{online}{}
+  \field{sortinit}{D}
+  \field{title}{DaaS vs. VDI comparison highlights benefits of cloud desktops}
+  \verb{url}
+  \verb http://searchvirtualdesktop.techtarget.com/feature/DaaS-vs-VDI-comparis
+  \verb on-highlights-benefits-of-cloud-desktops
+  \endverb
+  \verb{file}
+  \verb :./references/DaaS vs. VDI comparison highlights benefits of cloud desk
+  \verb tops.html:html
+  \endverb
+  \field{urlday}{22}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Death_To_VDI_Or_DaaS_Or_Whatever_Its_Called_This_Week}{online}{}
+  \field{sortinit}{D}
+  \field{title}{Death To VDI. Or DaaS. Or Whatever It's Called This Week -
+  Forbes}
+  \verb{url}
+  \verb http://www.forbes.com/sites/benkepes/2013/11/06/death-to-vdi-or-daas-or
+  \verb -whatever-its-called-this-week/
+  \endverb
+  \verb{file}
+  \verb :./references/Death To VDI. Or DaaS. Or Whatever It's Called This Week
+  \verb - Forbes.html:html
+  \endverb
+  \field{urlday}{22}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Disaster_Recovery_Resouce_Center_-_Vision_Solutions}{online}{}
+  \field{sortinit}{D}
+  \field{title}{Disaster Recovery Resouce Center - Vision Solutions}
+  \verb{url}
+  \verb http://www.visionsolutions.com/Solutions/Disaster-Recovery-toolkit-down
+  \verb time-calc.aspx
+  \endverb
+  \verb{file}
+  \verb :./references/Disaster Recovery Resouce Center - Vision Solutions.html:
+  \verb html
+  \endverb
+  \field{urlday}{22}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Dropbox_2014-11-15}{online}{}
+  \field{sortinit}{D}
+  \field{title}{Dropbox}
+  \verb{url}
+  \verb https://www.dropbox.com/
+  \endverb
+  \verb{file}
+  \verb :./references/Home - Dropbox.html:html
+  \endverb
+  \field{urlday}{15}
+  \field{urlmonth}{11}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Forrester_Report}{online}{}
+  \field{sortinit}{F}
+  \field{title}{Forrester Report - Total Economic Impact Of VMware Virtual
+  Desktop Infrastructure - Financial Services Industry}
+  \verb{url}
+  \verb https://www.vmware.com/files/pdf/analysts/Forrester_Report_Total_Econom
+  \verb ic_Impact_of_VMware_Virtual_Desktop_Infrastructure_in_Financial_Service
+  \verb s.pdf
+  \endverb
+  \verb{file}
+  \verb :./references/Microsoft Word - VMware NW Mutual TEI v20 final draft upd
+  \verb ated.doc - Forrester_Report_Total_Economic_Impact_of_VMware_Virtual_Des
+  \verb ktop_Infrastructure_in_Financial_Services.pdf:html
+  \endverb
+  \field{urlday}{10}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Introduction_to_Virtual_Desktop_Manager}{online}{}
+  \field{sortinit}{I}
+  \field{title}{Introduction to Virtual Desktop Manager}
+  \verb{url}
+  \verb http://www.vmware.com/pdf/vdm20_intro.pdf
+  \endverb
+  \verb{file}
+  \verb :./references/Introduction to Virtual Desktop Manager - vdm20_intro.pdf
+  \verb :html
+  \endverb
+  \field{urlday}{10}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{TCO_Comparison_Amazon_WorkSpaces_and_Traditional_Virtual_Desktop_Infrastructure_VDI_2014-11-15}{online}{}
+  \field{sortinit}{T}
+  \field{title}{TCO Comparison: Amazon WorkSpaces and Traditional Virtual
+  Desktop Infrastructure (VDI)}
+  \verb{url}
+  \verb https://aws.amazon.com/de/blogs/aws/tco-comparison-amazon-workspaces-an
+  \verb d-traditional-virtual-desktop-infrastructure-vdi/
+  \endverb
+  \verb{file}
+  \verb :./references/TCO Comparison: Amazon WorkSpaces and Traditional Virtual
+  \verb  Desktop Infrastructure (VDI).html:html
+  \endverb
+  \field{urlday}{15}
+  \field{urlmonth}{11}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{The_Internet_Industry_Is_on_a_Cloud_--_Whatever_That_May_Mean_-_WSJ_2014-10-03}{online}{}
+  \field{sortinit}{T}
+  \field{title}{The Internet Industry Is on a Cloud -- Whatever That May Mean -
+  WSJ}
+  \verb{url}
+  \verb http://online.wsj.com/articles/SB123802623665542725
+  \endverb
+  \verb{file}
+  \verb :./references/The Internet Industry Is on a Cloud -- Whatever That May
+  \verb Mean - WSJ.html:html
+  \endverb
+  \field{urlday}{03}
+  \field{urlmonth}{10}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{VDI_Performance}{online}{}
+  \field{sortinit}{V}
+  \field{title}{VDI Performance Benchmarking on VMware Virtual SAN 5.5}
+  \verb{url}
+  \verb http://blogs.vmware.com/performance/2014/03/vdi-performance-benchmarkin
+  \verb g-vmware-virtual-san-5-5.html
+  \endverb
+  \verb{file}
+  \verb :./references/VDI Performance Benchmarking on VMware Virtual SAN 5.5 |
+  \verb VMware VROOM! Blog - VMware Blogs.html:html
+  \endverb
+  \field{urlday}{10}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Virtual_CPUs_with_Amazon_Web_Services_2014-11-15}{online}{}
+  \field{sortinit}{V}
+  \field{title}{Virtual CPUs with Amazon Web Services}
+  \verb{url}
+  \verb http://www.pythian.com/blog/virtual-cpus-with-amazon-web-services/
+  \endverb
+  \verb{file}
+  \verb :./references/Virtual CPUs with Amazon Web Services.html:html
+  \endverb
+  \field{urlday}{15}
+  \field{urlmonth}{11}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Virtual_desktop_benefits_that_sell_VDI}{online}{}
+  \field{sortinit}{V}
+  \field{title}{Virtual desktop benefits that sell VDI}
+  \verb{url}
+  \verb http://searchvirtualdesktop.techtarget.com/tip/Virtual-desktop-benefits
+  \verb -that-sell-VDI
+  \endverb
+  \verb{file}
+  \verb :./references/Virtual desktop benefits that sell VDI.html:html
+  \endverb
+  \field{urlday}{22}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{What_is_Bandwidth_Pool_Bandwidth_Pool}{online}{}
+  \field{sortinit}{W}
+  \field{title}{What is Bandwidth Pool? | Bandwidth Pool}
+  \verb{url}
+  \verb http://bandwidthpool.com/
+  \endverb
+  \verb{file}
+  \verb :./references/What is Bandwidth Pool? | Bandwidth Pool.html:html
+  \endverb
+  \field{urlday}{22}
+  \field{urlmonth}{12}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{What_really_is_The_Cloud?_And_how_does_it_work?_A_simple_explainer_2014-10-31}{online}{}
+  \field{sortinit}{W}
+  \field{title}{What really is ‘The Cloud’? And how does it work? A simple
+  explainer}
+  \verb{url}
+  \verb http://www.news.com.au/technology/online/what-really-is-the-cloud-and-h
+  \verb ow-does-it-work-a-simple-explainer/story-fnjwmwrh-1227006315184
+  \endverb
+  \verb{file}
+  \verb :./references/What really is ‘The Cloud’? And how does it work? A s
+  \verb imple explainer.html:html
+  \endverb
+  \field{urlday}{31}
+  \field{urlmonth}{10}
+  \field{urlyear}{2014}
+\endentry
+
+\entry{Who_Coined_'Cloud_Computing'?_|_MIT_Technology_Review_2014-10-31}{online}{}
+  \field{sortinit}{W}
+  \field{title}{Who Coined 'Cloud Computing'? | MIT Technology Review}
+  \verb{url}
+  \verb http://www.technologyreview.com/news/425970/who-coined-cloud-computing/
+  \endverb
+  \verb{file}
+  \verb :./references/Who Coined 'Cloud Computing'? | MIT Technology Review.htm
+  \verb l:html
+  \endverb
+  \field{urlday}{31}
+  \field{urlmonth}{10}
+  \field{urlyear}{2014}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput
