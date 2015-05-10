@@ -1,7 +1,5 @@
-workstation-in-the-cloud
+travelintegrationtests
 ========================
 
-ZHAW Seminar - Cloud as Business
-by Simon Lang, Michael Hadorn
-
-Further information: https://drive.google.com/folderview?id=0B_XYfa9OdzJsYnZXeUt6NXVsQTg&usp=sharing
+ZHAW Semesterarbeit - Travel.ch Integrationstests
+by Simon Lang
