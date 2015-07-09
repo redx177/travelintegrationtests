@@ -6,6 +6,7 @@
     - saucelabs
         - Besseres UI als CBT.
         - Controll-Übernahme bei Tests.
+        - Schneller!
 - Bamboo
     - Automated vs on request.
         - Automated schlecht da man für die Minuten zahlt.
