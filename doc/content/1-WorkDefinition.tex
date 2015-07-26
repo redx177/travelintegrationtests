@@ -1,25 +1,38 @@
 \chapter{Beschreibung der Aufgabe}
 
 \section{Ausgangslage}
-Alle 1-2 Monaten wird auf der Webseite von Travelwindow AG eine neue Version eingespielt. Dies verlangt jedes mal ein ausführliches Testen, was bislang immer manuell durchgeführt wurde. Da dies eine sehr monotone und repetitive Arbeit ist, werden auch oft Fehler übersehen und für verschiedene Browsers wird auch nicht getestet. 
+Alle 3 bis 4 Wochen wird auf der Webseite von Travelwindow AG eine neue Version eingespielt. Dies verlangt jedes Mal ein ausführliches Testen, was bislang immer manuell durchgeführt wurde. Dies ist eine sehr monotone und repetitive Arbeit, da die selben Testfälle auf unterschiedlichen Browsern überprüft werden müssen und dadurch oft Fehler übersehen werden. Der Testaufwand würde sich auf 3 bis 4 Tage belaufen, wenn alle kombinierbaren Möglichkeiten von Browser, Sprache und Produkten ausführlich geprüft werden müssen.
 
 \section{Ziele der Arbeit}
 \label{sec:desc:targets}
-Die Einführung von automatischen Integrationstests sollen die repetitiven Testarbeiten minimieren.
-
-Ziel ist es, dass die Testpersonen bei jeder neuen Version nur noch testen müssen, was neu umgesetzt wurde.  Dadurch sollen mehr Programmfehler aufgedeckt und menschliche Fehler ausgeschlossen werden.
-
+Die Einführung von automatisierten Integrationstests sollen die repetitiven Testarbeiten minimieren. Diese sollen mittels Selenium umgesetzt werden.
+Das Ziel der Arbeit ist es, dass die Testpersonen bei jeder neuen Version nur noch testen müssen, was neu umgesetzt wurde.  Dadurch sollen mehr Programmfehler aufgedeckt und menschliche Fehler ausgeschlossen werden.
 Später sollte durch die Automatisierung auch ein Continous Delivery ermöglicht werden.
 
 \section{Aufgabenstellung}
-In der Arbeit werden automatisierbare Testfälle entwickelt. 
-Zuvor müssen diese spezifiziert und in Absprache mit Travelwindow AG priorisiert werden. Zusätzlich sind die einzusetzenden Frameworks und Architekturen zu evaluieren und dokummentieren.
+In der Arbeit werden während vier Phasen die automatisierbaren Testfälle entwickelt. 
 
-Schlussendlich müssen die Tests in den Application Lifecycle eingebaut werden, so dass sie automatisiert, nach zu definierenden Bedingungen, durchgeführt werden.
+\subsection{Recherche}
+Zu beginn werden die einzusetzenden Frameworks, welche für die Entwicklung und Ausführung der Testfälle benötigt werden, evaluiert.
 
+\subsection{Anforderungen und Analyse}
+Als Grundlage für die Konzeptionierung werden bestmöglichst alle Testfälle spezifiziert. Diese sollen die Funktionalität der Webseite vollständig abdecken. Der Product Owner wird die Testfälle priorisieren, so dass entschieden werden kann nach welcher Reihenfolge die Testfälle konzeptioniert und implementiert werden können.
+
+\subsection{Konzept}
+Die Testfälle, welche während dieses Projektes umgesetzt werden, müssen aus spezifiziert werden. Sprich es sind Vorbedingungen, Testabläufe, Soll-Resultate und Nachbedingungen zu definieren. Zusätzlich wird die gesamte Infrastruktur beschrieben.
+
+\subsection{Umsetzung}
+Die Testfälle werden Implementiert und schlussendlich in den Application Lifecycle eingebunden, so dass sie automatisiert und zu definierten Zeitpunkten durchgeführt werden können.
 Je nach Anzahl der Testfälle werden alle oder ein Untermenge davon, in Abhängigkeit der erwähnten Priorisierung, umgesetzt.
 
 \section{Erwartete Resultate}
+Als Testvorbereitung werden die Testfälle spezifiziert und dokumentiert. Anschliessend werden verschiedene Testframeworks evaluiert und eine Architekturbeschreibung der Testinfrastruktur erstellt.
+Es werden alle möglichen Testfälle spezifiziert. Diese werden sehr umfangreich ausfallen weshalb Vorbedingungen, Testabläufe, Soll-Resultate und Nachbedingungen nur für jene Tests definiert werden, welche auch tatsächlich umgesetzt werden sollen. Die zu implementierenden Tests werden von der gesetzten Priorisierung bestimmt.
+
+Der nächste Schritt ist die Implementierung der ausformulierten Tests. Dazu wird die Testinfrastruktur erstellt und die Tests programmiert. Ein vergleich mit den Ist-Resultate ist nicht nötig, da dies direkt von den automatischen Tests vorgenommen wird.
+
+Schlussendlich müssen die Test noch in den Application Lifcecycle integriert werden.
+
 \begin{itemize}
 \item Testfallspezitifkation inkl. Priorisierung
 \item Evaluation von Testframeworks
@@ -27,5 +40,4 @@ Je nach Anzahl der Testfälle werden alle oder ein Untermenge davon, in Abhängi
 \item Aufsetzen der Testinfrastruktur
 \item Implementierte Testfälle
 \item Testfallintegration in den bestehenden Application Lifecycle
-\item Tests sollen auf verschiedenen Browsern ausgeführt werden.
 \end{itemize}

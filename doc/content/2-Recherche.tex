@@ -1,0 +1,53 @@
+\chapter{Recherche}
+
+In diesem Kapitel werden die Rahmenbedingungen sowie die verschiedene Testing Frameworks recherchiert.
+
+\section{Rahmenbedingungen}
+\label{sec:Recherche:Rahmenbedingungen}
+Getestet werden soll die Webseite der Firma \textit{travelwindow AG}, welche unter \url{http://www.travel.ch} erreichbar ist. Die Seite ist mit C\# implementiert, weshalb auch die Tests in dieser Programmiersprache umgesetzt werden sollen.
+
+\subsection{Infrastruktur}
+\label{sec:Recherche:Rahmenbedingungen:Infrastruktur}
+Es gibt folgende drei Umgebungen:
+\begin{itemize}
+\item Test
+\item Quality
+\item Production
+\end{itemize}
+Bei der Entwicklung wird jeder Checkin in das Versionierungssystem (siehe \cref{sec:Recherche:Rahmenbedingungen:Tooling} \nameref{sec:Recherche:Rahmenbedingungen:Tooling}) automatisch auf die Test-Umgebung aufgespielt. Sobald ein Stand erreicht ist, welcher vom Business der travelwindow AG getestet werden soll, wird diese Version auf die Quality-Umgebung geladen. Sobald diese fertig mit dem Testen sind, wird diese Version auf die Production-Umgebung gespielt und ist damit Live.
+
+\subsection{Tooling}
+\label{sec:Recherche:Rahmenbedingungen:Tooling}
+Der Sourcecode der Softare ist auf einem eigenen \gls{svn}\footcite{Apache_Subversion_2015-07-26} Versioniert. Es ist jedoch eine Umstellung auf GIT\footcite{Git_2015-07-26} geplannt, weshalb neuer Sourcecode fortan nur noch auf dem GIT Hosting Dienst BitBucket\footcite{Git_and_Mercurial_code_management_for_teams_2015-07-26} gespeichert werden soll.
+
+Als Continuous Integration Server wird Bamboo\footcite{Bamboo_2015-07-26} eingesetzt. Dieser Kompiliert den Sourcecode und ist dafür verantwortlich, eine Version auf die Umgebungen Test, Quality und Production zu laden.
+
+\section{Testing Frameworks}
+\label{sec:Recherche:TestingFrameworks}
+Der defacto Standart für Integrationstests von Benutzeroberfläche ist Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-07-26}\footcite{Happy_10th_Birthday_Selenium_ThoughtWorks_2015-07-26}. Code für dieses Framework kann in C\# programmiert werden, welcher einen Webbrowser startet und Benutzereingaben simuliert. Dadurch können repetitive Tests automatisiert und auf verschiedenen Browsern durchgeführt werden.
+
+Die Tests können entweder auf einer eigens aufgesetzten Umgebung durchgeführt werden oder an einen Service ausgelagert werden.
+
+\subsection{lokale Ausführung vs Verwendung eines Services}
+\label{sec:Recherche:TestingFrameworks:vs}
+Werden die Tests lokal oder auf einem Server innerhalb der Firma ausgeführt laufen die Tests sehr schnell ab und es muss nichts für die Ausführung der Tests bezahlt werden. Bei der Verwendung eines Services dauern die Tests länger und es fallen Laufzeikosten an. Die Serviceanbieter rechnen pro Minute ab, welche ein Test auf ihrer Infrastruktur läuft.
+
+Der Vorteil der Serviceanbieter liegt darin, dass sie virtuelle Umgebungen für die Durchführung der Tests zur Verfügung stellen. Diese sind mit verschiedenen Betriebssystemen und Browser Konfigurationen ausgestattet. Einige Beispiele solcher Zusammenstellungen:
+\begin{itemize}
+\item Windows 7, Firefox 39
+\item Windows 8.1, Firefox 39
+\item OS X Yosemite, Safari 8
+\item IPhone, iOS 8.4
+\item Android 4.4, Samsung Galaxy S4
+\end{itemize}
+Es ist ersichtlich, dass auch Mobile Browser unterstützt werden. Das Aufsetzten und Pflegen verschiedener Servern mit verschiedenen Betriebssystemen, Browsern und Emulatoren für mobile Endgeräte ist aufwändig und benötigt viel Knowhow. 
+
+Als Service-Anbieter für Selenium Tests wurden zwei Kandidaten näher in Betracht gezogen. SauceLabs\footcite{Sauce_Labs_2015-07-26} und CrossBrowserTesting\footcite{Cross_Browser_Testing_2015-07-26}.
+
+Beide Anbieter verfügen über 500 verschiedene Betriebsystem/Browser Konfigurationen\footcite{Platforms_2015-07-26}\footcite{OS_Browser_Configurations_for_Cross_Browser_Compatibility_Testing_2015-07-26}. Beide können automatisierte Tests ausführen und liefern als Resultat ein Video der Durchführung sowie Screenshots der einzelnen Tests.
+
+Vom Preis her unterscheiden sie sich auch nicht markant\footcite{Sauce_Labs_Pricing_2015-07-26}\footcite{Test_your_site_on_all_browsers_2015-07-26}. SauceLabs hat das kleinste Packet mit 120 Minuten Automatisierten Tests für \$12/Monat. Beide Anbieten verrrechnen für 10 Stunden Testing \$49/Monat. Bei den teureren Packet für \$149/Monat bietet CrossBrowserTesting mit 2000- mehr als Sauclabs mit 1800 Minuten.
+
+\subsection{Prototyp}
+Um die beiden Frameworks, welche im \cref{sec:Recherche:TestingFrameworks:vs} \nameref{sec:Recherche:TestingFrameworks:vs} beschrieben wurden, zu testen wurde ein Prototyp entwickelt. Dieser kann die Tests auch lokal laufen lassen. Der Browser sowie der Selenium Treiber müssen dafür jedoch installiert sein. Der Quellcode ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
+
