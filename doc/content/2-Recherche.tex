@@ -1,6 +1,6 @@
 \chapter{Recherche}
 
-In diesem Kapitel werden die Rahmenbedingungen sowie die verschiedene Testing Frameworks recherchiert.
+In diesem Kapitel werden die Rahmenbedingungen, die verschiedene Testing Frameworks sowie die Zielgruppe recherchiert.
 
 \section{Rahmenbedingungen}
 \label{sec:Recherche:Rahmenbedingungen}
@@ -49,5 +49,30 @@ Beide Anbieter verfügen über 500 verschiedene Betriebsystem/Browser Konfigurat
 Vom Preis her unterscheiden sie sich auch nicht markant\footcite{Sauce_Labs_Pricing_2015-07-26}\footcite{Test_your_site_on_all_browsers_2015-07-26}. SauceLabs hat das kleinste Packet mit 120 Minuten Automatisierten Tests für \$12/Monat. Beide Anbieten verrrechnen für 10 Stunden Testing \$49/Monat. Bei den teureren Packet für \$149/Monat bietet CrossBrowserTesting mit 2000- mehr als Sauclabs mit 1800 Minuten.
 
 \subsection{Prototyp}
-Um die beiden Frameworks, welche im \cref{sec:Recherche:TestingFrameworks:vs} \nameref{sec:Recherche:TestingFrameworks:vs} beschrieben wurden, zu testen wurde ein Prototyp entwickelt. Dieser kann die Tests auch lokal laufen lassen. Der Browser sowie der Selenium Treiber müssen dafür jedoch installiert sein. Der Quellcode ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
+Um die beiden Frameworks, welche im \cref{sec:Recherche:TestingFrameworks:vs} \nameref{sec:Recherche:TestingFrameworks:vs} beschrieben wurden, zu testen wurde ein Prototyp entwickelt. Dieser kann die Tests auch lokal laufen lassen. Der Browser sowie der Selenium Treiber müssen dazu jedoch auf dem eigenen Rechner 	11111installiert sein. Der Quellcode ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
 
+\section{Zielgruppe}
+Die Zielgruppe sind die verschiedenen Browser, welche die Benutzer der Webseite verwenden. Die Tests werden schlussendlich auf den meist verwendeten Browsern durchgeführt.
+Auf \textit{travel.ch} wird Google Analytics eingesetzt. Die Auswertung des letzten halben Jahres (25.02.2015 - 25.07.2015) ergab folgendes:
+\begin{itemize}
+\item Safari: 32.61\%
+	\begin{itemize}
+			\item 8.0: 53.40\%
+			\item 7.0: 12.62\%
+	\end{itemize}
+\item Internet Explorer: 26.62\%
+	\begin{itemize}
+			\item 11.0: 74.23\%
+			\item 9.0: 13.95\%
+	\end{itemize}
+\item Chrome: 21.14\%
+	\begin{itemize}
+			\item 40.0: 19.24\%
+			\item 41.0: 15.82\%
+	\end{itemize}
+\item Firefox: 14.22\%
+	\begin{itemize}
+			\item 36.0: 25.95\%
+			\item 37.0: 21.53\%
+	\end{itemize}
+\end{itemize}
