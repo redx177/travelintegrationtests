@@ -40,7 +40,7 @@ Der Vorteil der Serviceanbieter liegt darin, dass sie virtuelle Umgebungen für 
 \item IPhone, iOS 8.4
 \item Android 4.4, Samsung Galaxy S4
 \end{itemize}
-Es ist ersichtlich, dass auch Mobile Browser unterstützt werden. Das Aufsetzten und Pflegen verschiedener Servern mit verschiedenen Betriebssystemen, Browsern und Emulatoren für mobile Endgeräte ist aufwändig und benötigt viel Knowhow. 
+Es ist ersichtlich, dass auch Mobile Browser unterstützt werden. Das Aufsetzten und Pflegen verschiedener Servern mit verschiedenen Betriebssystemen, Browsern und Emulatoren für mobile Endgeräte ist aufwändig und benötigt viel Knowhow. Aus diesem Grund wurde in Absprache mit dem Business von \textit{travel.ch} entschieden, dass die Browser nicht auf einem Rechner installiert werden sollen, sondern ein Service Anbieter verwendet wird.
 
 Als Service-Anbieter für Selenium Tests wurden zwei Kandidaten näher in Betracht gezogen. SauceLabs\footcite{Sauce_Labs_2015-07-26} und CrossBrowserTesting\footcite{Cross_Browser_Testing_2015-07-26}.
 
@@ -48,8 +48,10 @@ Beide Anbieter verfügen über 500 verschiedene Betriebsystem/Browser Konfigurat
 
 Vom Preis her unterscheiden sie sich auch nicht markant\footcite{Sauce_Labs_Pricing_2015-07-26}\footcite{Test_your_site_on_all_browsers_2015-07-26}. SauceLabs hat das kleinste Packet mit 120 Minuten Automatisierten Tests für \$12/Monat. Beide Anbieten verrrechnen für 10 Stunden Testing \$49/Monat. Bei den teureren Packet für \$149/Monat bietet CrossBrowserTesting mit 2000- mehr als Sauclabs mit 1800 Minuten.
 
+Um sich für einen Serviceanbieter zu entscheiden wurde ein Prototyp entwickelt, welcher im nächsten Abschnitt beschrieben wird.
+
 \subsection{Prototyp}
-Um die beiden Frameworks, welche im \cref{sec:Recherche:TestingFrameworks:vs} \nameref{sec:Recherche:TestingFrameworks:vs} beschrieben wurden, zu testen wurde ein Prototyp entwickelt. Dieser kann die Tests auch lokal laufen lassen. Der Browser sowie der Selenium Treiber müssen dazu jedoch auf dem eigenen Rechner 	11111installiert sein. Der Quellcode ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
+Um die beiden Frameworks, welche im \cref{sec:Recherche:TestingFrameworks:vs} \nameref{sec:Recherche:TestingFrameworks:vs} beschrieben wurden, zu testen wurde ein Prototyp entwickelt. Dieser kann die Tests auch lokal laufen lassen. Der Browser sowie der Selenium Treiber müssen dazu jedoch auf dem eigenen Rechner installiert sein. Der Quellcode ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
 
 \section{Zielgruppe}
 Die Zielgruppe sind die verschiedenen Browser, welche die Benutzer der Webseite verwenden sowie die Destinationen für die sie eine Reise buchen möchten.
