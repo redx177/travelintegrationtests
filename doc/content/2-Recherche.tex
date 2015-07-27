@@ -52,8 +52,9 @@ Vom Preis her unterscheiden sie sich auch nicht markant\footcite{Sauce_Labs_Pric
 Um die beiden Frameworks, welche im \cref{sec:Recherche:TestingFrameworks:vs} \nameref{sec:Recherche:TestingFrameworks:vs} beschrieben wurden, zu testen wurde ein Prototyp entwickelt. Dieser kann die Tests auch lokal laufen lassen. Der Browser sowie der Selenium Treiber müssen dazu jedoch auf dem eigenen Rechner 	11111installiert sein. Der Quellcode ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
 
 \section{Zielgruppe}
-Die Zielgruppe sind die verschiedenen Browser, welche die Benutzer der Webseite verwenden. Die Tests werden schlussendlich auf den meist verwendeten Browsern durchgeführt.
-Auf \textit{travel.ch} wird Google Analytics eingesetzt. Die Auswertung des letzten halben Jahres (25.02.2015 - 25.07.2015) ergab folgendes:
+Die Zielgruppe sind die verschiedenen Browser, welche die Benutzer der Webseite verwenden sowie die Destinationen für die sie eine Reise buchen möchten.
+
+Auf \textit{travel.ch} wird Google Analytics eingesetzt. Die Auswertung des letzten halben Jahres (25.02.2015 - 25.07.2015) ergab das folgende Browserversionen am meisten verwendet wurden:
 \begin{itemize}
 \item Safari: 32.61\%
 	\begin{itemize}
@@ -76,3 +77,24 @@ Auf \textit{travel.ch} wird Google Analytics eingesetzt. Die Auswertung des letz
 			\item 37.0: 21.53\%
 	\end{itemize}
 \end{itemize}
+
+Die Webseite ist in drei Bereiche aufgeteilt: Citytrip (Flug \& Hotel), Flug, Hotel. Folgend nun die zehn meist gesuchten Destinationen:
+\begin{table}[H] 
+	\caption{Top 10 Destinationen für Citytrip, Flug und Hotel}
+	\centering
+	
+	\begin{tabular}{ | c | l | l | l | } 
+		\hline 
+		\textbf{\#} & \textbf{Citytrip} & \textbf{Flug} & \textbf{Hotel} \\ \hline 
+		1 & Berlin & Bangkok & London \\ \hline
+		2 & Barcelona & Byculla & Rom \\ \hline
+		3 & Wien & London & Paris \\ \hline
+		4 & London & Berlin & New York City \\ \hline
+		5 & Amsterdam & Miami & Berlin \\ \hline
+		6 & Rom & Palma de Mallorca & Barcelona \\ \hline
+		7 & Lissabon & Los Angeles & München \\ \hline
+		8 & Hamburg & Wien  & Palma de Mallorca \\ \hline
+		9 & Prag & San Francisco & Wien \\ \hline
+		10 & Istanbul & Barcelona & Venedig \\ \hline
+	\end{tabular} 
+\end{table}
