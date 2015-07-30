@@ -1,3 +1,31 @@
 
 \chapter{Konzept}
-dfasdfadfadfad
+Dieses Kapitel spezifiziert die umzusetzenden Testfälle. Diese beinhalten die Ausführung, die erwarteten Resultate sowie allfällige Nachbedingungen. Die Vorbedingungen sind für alle Testfälle gleich, da jeder in einer neuen virtuellen Maschine (siehe \Gls{glos:virtualMachine}) gestartet wird und somit keine \Glspl{glos:session} und \Glspl{glos:httpcookie} vorhanden sind.
+
+Um die Kosten zu minimieren werden möglichst wenig Testfälle spezifiziert, jedoch trotzdem die gesamte Funktionalität der Webseite überprüft werden kann.
+
+Eine Übersicht der Testfälle wurde im Wiki von Hotelplan erstellt und wird zum Verständniss dort gepflegt. Die Liste ist im \cref{app:Testfälle} \nameref{app:Testfälle} unter "`Test Cases"' beigefügt.
+
+\section{Übersicht}
+Die Seite der \textit{travelwindow AG} besteht aus drei Bereichen (auch Engines genannt):
+\begin{itemize}
+\item Citytrip (Flug \& Hotel)
+\item Flug
+\item Hotel
+\end{itemize}
+
+Die Tests werden in drei Kategorien unterteilt:
+\begin{itemize}
+\item Happy Path
+\item Smoke Tests
+\item Main Tests
+\end{itemize}
+
+Wenn die Tests ausgeführt werden, sollen als erstes die Happy Paths\footcite{Happy_path_-_Wikipedia,_the_free_encyclopedia_2015-07-30} überprüft werden. Dabei wird der gesamte Such- und Buchungungsprozess pro Engine einmal durchlaufen, ohne eine Auswahl zu treffen oder auf Fehler zu überprüfen. Der Test ist erfolgreich wenn die letzte Seite des Buchungsprozesses erreicht werden kann.
+
+Danach folgen die Smoke- und Main Tests. Die Smoke Tests führen eine Suche für die in der \cref{sec:Recherche:Zielgruppe:top10} \nameref{sec:Recherche:Zielgruppe:top10} definierten top 10 Detinationen aus und überprüfen, ob Resultate geliefert werden.
+
+Die Main Tests überprüfen schlussendlich die Funktionalität der Webseite.
+
+\section{Happy Path}
+\subsection{Citytrip}
