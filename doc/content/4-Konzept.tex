@@ -27,5 +27,78 @@ Danach folgen die Smoke- und Main Tests. Die Smoke Tests führen eine Suche für
 
 Die Main Tests überprüfen schlussendlich die Funktionalität der Webseite.
 
+\subsection{Kunde \& Passagierangaben}
+\label{sec:Konzept:Übersicht:Angaben}
+Im Buchungsprozess müssen die Kunden- \& Passagierangaben ausgefüllt werden. Für alle Tests werden die folgenden Daten verwendet.
+
+Kundendaten:
+\begin{itemize}
+\item Vorname: Han
+\item Name: Sola
+\item Strasse \& Nummer: Bederstrasse 66
+\item Postleitzahl: 8002
+\item Ort: Zürich
+\item E-Mail Adresse: info@travel.ch
+\item Telefonnummer: +41 44 200 26 26 
+\end{itemize}
+
+Passagierangaben (Geschlecht, Vorname, Name, Geburtsdatum):
+\begin{itemize}
+\item Passagier 1: Männlich, Han, Solo, 24.03.1980
+\item Passagier 2: Weiblich, Leia Organa, Solo, 12.02.1978
+\item Passagier 3: Männlich, Luke, Skywalker, 07.08.1985
+\end{itemize}
+
 \section{Happy Path}
 \subsection{Citytrip}
+Einstiegsseite: Startpage
+
+\begin{table}[H] 
+	\caption{Testspezifikation: Happy Path - Citytrip}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+		
+	\begin{tabularx}{0.9\textwidth}{ | l | X | } 
+		\hline 
+		\textbf{Seite} & \textbf{Aktion} \\ \hline 
+		\multirow{1}{*}{Startseite} & Gehe auf die Startseite \\ \cline{2-2}
+		& Destinationsfeld: Leeren \\ \cline{2-2}
+		& Destinationsfeld: Gebe "`ber"' ein \\ \cline{2-2}
+		& Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+		& Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+		& Zimmerangabe: Klicke auf das Feld \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`1 Kind"' aus \\ \cline{2-2}
+		& Zimmerangabe: Wähle für das Geburtsdatum jeweils das erste Element aus den Dropdowns aus.  \\ \cline{2-2}
+		& Zimmerangabe: Füge ein Zimmer hinzu \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Abreisedatum \\ \cline{2-2}
+		& Datumsangabe: Gehe 3 Monate in die Zukunft \\ \cline{2-2}
+		& Datumsangabe: Wähle das erste Datum an \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Rückreisedatum \\ \cline{2-2}
+		& Datumsangabe: Wähle das dritte Datum an \\ \cline{2-2}
+		& Klicke auf den Suchen Button \\ \hline
+		
+		\multirow{1}{*}{Hotel Suchresultatseite} & Warte bis die Suchresultate dargestellt werden \\ \cline{2-2}
+		& Wähle das erste Hotel aus \\ \hline
+		
+		\multirow{1}{*}{Hotel Konfigurationsseite} & Warte bis der "`Weiter"' Button anwählbar ist \\ \cline{2-2}
+		& Klicke auf den "`Weiter"' Button \\ \hline
+				
+		\multirow{1}{*}{Flug Konfigurationsseite} & Warte bis die Seite geladen ist \\ \cline{2-2}
+		& Warte bis der "`Weiter"' Button anwählbar ist \\ \cline{2-2}
+		& Klicke auf den "`Weiter"' Button \\ \hline
+		
+		\multirow{1}{*}{Checkout: Passagierangabe} & Warte bis der Warenkorb geladen ist \\ \cline{2-2}
+		& Fülle die Passagierangaben wie im \cref{sec:Konzept:Übersicht:Angaben} \nameref{sec:Konzept:Übersicht:Angaben} beschrieben ab. \\ \cline{2-2}
+		& Fülle die Kundendaten wie im \cref{sec:Konzept:Übersicht:Angaben} \nameref{sec:Konzept:Übersicht:Angaben} beschrieben ab. \\ \cline{2-2}
+		& Klicke auf den "`Weiter"' Button \\ \hline
+		
+		\multirow{1}{*}{Checkout: Bezahlart} & Warte bis die Seite geladen ist \\ \cline{2-2}
+		& Warte bis der Warenkorb geladen ist \\ \cline{2-2}
+		& Klicke auf den "`Weiter"' Button \\ \hline
+		
+		\multirow{1}{*}{Checkout: Übersicht} & Warte bis die Seite geladen ist \\ \cline{2-2}
+		& Warte bis der Warenkorb geladen ist \\ \hline
+	\end{tabularx} 
+\end{table}
