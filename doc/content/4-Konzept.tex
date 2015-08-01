@@ -111,16 +111,18 @@ Passagierangaben (Geschlecht, Vorname, Name, Geburtsdatum):
 		\hline 
 		\textbf{Seite} & \textbf{Aktion} \\ \hline 
 		\multirow{1}{*}{-} & Gehe auf die Startseite \\ \hline
-		\multirow{1}{*}{Startseite} & Destinationsfeld: Leeren \\ \cline{2-2}
-		& Destinationsfeld: Gebe "`ber"' ein \\ \cline{2-2}
-		& Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
-		& Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+		\multirow{1}{*}{Startseite} & Abflugsort Destinationsfeld: Leeren \\ \cline{2-2}
+		& Abflugsort Destinationsfeld: Gebe "`zurich"' ein \\ \cline{2-2}
+		& Abflugsort Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+		& Abflugsort Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Leeren \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Gebe "`ber"' ein \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
 		& Zimmerangabe: Klicke auf das Feld \\ \cline{2-2}
-		& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`2 Erwachsenen"' aus \\ \cline{2-2}
 		& Zimmerangabe: Wähle "`1 Kind"' aus \\ \cline{2-2}
 		& Zimmerangabe: Wähle für das Geburtsdatum jeweils das erste Element aus den Dropdowns aus.  \\ \cline{2-2}
-		& Zimmerangabe: Füge ein Zimmer hinzu \\ \cline{2-2}
-		& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
 		& Datumsangabe: Klicke auf das Abreisedatum \\ \cline{2-2}
 		& Datumsangabe: Gehe 3 Monate in die Zukunft \\ \cline{2-2}
 		& Datumsangabe: Wähle das erste Datum an \\ \cline{2-2}
@@ -128,7 +130,7 @@ Passagierangaben (Geschlecht, Vorname, Name, Geburtsdatum):
 		& Datumsangabe: Wähle das dritte Datum an \\ \cline{2-2}
 		& Klicke auf den Suchen Button \\ \hline
 				
-		\multirow{1}{*}{Flug Suchresultatseite} & Warte bis die Seite geladen ist \\ \cline{2-2}
+		\multirow{1}{*}{Flug Suchresultatseite} & Warte bis die Suchresultate dargestellt werden \\ \cline{2-2}
 		& Wähle den ersten Flug aus \\ \hline
 		
 		\multirow{1}{*}{Checkout: Passagierangabe} & Warte bis der Warenkorb geladen ist \\ \cline{2-2}
@@ -160,8 +162,11 @@ Passagierangaben (Geschlecht, Vorname, Name, Geburtsdatum):
 		& Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
 		& Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
 		& Zimmerangabe: Klicke auf das Feld \\ \cline{2-2}
-		& Zimmerangabe: Wähle "`2 Erwachsenen"' aus \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
 		& Zimmerangabe: Wähle "`1 Kind"' aus \\ \cline{2-2}
+		& Zimmerangabe: Wähle für das Geburtsdatum jeweils das erste Element aus den Dropdowns aus.  \\ \cline{2-2}
+		& Zimmerangabe: Füge ein Zimmer hinzu \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
 		& Datumsangabe: Klicke auf das Abreisedatum \\ \cline{2-2}
 		& Datumsangabe: Gehe 3 Monate in die Zukunft \\ \cline{2-2}
 		& Datumsangabe: Wähle das erste Datum an \\ \cline{2-2}
@@ -188,3 +193,104 @@ Passagierangaben (Geschlecht, Vorname, Name, Geburtsdatum):
 		& Warte bis der Warenkorb geladen ist \\ \hline
 	\end{tabularx} 
 \end{table}
+
+\section{Smoke Tests}
+Smoke Tests führen eine Aktion durch und schauen lediglich, ob kein Fehler aufgetreten ist. Der Begriff rührt daher, dass eine Maschine gestartet und getestet wurde, ob sie nicht beginnt zu rauchen\footcite{Smoke_testing_software_-_Wikipedia_the_free_encyclopedia_2015-08-01}
+
+Bei den folgenden Smoke Tests werden pro Engine die jeweiligen Top 10 (siehe \cref{sec:Recherche:Zielgruppe:top10} \nameref{sec:Recherche:Zielgruppe:top10}) Destinationen gesucht und überprüft, ob Suchresultate geliefert werden.
+
+Die Tests sind pro Engine immer gleich aufgebaut. Sprich die Suchparameter sind dieselben und auch die Verifikation ob kein Fehler aufgetreten ist äquivalent. Das einzige was sich unterscheidet sind die Destinationen. Daher wird jeweils nur der Test für die erste Destination ausführlich spezifiziert. Für die restlichen 9 gilt der selbe Ablauf.
+
+\subsection{Citytrip}
+\begin{table}[H] 
+	\caption{Testspezifikation: Smoke Test - Citytrip}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+		
+	\begin{tabularx}{0.9\textwidth}{ | l | X | } 
+		\hline 
+		\textbf{Seite} & \textbf{Aktion} \\ \hline 
+		\multirow{1}{*}{-} & Gehe auf die Startseite \\ \hline
+		\multirow{1}{*}{Startseite} & Destinationsfeld: Leeren \\ \cline{2-2}
+		& Destinationsfeld: Gebe "`Wien"' ein \\ \cline{2-2}
+		& Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+		& Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+		& Zimmerangabe: Klicke auf das Feld \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`2 Erwachsenen"' aus \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Abreisedatum \\ \cline{2-2}
+		& Datumsangabe: Gehe 3 Monate in die Zukunft \\ \cline{2-2}
+		& Datumsangabe: Wähle das erste Datum an \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Rückreisedatum \\ \cline{2-2}
+		& Datumsangabe: Wähle das dritte Datum an \\ \cline{2-2}
+		& Klicke auf den Suchen Button \\ \hline
+		
+		\multirow{1}{*}{Hotel Suchresultatseite} & Warte bis die Suchresultate dargestellt werden \\ \cline{2-2}
+		& \textbf{Verifikation:} Es muss mind. ein Hotel vorhanden sein. \\ \hline
+	\end{tabularx} 
+\end{table}
+
+\subsection{Flight}
+\begin{table}[H] 
+	\caption{Testspezifikation: Smoke Test - Flight}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+		
+	\begin{tabularx}{0.9\textwidth}{ | l | X | } 
+		\hline 
+		\textbf{Seite} & \textbf{Aktion} \\ \hline 
+		\multirow{1}{*}{-} & Gehe auf die Startseite \\ \hline
+		\multirow{1}{*}{Startseite} & Abflugsort Destinationsfeld: Leeren \\ \cline{2-2}
+		& Abflugsort Destinationsfeld: Gebe "`Zurich"' ein \\ \cline{2-2}
+		& Abflugsort Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+		& Abflugsort Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Leeren \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Gebe "`Palma de Mallorca"' ein \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+		& Zimmerangabe: Klicke auf das Feld \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`2 Erwachsenen"' aus \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Abreisedatum \\ \cline{2-2}
+		& Datumsangabe: Gehe 3 Monate in die Zukunft \\ \cline{2-2}
+		& Datumsangabe: Wähle das erste Datum an \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Rückreisedatum \\ \cline{2-2}
+		& Datumsangabe: Wähle das dritte Datum an \\ \cline{2-2}
+		& Klicke auf den Suchen Button \\ \hline
+				
+		\multirow{1}{*}{Flug Suchresultatseite} & Warte bis die Suchresultate dargestellt werden \\ \cline{2-2}
+		& \textbf{Verifikation:} Es muss mind. ein Flug vorhanden sein. \\ \hline
+	\end{tabularx} 
+\end{table}
+
+\subsection{Hotel}
+\begin{table}[H] 
+	\caption{Testspezifikation: Smoke Test - Hotel}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+		
+	\begin{tabularx}{0.9\textwidth}{ | l | X | } 
+			\hline 
+			\textbf{Seite} & \textbf{Aktion} \\ \hline 
+			\multirow{1}{*}{-} & Gehe auf die Startseite \\ \hline
+			\multirow{1}{*}{Startseite} & Destinationsfeld: Leeren \\ \cline{2-2}
+			& Destinationsfeld: Gebe "`ber"' ein \\ \cline{2-2}
+			& Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+			& Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+			& Zimmerangabe: Klicke auf das Feld \\ \cline{2-2}
+			& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
+			& Zimmerangabe: Wähle "`1 Kind"' aus \\ \cline{2-2}
+			& Zimmerangabe: Wähle für das Geburtsdatum jeweils das erste Element aus den Dropdowns aus.  \\ \cline{2-2}
+			& Zimmerangabe: Füge ein Zimmer hinzu \\ \cline{2-2}
+			& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
+			& Datumsangabe: Klicke auf das Abreisedatum \\ \cline{2-2}
+			& Datumsangabe: Gehe 3 Monate in die Zukunft \\ \cline{2-2}
+			& Datumsangabe: Wähle das erste Datum an \\ \cline{2-2}
+			& Datumsangabe: Klicke auf das Rückreisedatum \\ \cline{2-2}
+			& Datumsangabe: Wähle das dritte Datum an \\ \cline{2-2}
+			& Klicke auf den Suchen Button \\ \hline
+					
+			\multirow{1}{*}{Hotel Suchresultatseite} & Warte bis die Suchresultate dargestellt werden \\ \cline{2-2}
+			& \textbf{Verifikation:} Es muss mind. ein Hotel vorhanden sein. \\ \hline
+	\end{tabularx} 
+\end{table}
+
+\section{Main Tests}
