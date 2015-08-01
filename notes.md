@@ -1,3 +1,9 @@
+# Todo:
+- NUnit [Category] Group
+- Warum NUnit?
+- Die anderen (neuen) Services (BrowserStack etc)
+    - US vs EU Server
+
 # Brainstorming
 - Fälle definieren mit business
 - Schätzung der Fälle
