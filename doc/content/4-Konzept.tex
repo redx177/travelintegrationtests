@@ -4,7 +4,7 @@ Dieses Kapitel spezifiziert die umzusetzenden Testfälle. Diese beinhalten die A
 
 Um die Kosten zu minimieren werden möglichst wenig Testfälle spezifiziert, jedoch trotzdem die gesamte Funktionalität der Webseite überprüft werden kann.
 
-Eine Übersicht der Testfälle wurde im Wiki von Hotelplan erstellt und wird zum Verständniss dort gepflegt. Die Liste ist im \cref{app:Testfälle} \nameref{app:Testfälle} unter "`Test Cases"' beigefügt.
+Eine Übersicht der Testfälle wurde im Wiki von Hotelplan erstellt und wird zum Verständnis dort gepflegt. Die Liste ist im \cref{app:Testfälle} \nameref{app:Testfälle} unter "`Test Cases"' beigefügt.
 
 \section{Übersicht}
 Die Seite der \textit{travelwindow AG} besteht aus drei Bereichen (auch Engines genannt):
@@ -50,6 +50,7 @@ Passagierangaben (Geschlecht, Vorname, Name, Geburtsdatum):
 \end{itemize}
 
 \section{Happy Path}
+Der Happy Path testet, ob beim standard Szenario keine Fehler auftreten. Es werden demnach jede Engine einmal durchlaufen mit gültigen Angaben. Dies soll überprüfen ob keine grundlegenden Fehler vorhanden sind.
 \subsection{Citytrip}
 \begin{table}[H] 
 	\caption{Testspezifikation: Happy Path - Citytrip}
@@ -119,10 +120,10 @@ Passagierangaben (Geschlecht, Vorname, Name, Geburtsdatum):
 		& Ankunftsort Destinationsfeld: Gebe "`ber"' ein \\ \cline{2-2}
 		& Ankunftsort Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
 		& Ankunftsort Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
-		& Zimmerangabe: Klicke auf das Feld \\ \cline{2-2}
-		& Zimmerangabe: Wähle "`2 Erwachsenen"' aus \\ \cline{2-2}
-		& Zimmerangabe: Wähle "`1 Kind"' aus \\ \cline{2-2}
-		& Zimmerangabe: Wähle für das Geburtsdatum jeweils das erste Element aus den Dropdowns aus.  \\ \cline{2-2}
+		& Passagierangabe: Klicke auf das Feld \\ \cline{2-2}
+		& Passagierangabe: Wähle "`2 Erwachsenen"' aus \\ \cline{2-2}
+		& Passagierangabe: Wähle "`1 Kind"' aus \\ \cline{2-2}
+		& Passagierangabe: Wähle für das Geburtsdatum jeweils das erste Element aus den Dropdowns aus.  \\ \cline{2-2}
 		& Datumsangabe: Klicke auf das Abreisedatum \\ \cline{2-2}
 		& Datumsangabe: Gehe 3 Monate in die Zukunft \\ \cline{2-2}
 		& Datumsangabe: Wähle das erste Datum an \\ \cline{2-2}
@@ -294,3 +295,167 @@ Die Tests sind pro Engine immer gleich aufgebaut. Sprich die Suchparameter sind 
 \end{table}
 
 \section{Main Tests}
+Bei den Happy Paths und Smoke Tests wurde überprüft, ob die wichtigste Funktionalität der Webseite noch funktioniert. In diesem Abschnitt wird die gesamte Restliche Funktionalität überprüft. Dies umfasst Randbedingungen, Fehleingaben, etc.
+
+\subsection{Citytrip}
+
+\begin{table}[H] 
+	\caption{Testspezifikation: Main Tests - Citytrip}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+		
+	\begin{tabularx}{0.9\textwidth}{ | l | X | } 
+		\hline 
+		\textbf{Seite} & \textbf{Aktion} \\ \hline 
+		\multirow{1}{*}{-} & Gehe auf die Startseite \\ \hline
+		\multirow{1}{*}{Startseite} & Destinationsfeld: Leeren \\ \cline{2-2}
+		& Destinationsfeld: Gebe "`Amsterdam"' ein \\ \cline{2-2}
+		& Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+		& Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+		& Zimmerangabe: Klicke auf das Feld \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`1 Kind"' aus \\ \cline{2-2}
+		& Zimmerangabe: Wähle für das Geburtsdatum jeweils das erste Element aus den Dropdowns aus.  \\ \cline{2-2}
+		& Zimmerangabe: Füge ein Zimmer hinzu \\ \cline{2-2}
+		& Zimmerangabe: Wähle "`1 Erwachsenen"' aus \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Abreisedatum \\ \cline{2-2}
+		& Datumsangabe: Gehe 3 Monate in die Zukunft \\ \cline{2-2}
+		& Datumsangabe: Wähle das erste Datum an \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Rückreisedatum \\ \cline{2-2}
+		& Datumsangabe: Wähle das dritte Datum an \\ \cline{2-2}
+		& Klicke auf den Suchen Button \\ \hline
+		
+		\multirow{1}{*}{Hotel Suchresultatseite} & Warte bis die Suchresultate dargestellt werden \\ \cline{2-2}
+		& Wähle das erste Hotel aus \\ \hline
+		
+		\multirow{1}{*}{Hotel Konfigurationsseite} & Warte bis der "`Weiter"' Button anwählbar ist \\ \cline{2-2}
+		& Klicke auf den "`Weiter"' Button \\ \hline
+				
+		\multirow{1}{*}{Flug Konfigurationsseite} & Warte bis die Seite geladen ist \\ \cline{2-2}
+		& Warte bis der "`Weiter"' Button anwählbar ist \\ \cline{2-2}
+		& Suche ein Flug welcher mehrere Hinflüge hat und wähle den zweiten aus \\ \cline{2-2}
+		& Überprüfe ob sich in der Übersicht die Airline, das Datum und der Preis korrekt angepasst haben\\ \cline{2-2}
+		& Suche ein Flug welcher mehrere Rückflüge hat und wähle den zweiten aus \\ \cline{2-2}
+		& Überprüfe ob sich in der Übersicht die Airline, das Datum und der Preis korrekt angepasst haben\\ \cline{2-2}
+	\end{tabularx} 
+\end{table}
+
+\subsection{Flight}
+\begin{table}[H] 
+	\caption{Testspezifikation: Main Tests - Flight}
+	\centering
+	\rowcolors{1}{tablebodycolor}{tablerowcolor}
+		
+	\begin{tabularx}{0.9\textwidth}{ | l | X | } 
+		\hline 
+		\textbf{Seite} & \textbf{Aktion} \\ \hline 
+		\multirow{1}{*}{-} & Gehe auf die Startseite \\ \hline
+		\multirow{1}{*}{Startseite} & Abflugsort Destinationsfeld: Leeren \\ \cline{2-2}
+		& Abflugsort Destinationsfeld: Gebe "`new york"' ein \\ \cline{2-2}
+		& Abflugsort Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+		& Abflugsort Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Leeren \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Gebe "`Zurich"' ein \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Warte bis die Vorschläge erscheinen \\ \cline{2-2}
+		& Ankunftsort Destinationsfeld: Klicke auf den ersten Vorschlag \\ \cline{2-2}
+		& Passagierangabe: Klicke auf das Feld \\ \cline{2-2}
+		& Passagierangabe: Wähle "`2 Erwachsenen"' aus \\ \cline{2-2}
+		& Passagierangabe: Wähle "`1 Kind"' aus \\ \cline{2-2}
+		& Passagierangabe: Wähle für das Geburtsdatum jeweils das erste Element aus den Dropdowns aus.  \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Abreisedatum \\ \cline{2-2}
+		& Datumsangabe: Gehe 3 Monate in die Zukunft \\ \cline{2-2}
+		& Datumsangabe: Wähle das erste Datum an \\ \cline{2-2}
+		& Datumsangabe: Klicke auf das Rückreisedatum \\ \cline{2-2}
+		& Datumsangabe: Wähle das dritte Datum an \\ \cline{2-2}
+		& Klicke auf den Suchen Button \\ \hline
+				
+		\multirow{1}{*}{Flug Suchresultatseite} & Überprüfe ob beim Anpassen des Hinfluges der korrekte Flug angewählt wird: \\ \cline{2-2}
+		& - Suche eine Fluggruppe mit mehreren Hinflügen \\ \cline{2-2}
+		& - Speichere den ersten Flug der Fluggruppe \\ \cline{2-2}
+		& - Wähle den zweiten Flug der Fluggruppe \\ \cline{2-2}
+		& - Überprüfe ob der zweite Flug korrekt aktualisiert wurde \\ \cline{2-2}& Überprüfe ob beim Anpassen des Hinfluges der korrekte Flug angewählt wird: \\ \cline{2-2}
+		& - Suche eine Fluggruppe mit mehreren Rückflügen \\ \cline{2-2}
+		& - Speichere den ersten Flug der Fluggruppe \\ \cline{2-2}
+		& - Wähle den zweiten Flug der Fluggruppe \\ \cline{2-2}
+		& - Überprüfe ob der zweite Flug korrekt aktualisiert wurde \\ \cline{2-2}
+		& Überprüfe ob bei allen Flügen der Totalprei angezeigt wird \\ \cline{2-2}
+		& Überprüfe ob das Datum des Fluges in der Übersicht dargestellt wird. \\ \cline{2-2}
+		& Überprüfe für alle Flüge: \\ \cline{2-2}
+		& - Flug ist anwählbar \\ \cline{2-2}
+		& - Airline Bild des Hinfluges wird angezeigt \\ \cline{2-2}
+		& - Airline Bild des Rückfluges wird angezeigt \\ \cline{2-2}
+		& Wähle ein Rückflug mit mehreren Hin- und Rückfluge \\ \cline{2-2}
+		& Wähle den zweiten Hin- und Rückflug aus \\ \cline{2-2}
+		& Speichere folgende Daten der Hin- und Rückflüge für eine spätere Überprüfung: \\ \cline{2-2}
+		& - Abreisezeit des Hinfluges \\ \cline{2-2}
+		& - Ankunftszeit des Hinfluges \\ \cline{2-2}
+		& - Abreisezeit des Rückfluges \\ \cline{2-2}
+		& - Ankunftszeit des Rückfluges \\ \cline{2-2}
+		& - Preis des Fluges \\ \cline{2-2}
+		& Wähle den Flug aus \\ \hline
+		
+		\multirow{1}{*}{Checkout: Passagierangabe} & Warte bis der Warenkorb geladen ist \\ \cline{2-2}
+		& Überprüfe ob die Daten im Warenkorb mit den gewählten Daten übereinstimmen: \\ \cline{2-2}
+		& - Abreisezeit des Hinfluges \\ \cline{2-2}
+		& - Ankunftszeit des Hinfluges \\ \cline{2-2}
+		& - Abreisezeit des Rückfluges \\ \cline{2-2}
+		& - Ankunftszeit des Rückfluges \\ \cline{2-2}
+		& - Preis des Fluges \\ \cline{2-2}
+		& Fülle die Passagierangaben wie im \cref{sec:Konzept:Übersicht:Angaben} \nameref{sec:Konzept:Übersicht:Angaben} beschrieben ab. \\ \cline{2-2}
+		& Fülle die Kundendaten wie im \cref{sec:Konzept:Übersicht:Angaben} \nameref{sec:Konzept:Übersicht:Angaben} beschrieben ab. \\ \cline{2-2}
+		& Klicke auf den "`Weiter"' Button \\ \hline
+		
+		\multirow{1}{*}{Checkout: Bezahlart} & Warte bis die Seite geladen ist \\ \cline{2-2}
+		& Warte bis der Warenkorb geladen ist \\ \cline{2-2}
+		& Überprüfe ob das Kreditkarten-Formular standartmässig nicht angezeigt wird: \\ \cline{2-2}
+		& - Kreditkartennummer Feld wird nicht angezeigt \\ \cline{2-2}
+		& - Monats Feld wird nicht angezeigt \\ \cline{2-2}
+		& - Jahr Feld wird nicht angezeigt \\ \cline{2-2}
+		& - CVC Feld wird nicht angezeigt \\ \cline{2-2}
+		& - Name Feld wird nicht angezeigt \\ \cline{2-2}
+		& Klicke auf den Kreditkaraten Radio-Button \\ \cline{2-2}
+		& Überprüfe ob das Kreditkarten-Formular angezeigt wird: \\ \cline{2-2}
+		& - Kreditkartennummer Feld wird angezeigt \\ \cline{2-2}
+		& - Monats Feld wird angezeigt \\ \cline{2-2}
+		& - Jahr Feld wird angezeigt \\ \cline{2-2}
+		& - CVC Feld wird angezeigt \\ \cline{2-2}
+		& - Name Feld wird angezeigt \\ \cline{2-2}
+		& Klicke auf den "`Weiter"' Button \\ \hline
+		& Überprüfe ob bei jedem Kreditkarten-Formular-Feld ein Fehler angezeigt wird, da keine gültigen Kreditkarten-Daten angegeben wurden: \\ \cline{2-2}
+		& - Kreditkartennummer Feld zeigt einen Fehler an \\ \cline{2-2}
+		& - Monats Feld zeigt einen Fehler an \\ \cline{2-2}
+		& - Jahr Feld zeigt einen Fehler an \\ \cline{2-2}
+		& - CVC Feld zeigt einen Fehler an \\ \cline{2-2}
+		& - Name Feld zeigt einen Fehler an \\ \cline{2-2}
+		& Überprüfe Kreditkartennummer Feld Funktionalität: \\ \cline{2-2}
+		& - Wenn eine 15 stellige Zahl angegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn eine 16 stellige Zahl angegeben wird erscheint kein Fehler \\ \cline{2-2}
+		& Überprüfe Monats Feld Funktionalität: \\ \cline{2-2}
+		& - Wenn "`0"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`8"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`01"' eingegeben wird erscheint kein Fehler \\ \cline{2-2}
+		& Überprüfe Jahr Feld Funktionalität: \\ \cline{2-2}
+		& - Wenn "`a"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`9"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`9a"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`a9"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`20"' eingegeben wird erscheint kein Fehler \\ \cline{2-2}
+		& Überprüfe CVC Feld Funktionalität: \\ \cline{2-2}
+		& - Wenn "`a"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`aa"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`aaa"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`9"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`99"' eingegeben wird erscheint ein Fehler \\ \cline{2-2}
+		& - Wenn "`424"' eingegeben wird erscheint kein Fehler \\ \cline{2-2}
+		& Überprüfe ob mit korrekten Kreditkarten Daten der Checkout Prozess fortgeführt werden kann: \\ \cline{2-2}
+		& - Gebe "`01234567890123456"' für die Kreditkartennummer ein \\ \cline{2-2}
+		& - Gebe "`02"' für den Monat ein \\ \cline{2-2}
+		& - Gebe "`21"' für das Jahr ein \\ \cline{2-2}
+		& - Febe "`123"' für das CVC ein \\ \cline{2-2}
+		& - Klicke auf den "`Weiter"' Button \\ \cline{2-2}
+		
+		
+		\multirow{1}{*}{Checkout: Übersicht} & Warte bis die Seite geladen ist \\ \cline{2-2}
+		& Warte bis der Warenkorb geladen ist \\ \hline
+	\end{tabularx} 
+\end{table}
