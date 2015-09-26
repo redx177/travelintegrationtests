@@ -1,0 +1,24 @@
+
+% Eigener Beitrag: Beschreibung, Begründung, Aufzeigung, Methode, Fazit
+
+\chapter{Umsetzung}
+\label{sec:umsetzung}
+
+
+Dieses Kapitel beschreibt die technischen Aspekte, wie die Testfälle aus dem \cref{sec:konzept} \nameref{sec:konzept} umgesetzt werden.
+
+\section{Selenium}
+\label{sec:umsetzung:selenium}
+Die Testfälle werden mit Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-09-26} implementiert. Dieses automatisiert Browser, sprich es wird als erstes einer aufgestartet, danach Testschritte ausgeführt und schlussendlich einige Behauptungen aufgestellt. Sind diese korrekt so ist der Test erfolgreich. Wenn nicht schlägt der Test fehl.
+
+Selenium selber ist in Java implementiert und bietet eine eigene \Gls{glos:ide} mit dem Namen Selenium IDE\footcite{Selenium_IDE_Plugins_2015-09-26}, welche ein Plugin für den Firefox\footcite{Download_Firefox__Free_Web_Browser__Mozilla_2015-09-26} darstellt. Damit können Aktionen im Browser aufgezeichnet werden und danach als Test automatisiert durchgeführt werden. Die gesamte Software ist Open Source unter der \textit{Apache License 2.0} erhältlich\footcite{Selenium_software_-_Wikipedia,_the_free_encyclopedia_2015-09-26}.
+
+Die gesamte Webseitenentwiclung der Firma Travelwindow AG findet in der Programmiersprache C\# statt. Aus Gründen der Konsistenz wurde entschieden, dass auch die Tests in C\# umgesetzt werden sollen. 
+Selenium WebDriver\footcite{Selenium_WebDriver_2015-09-26} ist ein Aufsatz auf Selenium, welcher eine API bietet damit mit verschiedenen Programmiersprachen Tests umgesetzt werden können. Vollständig unterstützt werden die Sprachen Python, Ruby, Java und C\#. 
+
+Angetrieben werden Selenium Tests mittels UnitTests. Diese können von Testtreibern ausgeführt werden und erlauben die Überprüfung von Behauptungen. Es können jegliche UnitTest Frameworks von der jeweils eingesetzten Programmiersprache verwendet werden.
+
+\section{Testimplementierung}
+\label{sec:umsetzung:selenium}
+Wie im \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium} beschrieben werden die Tests mit C\# umgesetzt.
+Angetrieben werden Selenium Tests mittels eines UnitTest Frameworks. Dies NUnit\footcite{NUnit_-_Home_2015-09-26} und sind demnach in der Programmiersprache C\# implementiert. Von 
