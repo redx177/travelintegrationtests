@@ -1,6 +1,13 @@
+# Vorkentnisse
+- HTML
+- DOM
+- C#
+- JS
+
 # Todo:
 - NUnit [Category] Group
 - Warum NUnit?
+- Warum die 3 Umgebungen (Test, STA, PROD) beschrieben? Noch besser einbinden
 - Die anderen (neuen) Services (BrowserStack etc)
     - US vs EU Server
 

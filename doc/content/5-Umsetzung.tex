@@ -1,24 +1,375 @@
 
-% Eigener Beitrag: Beschreibung, Begründung, Aufzeigung, Methode, Fazit
+% Infrastruktur
+% Implementierung
+	% Ordnerstruktur
+	% Patterns
+		% PageObject
+		% PageFactory
+	% Architektur
+		% TestRunners
+	% Testbeschreibung
 
 \chapter{Umsetzung}
 \label{sec:umsetzung}
 
-
 Dieses Kapitel beschreibt die technischen Aspekte, wie die Testfälle aus dem \cref{sec:konzept} \nameref{sec:konzept} umgesetzt werden.
+
+Zuerst wird der Einsatz von Selenium sowie die Infrastruktur der Travelwindow AG beschrieben, um einen Überblick zu verschaffen. Danach folgen die Umsetzungsdetails und schlussendlich wie die Tests in den Entwicklungsprozess eingebunden werden.
 
 \section{Selenium}
 \label{sec:umsetzung:selenium}
-Die Testfälle werden mit Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-09-26} implementiert. Dieses automatisiert Browser, sprich es wird als erstes einer aufgestartet, danach Testschritte ausgeführt und schlussendlich einige Behauptungen aufgestellt. Sind diese korrekt so ist der Test erfolgreich. Wenn nicht schlägt der Test fehl.
+Die Testfälle werden mit Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-09-26} implementiert. Dieses automatisiert Browser, sprich es wird als erstes einer aufgestartet, danach Testschritte ausgeführt und schlussendlich einige Behauptungen aufgestellt. Sind diese korrekt so ist der Test erfolgreich. Wenn nicht schlägt der Test fehl. 
+Angetrieben werden Selenium Tests mittels UnitTests. Diese können von Testtreibern ausgeführt werden und erlauben die Überprüfung von Behauptungen.
 
 Selenium selber ist in Java implementiert und bietet eine eigene \Gls{glos:ide} mit dem Namen Selenium IDE\footcite{Selenium_IDE_Plugins_2015-09-26}, welche ein Plugin für den Firefox\footcite{Download_Firefox__Free_Web_Browser__Mozilla_2015-09-26} darstellt. Damit können Aktionen im Browser aufgezeichnet werden und danach als Test automatisiert durchgeführt werden. Die gesamte Software ist Open Source unter der \textit{Apache License 2.0} erhältlich\footcite{Selenium_software_-_Wikipedia,_the_free_encyclopedia_2015-09-26}.
 
 Die gesamte Webseitenentwiclung der Firma Travelwindow AG findet in der Programmiersprache C\# statt. Aus Gründen der Konsistenz wurde entschieden, dass auch die Tests in C\# umgesetzt werden sollen. 
 Selenium WebDriver\footcite{Selenium_WebDriver_2015-09-26} ist ein Aufsatz auf Selenium, welcher eine API bietet damit mit verschiedenen Programmiersprachen Tests umgesetzt werden können. Vollständig unterstützt werden die Sprachen Python, Ruby, Java und C\#. 
 
-Angetrieben werden Selenium Tests mittels UnitTests. Diese können von Testtreibern ausgeführt werden und erlauben die Überprüfung von Behauptungen. Es können jegliche UnitTest Frameworks von der jeweils eingesetzten Programmiersprache verwendet werden.
+\subsection{Beispiele}
+Hier sollen einige Beispiele dafür aufgezeigt werden, wie über Selenium mit dem Browser interagiert werden kann.
 
-\section{Testimplementierung}
-\label{sec:umsetzung:selenium}
-Wie im \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium} beschrieben werden die Tests mit C\# umgesetzt.
-Angetrieben werden Selenium Tests mittels eines UnitTest Frameworks. Dies NUnit\footcite{NUnit_-_Home_2015-09-26} und sind demnach in der Programmiersprache C\# implementiert. Von 
+Um einen Browser zu starten muss ein entsprechender Driver instantiiert werden. Im folgenden Code wird ein Firefox aufgerufen.
+\begin{lstlisting}
+	IWebDriver driver = new FirefoxDriver();
+\end{lstlisting}
+
+Um auf eine Webseite zu navigieren muss dies dem Driver übermittelt werden:
+\begin{lstlisting}
+	driver.Navigate().GoToUrl(targetUrl);
+\end{lstlisting}
+
+Ist eine Seite im Browser geladen, kann über den \gls{dom}\footcite{Document_Object_Model} Tree auf die HTML Elemente zugegriffen werden. Dazu werden Selektoren verwendet, welche entweder als \textit{CSS Selector} oder als \textit{XPath} definiert werden können. Alternativ kann auch JavaScript ausgeführt werden um ein Element zu finden.
+\begin{lstlisting}
+	///// CSS selectors /////
+	// Get elements by class
+	IList<IWebElement> flightListElements = driver.FindElements(By.CssSelector(".flight"));
+	// Get element by id 
+	IWebElement submitButton = driver.FindElements(By.CssSelector("#submit")); 
+	// Advanced usage
+	IWebElement cityTripButton = driver.FindElements(By.CssSelector(".toggle-buttons button[value='Flight']")); 
+	
+	///// XPath selectors /////
+	// Get all input elments
+	IList<IWebElement> inputs = driver.FindElements(By.XPath("//input")); 
+	// Get the first image of each flight
+	IList<IWebElement> inputs = driver.FindElements(By.XPath("//child::flight/image[1]")); 
+	
+	///// JavaScripit /////
+	IWebElement element = (IWebElement) ((IJavaScriptExecutor)driver).ExecuteScript("return $('.flight')[0]")
+\end{lstlisting}
+
+Mit den \gls{dom} Elementen kann auf verschiedene Arten interagiert werden.
+
+\begin{lstlisting}
+	// Klick auf einen Button
+	IWebElement button = GetButton();
+	button.Click();
+	
+	// Text in ein Element schreiben
+	IWebElement inputField = GetInputField();
+	inputField.SendKeys("`New York"');
+	
+	// Eingabefeld leeren
+	inputField.Clear();
+	
+	// Eingabefeld an den Webserver senden
+	inputField.Submit();
+\end{lstlisting}
+
+Falls nötig kann JavaScript Code ausgeführt werden.
+
+\begin{lstlisting}
+	var jsExecutor = ((IJavaScriptExecutor)driver);
+	jsExecutor.ExecuteScript("var a=$('#chat');if (a!=null)a.parentNode.removeChild(a)");
+\end{lstlisting}
+
+
+\section{Infrastruktur}
+\label{sec:umsetzung:infrastruktur}
+Dieser Abschnitt beschreibt die Infrastruktur der Travelwindow AG.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/trv infrastructure.png}
+	\caption{Travelwindow AG Infrastruktur}
+	\label{fig:umsetzung:infrastruktur}
+\end{figure}
+
+Als \Gls{glos:vcs} wird BitBucket\footcite{Git_and_Mercurial_code_management_for_teams_2015-07-26} von Atlassian eingesetzt. Der Code wird bei jeder Änderung vom Build Server heruntergeladen und Compiliert, wodurch überprüft wird ob keine syntaktischen Fehler vorhanden sind. Dabei wird jeweils eine Revision angelegt. Auf dem Build Server läuft Bamboo\footcite{Bamboo_2015-07-26}, welches ebenfalls von Atlassian hergestellt wird. 
+
+Es gibt folgende drei Umgebungen:
+\begin{itemize}
+\item Test
+\item Quality
+\item Production
+\end{itemize}
+Die erste ist für die Entwickler. Die zweite für den Kunden zum Testen und die letzte ist jene Umgebung, welche von den Kunden verwendet wird.
+
+Soll eine Version der Webseite auf eine Umgebung hochgeladen werden, so kann der Prozess auf dem Build Server gestartet werden, wodurch eine Revision vom Bamboo Server auf die entsprechende Umgebung hochgeladen wird. Als Deployment Server wird Octopus\footcite{Octopus_Deploy_2015-09-28} eingesetzt.
+
+\section{Implementierung}
+\label{sec:umsetzung:implementierung}
+Das Kapitel widmet sich der Implementierung. Als erstes wird der Aufbau der Ordnerstruktur beschrieben, danach die verwendeten Design Patterns erläutert und schlussendlich die Tests dokumentiert.
+
+\subsection{Ordnerstruktur}
+Das Projekt ist in folgende Ordner aufgeteilt:
+\begin{itemize}
+\item Bootstrap: Beinhaltet Objekte welche für den Aufbau von Tests benötigt werden.
+\item Models: Model Klassen die während der Durchführung verwendet werden.
+\item Modules: Ein Modul repräsentiert ein Teil einer Webseite. Mehr dazu im \cref{sec:umsetzung:implementierung:patterns:pageobject} \nameref{sec:umsetzung:implementierung:patterns:pageobject}
+\item Pages: Eine Page entspricht einer Webseite welche zu testen ist. Mehr dazu im \cref{sec:umsetzung:implementierung:patterns:pageobject} \nameref{sec:umsetzung:implementierung:patterns:pageobject}
+\item Properties: Metadaten der Entwicklungsumgebung, welche automatisch generiert wurden.
+\item TestRunners: Ermöglichen die Verbindung zu einem externen Testanbieter. Mehr dazu im \cref{sec:umsetzung:implementierung:architektur:testrunners} \nameref{sec:umsetzung:implementierung:architektur:testrunners}
+\item Tests: Beinhaltet die eigentlichen Tests.
+\item resources: Ressourcen welche für die Testausführung benötigt werden.
+\end{itemize}
+
+\subsection{Design Patterns}
+Es werden die beiden Design Patterns \textit{Page Object} und \textit{Page Factory} vorgestellt. Die Verwendung soll anhand eines Beispieles erläutert werden. Dazu soll folgender Test optimiert werden:
+
+\begin{lstlisting}        
+public class CityTrip
+{	    	
+	[Test]
+	public IWebElement SearchReturnsResults() 
+	{
+		// Setup driver
+		var driver = new FirefoxDriver();
+		driver.Navigate().GoToUrl("http://www.travel.ch/staedtereisen");
+		var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+		
+		// Fill in form
+		driver.FindElement(By.CssSelector(".form .destination")).SendKeys("Wien");
+		driver.FindElement(By.CssSelector(".form .submit")).Click();
+		
+		// Wait for result page to be ready
+		wait.Until(d => d.FindElement(By.ClassName("js-results-item")));
+		
+		// Check for search results
+		var results = driver.FindElement(By.CssSelector(".list .items"));
+		Assert.IsTrue(results.Any(), "`no search results"');
+	}
+}
+\end{lstlisting}
+
+Der Test gibt eine Destination in ein Suchformular ein, sendet das Formular ab und überprüft ob, ob mind. ein Resultat gefunden wurde.
+
+\subsubsection{Page Object}
+\label{sec:umsetzung:implementierung:patterns:pageobject}
+Das Page Object Design Pattern gibt vor, dass Webseiten in Objekten im Code repräsentiert werden sollen\footcite{PageObjects}. Diese Objekte werden Page Objects genannt. Sie kapseln die Logik, um mit einer Webseite zu interagieren, weg. Zum Beispiel das selektieren eines \gls{dom} Elements oder das drücken eines Buttons.
+
+Das Design Pattern auf das in der Kapiteleinführung gegebene Beispiel angewendet ergibt folgender Code:
+\begin{lstlisting}
+public class CityTrip
+{	    	
+	[Test]
+	public IWebElement SearchReturnsResults() 
+	{
+		var driver = new FirefoxDriver();
+		driver.Navigate().GoToUrl("http://www.travel.ch/staedtereisen");
+		var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+		
+		var searchPage = new SearchPage(driver);
+		var resultsPage = searchPage.SubmitValidForm();
+		
+		Assert.IsTrue(resultsPage.GetResults().Any(), "`no search results"');
+	}
+}
+
+public class StartPage
+{
+	private readonly IWebDriver driver;
+	
+	public StartPage(IWebDriver drivert)
+	{
+		this.driver = driver;
+	}
+	
+	public SearchResultPage SubmitValidForm() 
+	{
+	   	driver.FindElement(By.CssSelector(".form .destination")).SendKeys("Wien");
+	   	driver.FindElement(By.CssSelector(".form .submit")).Click();
+	   	
+	   	return new SearchResultPage(driver);
+	}
+}
+
+public class SearchResultPage
+{
+	private readonly IWebDriver driver;
+	private readonly WebDriverWait driverWait;
+	
+	public StartPage(IWebDriver drivert)
+	{
+		this.driver = driver;
+		this.driverWait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+		WaitForSearchResults();
+	}
+	
+	private void WaitForSearchResults() {
+	   	driverWait.Until(d => d.FindElement(By.ClassName("js-results-item")));
+	}
+		
+	public IList<IWebElement> GetResults() 
+	{
+	   	return driver.FindElement(By.CssSelector(".list .items"))
+	}
+}
+\end{lstlisting}
+
+Die Testmethode \textit{SearchReturnsResults} (Zeile 4) ist aufgeräumt und übersichtlich. Es wird eine SearchPage instanziiert und auf der das Suchformular abgefüllt. Schlussendlich wird auf gefundene Resultate überprüft.
+
+Dazu gekommen sind die beiden Page Objects \textit{StartPage} (Zeile 17) und \textit{SearchResultPage} (Zeile 35). Sie beinhalten die jeweiligen CSS Selektoren für die entsprechende Seite.
+
+Für die Navigation von einer Seite auf die nächste sind ebenfalls die Page Objects zuständig, da sie wissen auf welche Seite ein Link oder ein Formular führt. Die Methode \textit{SubmitValidForm} (Zeile 26) gibt ein weiteres Page Object zurück.  
+
+\subsubsection{Page Factory}
+Eine \textit{Page Factory} erleitert den Umgang mit einem \textit{Page Object}. Es initialisiert die Elemente eines Page Objects. Der Code kann auf folgende Weise umgebaut werden: 
+
+\begin{lstlisting}
+public class CityTrip
+{	    	
+	[Test]
+	public IWebElement SearchReturnsResults() 
+	{
+		var driver = new FirefoxDriver();
+		driver.Navigate().GoToUrl("http://www.travel.ch/staedtereisen");
+		var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+		
+		var searchPage = new SearchPage(driver);
+		var resultsPage = searchPage.SubmitValidForm();
+		
+		Assert.IsTrue(resultsPage.Results.Any(), "`no search results"');
+	}
+}
+
+public class StartPage
+{
+	private readonly IWebDriver driver;
+	
+	[FindsBy(How = How.CssSelector, Using = ".form .destination")]
+	private IWebElement destination;
+	
+	[FindsBy(How = How.CssSelector, Using = ".form .submit")]
+	private IWebElement submitButton;
+	        
+	public StartPage(IWebDriver drivert)
+	{
+		this.driver = driver;
+		PageFactory.InitElements(driver, this);
+	}
+	
+	public SearchResultPage SubmitValidForm() 
+	{
+	   	destination.SendKeys("Wien");
+	   	submitButton.Click();
+	   	
+	   	return new SearchResultPage(driver);
+	}
+}
+
+public class SearchResultPage
+{
+	private readonly IWebDriver driver;
+	private readonly WebDriverWait driverWait;
+		
+	[FindsBy(How = How.CssSelector, Using = ".list .items")]
+	public IList<IWebElement> Results;
+	
+	public StartPage(IWebDriver drivert)
+	{
+		this.driver = driver;
+		this.driverWait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+		WaitForSearchResults();
+		PageFactory.InitElements(driver, this);
+	}
+	
+	private void WaitForSearchResults() {
+	   	driverWait.Until(d => d.FindElement(By.ClassName("js-results-item")));
+	}
+}
+\end{lstlisting}
+
+Als erstes wurde auf den Zeilen 21-25 sowie 47-48 Felder mit einer Annotation eingefügt. Diese Teilen der PageFactory mit, wie die Elemente gefunden werden sollen. 
+
+Im zweiten Schritt wird auf den Zeilen 30 und 55 die PageFactory aufgerufen, welche die für die Felder entsprechenden Elemente im \gls{dom} sucht.
+
+Auf den Zeilen 13, 35 und 36 werden schlussendlich die Felder verwendet.
+
+Durch die Page Factory wird die Lesbarkeit des Codes verbessert sowie dessen wartbarkeit, da die Elementdefinitionen einheitlich zu beginn der Klasse aufgeführt werden.
+
+\subsection{Architektur}
+\subsubsection{TestRunners}
+\label{sec:umsetzung:implementierung:architektur:testrunners}
+TestRunners treiben die Tests an und sind die Anbindung an die Service-Anbieter (siehe \cref{sec:Recherche:TestingFrameworks} \nameref{sec:Recherche:TestingFrameworks}). Sie sind dafür zuständig, einen passenden und konfigurierten Treiber zu erstellen sowie eine Antwort über Erfolg oder Misserfolg an den Service-Anbieter zu senden.
+
+Für die Konfiguration eines Treibers können über den Konstruktor ein Browser, eine Browser-Version sowie die Plattform /Betriebsystem übergeben werden. Die möglichen Werte sind im Ordner /Bootstrap/Devices in Objekte gekapselt. Da jedoch jeder Anbieter eigene Werte definiert, müssen dies internen auf jene des Anbieters innerhalb des TestRunners gemapped werden.
+
+Um einen Status über den Erfolg oder Misserfolg an den Service-Anbieter zu senden, sind im Interface ITestRunner die zwei Methoden \textit{TestSucceeded} und \textit{FailTestIfNotSucceeded} definiert. Sobald ein Test erfolgreich war wird die erste Methode aufgerufen. Die zweite wird zum Schluss jedes Tests ausgeführt und liefert einen Test-Erfolg an den Service anbieter, wenn TestSucceeded einmal ausgeführt wurde, sonst wird ein Test-Misserfolg gesendet.
+
+Ein spezieller TestRunner stellt der LocalTestRunner. Dieser führt den Test nicht bei einem Service-Anbieter durch, sondern auf der lokalen Maschine. Demnach muss der Browser, der Browser-Treiber und das Projekt auf dem eigenen Computer lauffähig sein. Dieser wird hauptsächlich für die Entwicklung verwendet da die Tests schneller abgearbeitet werden können. Die Beiden Methoden TestSucceeded und FailTestIfNotSucceeded machen bei diesem TestTreiber nichts.
+
+\subsubsection{Modules}
+Module sind wiederautauchende Teile einer Page (siehe \cref{sec:umsetzung:implementierung:patterns:pageobject} \nameref{sec:umsetzung:implementierung:patterns:pageobject}). Sie sind im Ordner /Modules definiert. Beispiele dafür sind die Suchformulare der verschiedenen Engines, da diese auf der Start-, auf der Engine-Einstiegs- sowie auf der Suchresultatseite vorkommen.
+
+\subsubsection{Konfiguration}
+\label{sec:umsetzung:Implementierung:Architektur:Konfiguration}
+Es gibt zwei Orte wo die Ausführung konfiguriert werden kann. Dies ist zum einen in den \textit{app.config}-Dateien, sowie über die Kommandozeile.
+
+Die app.config-Dateien sind im obersten Ordner des Projektes abgelegt. Für jede Umgebung (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}) gibt es ein dediziertes File, welche folgenden Aufbau haben:
+
+\lstset{language=xml}
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+	<testConfigurations xdt:Transform="Replace">
+		<testConfiguration>
+			<testRunner>crossbrowsertesting</testRunner>
+			<targetUrl>http://travel.local.ch</targetUrl>
+			<authenticationType>netScaler</authenticationType>-->
+		</testConfiguration>
+	</testConfigurations>
+</configuration>
+\end{lstlisting}
+
+Der Browser, die Browser-Version und die Plattform sind für alle Tests die selben und werden über die Kommandozeile-Parameter definiert. Wenn die Test-Suite mit mehreren Konfigurationen getestet werden soll, so muss das Test-Projekt mehrfach mit verschiedenen Parametern ausgeführt werden. Dies wird entsprechend im Bamboo (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}) definiert.
+
+Die Kommandozeile-Parameter haben folgende Form:
+\begin{quote}
+browser=Chrome version=38 platform=Windows8
+\end{quote}
+Die Werte der Parameter müssen mit den Werten in dem Ordner /Bootstrap/Devices übereinstimmen. Eine Ausnahme ist die Version. In dem genannten Ordner haben diese einen Unterstrich vorangesetzt (zum Beispiel \_7, \_11, etc.), da die Werte in C\# nicht mit einer Zahl beginnen dürfen.
+
+\subsubsection{Authentifizierung}
+\label{sec:umsetzung:Implementierung:Architektur:Authentifizierung}
+Es gibt drei verschiedene Arten der Authentifizierung:
+\begin{itemize}
+\item Keine
+\item BasicAuthentication
+\item netScaler
+\end{itemize}
+
+Keine Authentifizierung wird für die lokale Testausführung verwendet. Sprich wenn der Test auf dem eigenen Rechner ausgeführt werden soll.
+
+BasicAuthentication ist die Authentifizierungsmethode des \Gls{glos:iis} Servers. Kommt man auf eine entsprechend Konfigurierte Webseite wird man vom Browser zur Eingabe eines Benutzernamens und Passwort aufgefordert. Alternativ können die beiden Werte auch über die \gls{url} mitgegeben werden in folgender Form:
+\begin{quote}
+	scheme://user:passwort@host
+\end{quote}
+Die DriverFactory (siehe \cref{sec:umsetzung:Implementierung:Architektur:DriverFactory} \nameref{sec:umsetzung:Implementierung:Architektur:DriverFactory}) stellt sicher, dass die Authentifizierung für HTTP sowie für HTTPS durchgeführt wird.
+
+Der netScaler\footcite{NetScaler} ist ein Application Delivery Controller der Firma Citrix und wird in Hotelplan Gruppe verwendet um unter anderem die Authentifizierung sicherzustellen. Kommt man auf eine vom netScaler geschützten Webseite erscheint eine \Gls{glos:html}-Seite welche die Eingabe eines Passwort verlangt. Die DriverFactory gibt das Passwort ein und leitet den User auf die Startseite weiter. Danach kann mit Testausführung begonnen werden.
+
+\subsubsection{DriverFactory}
+\label{sec:umsetzung:Implementierung:Architektur:DriverFactory}
+Die DriverFactory ist der Einstiegspunkt in die ganze initialisierung (Bootstrapping) eines Tests. Sie ist zuständig für die Konfiguration (siehe \cref{sec:umsetzung:Implementierung:Architektur:Konfiguration} \nameref{sec:umsetzung:Implementierung:Architektur:Konfiguration}), die TestRunners (siehe \cref{sec:umsetzung:implementierung:architektur:testrunners} \nameref{sec:umsetzung:implementierung:architektur:testrunners}) sowie die Authentifizierung (siehe \cref{sec:umsetzung:Implementierung:Architektur:Authentifizierung} \nameref{sec:umsetzung:Implementierung:Architektur:Authentifizierung})
+
+Bei der erstellung der DriverFactory wird die Konfiguration ausgelesen, der Treiber erstellt sowie die Authentifizierung vorgenommen. Damit ist der Treiber bereit um für einen Test verwendet zu werden.
+
+
+\subsection{Testbeschreibung}
+Die HappyPath Tests sind in der Datei HappyPath.cs im Ordner Tests spezifiziert, die SearchSmokeTests im File SearchSmokeTests.cs und für die Main Tests gibt es für die jeweilige Engine eine eigene Datei (Citytrip.cs und Flight.cs).
+
+
+Wie im \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium} beschrieben werden die Tests mit C\# umgesetzt und mittels des UnitTest Frameworks NUnit\footcite{NUnit_-_Home_2015-09-26} angetrieben.
+In diesem Framework
