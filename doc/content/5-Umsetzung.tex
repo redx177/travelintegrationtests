@@ -12,7 +12,7 @@
 \chapter{Umsetzung}
 \label{sec:umsetzung}
 
-Dieses Kapitel beschreibt die technischen Aspekte, wie die Testfälle aus dem \cref{sec:konzept} \nameref{sec:konzept} umgesetzt werden.
+Dieses Kapitel beschreibt die technischen Aspekte, wie die Testfälle aus dem \cref{sec:konzept} \nameref{sec:konzept} umgesetzt wurden.
 
 Zuerst wird der Einsatz von Selenium sowie die Infrastruktur der Travelwindow AG beschrieben, um einen Überblick zu verschaffen. Danach folgen die Umsetzungsdetails und schlussendlich wie die Tests in den Entwicklungsprozess eingebunden werden.
 
@@ -30,6 +30,7 @@ Selenium WebDriver\footcite{Selenium_WebDriver_2015-09-26} ist ein Aufsatz auf S
 Hier sollen einige Beispiele dafür aufgezeigt werden, wie über Selenium mit dem Browser interagiert werden kann.
 
 Um einen Browser zu starten muss ein entsprechender Driver instantiiert werden. Im folgenden Code wird ein Firefox aufgerufen.
+\lstset{language=csh}
 \begin{lstlisting}
 	IWebDriver driver = new FirefoxDriver();
 \end{lstlisting}
@@ -327,7 +328,7 @@ Die app.config-Dateien sind im obersten Ordner des Projektes abgelegt. Für jede
 		<testConfiguration>
 			<testRunner>crossbrowsertesting</testRunner>
 			<targetUrl>http://travel.local.ch</targetUrl>
-			<authenticationType>netScaler</authenticationType>-->
+			<authenticationType>netScaler</authenticationType>
 		</testConfiguration>
 	</testConfigurations>
 </configuration>
@@ -366,10 +367,84 @@ Die DriverFactory ist der Einstiegspunkt in die ganze initialisierung (Bootstrap
 
 Bei der erstellung der DriverFactory wird die Konfiguration ausgelesen, der Treiber erstellt sowie die Authentifizierung vorgenommen. Damit ist der Treiber bereit um für einen Test verwendet zu werden.
 
+\subsection{Timing}
+\label{sec:umsetzung:Implementierung:Architektur:Timing}
+Wichtig für den Erfolg von Selenium Tests sind die Timings. Einige Teile der Webseite brauchen mehr Zeit bis sie geladen sind, da viel Rechenleistung benötigt wird oder sie mit JavaScript nachgeladen werden. Die Pages (siehe \cref{sec:umsetzung:implementierung:patterns:pageobject} \nameref{sec:umsetzung:implementierung:patterns:pageobject}) warten deshalb im Konstruktor, bis die Webseite geladen ist. Dazu wird die Klasse WebDriverWait von Selenium verwendet. Es wird gewartet, bis ein \Gls{glos:html}-Element gefunden wird.
 
-\subsection{Testbeschreibung}
+Die Timings sind sehr aufwändig, da man zu beginn meistens nicht genau weiss, wo die Tests schneller sind als die Webseite. Dies merkt man meistens erst bei der Ausführung und muss danach die Timings nachpflegen, was sehr aufwändig werden kann.
+
+Ein Beispiel dafür ist die Flug-Konfigurations Seite. Dort ist ein Button erst nach wenigen Sekunden anwählbar.
+Solange er es noch nicht ist hat er die Klasse "`btn-loading"'. 
+
+\lstset{language=csh}
+\begin{lstlisting}
+public void WaitForPageToBeReady()
+{
+    wait.Until(d => d.FindElement(By.CssSelector(".js-configuration-submit:not(.btn-loading)")));
+}
+\end{lstlisting}
+
+Mit diesem Code wird sichergestellt, dass gewartet wird bis der Button die Klasse nicht mehr hat.
+
+Auf der Flugresultat Seite werden die Flüge über JavaScript nachgeladen, weshalb gewartet werden muss bis eine Antwort eingetroffen ist und diese in dem Browser dargestellt wird.
+
+\begin{lstlisting}
+public void WaitForResults()
+{
+    wait.Until(d => d.FindElement(By.CssSelector(".js-search-content.content-loaded")));
+}
+\end{lstlisting}
+
+Diese Methode wartet, bis der Behälter für die Suchresultate die Klasse "`content-loaded"' besitzt, denn erst dann darf mit dem Test weitergeführt werden.
+
+Die wait.Unitl() Methode nimmt eine \Gls{glos:closure} entgegen.
+
+\subsection{Tests}
 Die HappyPath Tests sind in der Datei HappyPath.cs im Ordner Tests spezifiziert, die SearchSmokeTests im File SearchSmokeTests.cs und für die Main Tests gibt es für die jeweilige Engine eine eigene Datei (Citytrip.cs und Flight.cs).
 
 
 Wie im \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium} beschrieben werden die Tests mit C\# umgesetzt und mittels des UnitTest Frameworks NUnit\footcite{NUnit_-_Home_2015-09-26} angetrieben.
-In diesem Framework
+
+\begin{lstlisting}
+[SetUp]
+public void SetUp()
+{
+    driverFactory = new DriverFactory();
+    targetUrl = driverFactory.TargetUrl;
+    driver = driverFactory.GetDriver();
+    wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+}
+
+[TearDown]
+public void TearDown()
+{
+    driverFactory.FailTestIfNotSucceeded();
+    driver.Quit();
+}
+\end{lstlisting}
+
+Diese beiden Methoden werden zu Beginn respektive zum Ende jedes Tests ausgeführt. Die SetUp Methode lädt den Treiber (siehe \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium}) und erstellt die Klasse \textit{WebDriverWait} (siehe \cref{sec:umsetzung:Timing} \nameref{sec:umsetzung:Timing}). Die TearDown Methode sendet den Status über Erfolg oder Misserfolg an den Service-Anbieter und schliesst den Treiber wieder.
+
+Die Testmethoden werden mit dem \textit{Test} Attribut gekennzeichnet. Diese werden von NUnit ausgeführt.
+
+\begin{lstlisting}
+[Test]
+public void Citytrip_ToAmsterdam_FromZurich_Room1_1Adults1Child_Room2_1Adult()
+{
+	// Setup
+	driver.Navigate().GoToUrl(targetUrl);
+	var startPage = new StartPage(driver, wait);
+	
+	// Tests & Assertions
+	...
+	
+	// Teardown
+	driverFactory.TestSucceeded();
+}
+\end{lstlisting}
+
+In jedem Test wird zuerst auf die Startseite Navigiert (Zeile 5) und die \textit{StartPage} instanziiert (Zeile 6).
+
+Danach folgen die Testinstruktionen und die Behauptungen.
+
+Wenn der Test durchläuft, sprich es gab keine Behauptung welche fehlgeschlagen ist, so wird zum Schluss noch \textit{driverFactory.TestSucceeded();} aufgerufen. Dies signalisiert das der Test erfolgreich war.

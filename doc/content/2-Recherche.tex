@@ -1,6 +1,6 @@
 \chapter{Recherche}
 
-In diesem Kapitel werden die Rahmenbedingungen, die verschiedene Testing Frameworks sowie die Zielgruppe recherchiert.
+In diesem Kapitel werden die Rahmenbedingungen, die verschiedene Testing Frameworks (Service-Anbieter) sowie die Zielgruppe recherchiert.
 
 \section{Rahmenbedingungen}
 \label{sec:Recherche:Rahmenbedingungen}
@@ -22,6 +22,8 @@ Der Sourcecode der Softare ist auf einem eigenen \gls{svn}\footcite{Apache_Subve
 
 Als Continuous Integration Server wird Bamboo\footcite{Bamboo_2015-07-26} eingesetzt. Dieser Kompiliert den Sourcecode und ist dafür verantwortlich, eine Version auf die Umgebungen Test, Quality und Production zu laden.
 
+Das Tooling ist genauer beschrieben im \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}.
+
 \section{Testing Frameworks}
 \label{sec:Recherche:TestingFrameworks}
 Der defacto Standart für Integrationstests von Benutzeroberfläche ist Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-07-26}\footcite{Happy_10th_Birthday_Selenium_ThoughtWorks_2015-07-26}. Code für dieses Framework kann in C\# programmiert werden, welcher einen Webbrowser startet und Benutzereingaben simuliert. Dadurch können repetitive Tests automatisiert und auf verschiedenen Browsern durchgeführt werden.
@@ -40,9 +42,9 @@ Der Vorteil der Serviceanbieter liegt darin, dass sie virtuelle Umgebungen für 
 \item IPhone, iOS 8.4
 \item Android 4.4, Samsung Galaxy S4
 \end{itemize}
-Es ist ersichtlich, dass auch Mobile Browser unterstützt werden. Das Aufsetzten und Pflegen verschiedener Servern mit verschiedenen Betriebssystemen, Browsern und Emulatoren für mobile Endgeräte ist aufwändig und benötigt viel Knowhow. Aus diesem Grund wurde in Absprache mit dem Business von \textit{travel.ch} entschieden, dass die Browser nicht auf einem Rechner installiert werden sollen, sondern ein Service Anbieter verwendet wird.
+Es ist ersichtlich, dass auch Mobile Browser unterstützt werden. Das Aufsetzten und Pflegen verschiedener Servern mit verschiedenen Betriebssystemen, Browsern und Emulatoren für mobile Endgeräte ist aufwändig und benötigt viel Knowhow. Aus diesem Grund wurde in Absprache mit dem Business von \textit{travel.ch} entschieden, dass die Browser nicht auf einem Rechner installiert werden sollen, sondern ein Service-Anbieter verwendet wird.
 
-Als Service-Anbieter für Selenium Tests wurden zwei Kandidaten näher in Betracht gezogen. SauceLabs\footcite{Sauce_Labs_2015-07-26} und CrossBrowserTesting\footcite{Cross_Browser_Testing_2015-07-26}.
+Als Testing Framework für Selenium Tests wurden zwei Kandidaten näher in Betracht gezogen. SauceLabs\footcite{Sauce_Labs_2015-07-26} und CrossBrowserTesting\footcite{Cross_Browser_Testing_2015-07-26}.
 
 Beide Anbieter verfügen über 500 verschiedene Betriebsystem/Browser Konfigurationen\footcite{Platforms_2015-07-26}\footcite{OS_Browser_Configurations_for_Cross_Browser_Compatibility_Testing_2015-07-26}. Beide können automatisierte Tests ausführen und liefern als Resultat ein Video der Durchführung sowie Screenshots der einzelnen Tests.
 
@@ -52,11 +54,16 @@ Um sich für einen Serviceanbieter zu entscheiden wurde ein Prototyp entwickelt,
 
 \subsection{Prototyp}
 \label{sec:Recherche:TestingFrameworks:Prototyp}
-Um die beiden Frameworks, welche im \cref{sec:Recherche:TestingFrameworks:vs} \nameref{sec:Recherche:TestingFrameworks:vs} beschrieben wurden, zu testen wurde ein Prototyp entwickelt. Dieser kann die Tests auch lokal laufen lassen. Der Browser sowie der Selenium Treiber müssen dazu jedoch auf dem eigenen Rechner installiert sein. Der Quellcode ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
+Um die beiden Frameworks, welche im \cref{sec:Recherche:TestingFrameworks:vs} \nameref{sec:Recherche:TestingFrameworks:vs} beschrieben wurden, zu testen wurde ein Prototyp entwickelt. Zusätzlich kann dieser die Tests auch lokal laufen lassen. Der Browser sowie der Selenium Treiber müssen dazu jedoch auf dem eigenen Rechner installiert sein. Der Quellcode ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
+
+\subsubsection{Auswertung}
+TODO!!!
+SauceLabs, da besseres Interface!
+Oben noch die anderen Service-Anbiter aufliesten. Z.B. EU Anbieter um latenz der US Anbieter zu testen.
 
 \section{Zielgruppe}
 \label{sec:Recherche:Zielgruppe}
-Die Zielgruppe sind die verschiedenen Browser, welche die Benutzer der Webseite verwenden sowie die Destinationen für die sie eine Reise buchen möchten.
+Die Zielgruppe sind die Benutzer der Webseite, beziehungsweise die verschiedenen Browser, welche sie verwenden, sowie die Destinationen für die sie eine Reise buchen möchten. Denn für diese müssen Tests geschrieben werden.
 
 Auf \textit{travel.ch} wird Google Analytics eingesetzt. Die Auswertung des letzten halben Jahres (25.02.2015 - 25.07.2015) ergab das folgende Browserversionen am meisten verwendet wurden:
 \begin{itemize}
@@ -103,3 +110,5 @@ Die Webseite ist in drei Bereiche aufgeteilt: Citytrip (Flug \& Hotel), Flug, Ho
 		10 & Istanbul & Barcelona & Venedig \\ \hline
 	\end{tabular} 
 \end{table}
+
+Es ist demnach wichtig, dass die oben genannten Browser getestet werden sowie die aufgeführten Destinationen.

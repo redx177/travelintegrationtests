@@ -3,7 +3,7 @@
 \label{sec:konzept}
 Dieses Kapitel spezifiziert die umzusetzenden Testfälle. Diese beinhalten die Ausführung, die erwarteten Resultate sowie allfällige Nachbedingungen. Die Vorbedingungen sind für alle Testfälle gleich, da jeder in einer neuen virtuellen Maschine (siehe \Gls{glos:virtualMachine}) gestartet wird und somit keine \Glspl{glos:session} und \Glspl{glos:httpcookie} vorhanden sind.
 
-Um die Kosten zu minimieren werden möglichst wenig Testfälle spezifiziert, jedoch trotzdem die gesamte Funktionalität der Webseite überprüft werden kann.
+Um die Kosten zu minimieren werden möglichst wenig Testfälle spezifiziert, jedoch trotzdem die gesamte Funktionalität der Webseite überprüft werden kann. Weitere Details dazu sind im \cref{sec:analyse} \nameref{sec:analyse} aufgeführt.
 
 Eine Übersicht der Testfälle wurde im Wiki von Hotelplan erstellt und wird zum Verständnis dort gepflegt. Die Liste ist im \cref{app:Testfälle} \nameref{app:Testfälle} unter "`Test Cases"' beigefügt.
 
@@ -22,16 +22,17 @@ Die Tests werden in drei Kategorien unterteilt:
 \item Main Tests
 \end{itemize}
 
-Wenn die Tests ausgeführt werden, sollen als erstes die Happy Paths\footcite{Happy_path_-_Wikipedia_the_free_encyclopedia_2015-07-30} überprüft werden. Dabei wird der gesamte Such- und Buchungungsprozess pro Engine einmal durchlaufen, ohne eine Auswahl zu treffen oder auf Fehler zu überprüfen. Der Test ist erfolgreich wenn die letzte Seite des Buchungsprozesses erreicht werden kann.
+Wenn die Tests ausgeführt werden, sollen als erstes die Happy Paths\footcite{Happy_path_-_Wikipedia_the_free_encyclopedia_2015-07-30} überprüft werden. Dabei wird der gesamte Such- und Buchungungsprozess pro Engine einmal durchlaufen, ohne eine Auswahl zu treffen oder auf Fehler zu überprüfen. Der Test ist erfolgreich wenn die letzte Seite des Buchungsprozesses erreicht werden kann. Damit wird sichergestellt dass die Webseite im standartdurchlauf keine Fehler produziert.
 
-Danach folgen die Smoke- und Main Tests. Die Smoke Tests führen eine Suche für die in der \cref{sec:Recherche:Zielgruppe:top10} \nameref{sec:Recherche:Zielgruppe:top10} definierten top 10 Detinationen aus und überprüfen, ob Resultate geliefert werden.
+Danach folgen die Smoke- und Main Tests. Die Smoke Tests führen eine Suche für die in der \cref{sec:Recherche:Zielgruppe:top10} \nameref{sec:Recherche:Zielgruppe:top10} definierten Destinationen aus und überprüfen, ob Resultate geliefert werden.
 
-Die Main Tests überprüfen schlussendlich die Funktionalität der Webseite.
+Die Main Tests überprüfen schlussendlich die Funktionalität (siehe \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten}) der Webseite.
 
 \subsection{Kunde \& Passagierangaben}
 \label{sec:Konzept:Übersicht:Angaben}
 Im Buchungsprozess müssen die Kunden- \& Passagierangaben ausgefüllt werden. Für alle Tests werden die folgenden Daten verwendet.
-
+ \\
+ \\
 Kundendaten:
 \begin{itemize}
 \item Vorname: Han
@@ -296,7 +297,7 @@ Die Tests sind pro Engine immer gleich aufgebaut. Sprich die Suchparameter sind 
 \end{table}
 
 \section{Main Tests}
-Bei den Happy Paths und Smoke Tests wurde überprüft, ob die wichtigste Funktionalität der Webseite noch funktioniert. In diesem Abschnitt wird die gesamte Restliche Funktionalität überprüft. Dies umfasst Randbedingungen, Fehleingaben, etc.
+Bei den Happy Paths wird überprüft, ob die Funktionalität der Webseite gemäss Spezifikation (siehe \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten}) funktioniert. Die Funktionalitäten im Anhang sind priorisieriert und werden gemäss dieser umgesetzt. Begonnen wurde mit der höchsten Zahl.
 
 \subsection{Citytrip}
 
