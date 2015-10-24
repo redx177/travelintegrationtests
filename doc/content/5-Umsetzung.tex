@@ -19,7 +19,7 @@ Zuerst wird der Einsatz von Selenium sowie die Infrastruktur der Travelwindow AG
 \section{Selenium}
 \label{sec:umsetzung:selenium}
 Die Testfälle werden mit Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-09-26} implementiert. Dieses automatisiert Browser, sprich es wird als erstes einer aufgestartet, danach Testschritte ausgeführt und schlussendlich einige Behauptungen aufgestellt. Sind diese korrekt so ist der Test erfolgreich. Wenn nicht schlägt der Test fehl. 
-Angetrieben werden Selenium Tests mittels UnitTests. Diese können von Testtreibern ausgeführt werden und erlauben die Überprüfung von Behauptungen.
+Angetrieben werden Selenium Tests mittels UnitTests. Diese können von Testtreibern ausgeführt werden und erlauben die Überprüfung von Behauptungen.t
 
 Selenium selber ist in Java implementiert und bietet eine eigene \Gls{glos:ide} mit dem Namen Selenium IDE\footcite{Selenium_IDE_Plugins_2015-09-26}, welche ein Plugin für den Firefox\footcite{Download_Firefox__Free_Web_Browser__Mozilla_2015-09-26} darstellt. Damit können Aktionen im Browser aufgezeichnet werden und danach als Test automatisiert durchgeführt werden. Die gesamte Software ist Open Source unter der \textit{Apache License 2.0} erhältlich\footcite{Selenium_software_-_Wikipedia,_the_free_encyclopedia_2015-09-26}.
 
@@ -109,24 +109,7 @@ Die erste ist für die Entwickler. Die zweite für den Kunden zum Testen und die
 
 Soll eine Version der Webseite auf eine Umgebung hochgeladen werden, so kann der Prozess auf dem Build Server gestartet werden, wodurch eine Revision vom Bamboo Server auf die entsprechende Umgebung hochgeladen wird. Als Deployment Server wird Octopus\footcite{Octopus_Deploy_2015-09-28} eingesetzt.
 
-\section{Implementierung}
-\label{sec:umsetzung:implementierung}
-Das Kapitel widmet sich der Implementierung. Als erstes wird der Aufbau der Ordnerstruktur beschrieben, danach die verwendeten Design Patterns erläutert und schlussendlich die Tests dokumentiert.
-
-\subsection{Ordnerstruktur}
-Das Projekt ist in folgende Ordner aufgeteilt:
-\begin{itemize}
-\item Bootstrap: Beinhaltet Objekte welche für den Aufbau von Tests benötigt werden.
-\item Models: Model Klassen die während der Durchführung verwendet werden.
-\item Modules: Ein Modul repräsentiert ein Teil einer Webseite. Mehr dazu im \cref{sec:umsetzung:implementierung:patterns:pageobject} \nameref{sec:umsetzung:implementierung:patterns:pageobject}
-\item Pages: Eine Page entspricht einer Webseite welche zu testen ist. Mehr dazu im \cref{sec:umsetzung:implementierung:patterns:pageobject} \nameref{sec:umsetzung:implementierung:patterns:pageobject}
-\item Properties: Metadaten der Entwicklungsumgebung, welche automatisch generiert wurden.
-\item TestRunners: Ermöglichen die Verbindung zu einem externen Testanbieter. Mehr dazu im \cref{sec:umsetzung:implementierung:architektur:testrunners} \nameref{sec:umsetzung:implementierung:architektur:testrunners}
-\item Tests: Beinhaltet die eigentlichen Tests.
-\item resources: Ressourcen welche für die Testausführung benötigt werden.
-\end{itemize}
-
-\subsection{Design Patterns}
+\section{Design Patterns}
 Es werden die beiden Design Patterns \textit{Page Object} und \textit{Page Factory} vorgestellt. Die Verwendung soll anhand eines Beispieles erläutert werden. Dazu soll folgender Test optimiert werden:
 
 \begin{lstlisting}        
@@ -156,8 +139,8 @@ public class CityTrip
 
 Der Test gibt eine Destination in ein Suchformular ein, sendet das Formular ab und überprüft ob, ob mind. ein Resultat gefunden wurde.
 
-\subsubsection{Page Object}
-\label{sec:umsetzung:implementierung:patterns:pageobject}
+\subsection{Page Object}
+\label{sec:umsetzung:patterns:pageobject}
 Das Page Object Design Pattern gibt vor, dass Webseiten in Objekten im Code repräsentiert werden sollen\footcite{PageObjects}. Diese Objekte werden Page Objects genannt. Sie kapseln die Logik, um mit einer Webseite zu interagieren, weg. Zum Beispiel das selektieren eines \gls{dom} Elements oder das drücken eines Buttons.
 
 Das Design Pattern auf das in der Kapiteleinführung gegebene Beispiel angewendet ergibt folgender Code:
@@ -225,7 +208,7 @@ Dazu gekommen sind die beiden Page Objects \textit{StartPage} (Zeile 17) und \te
 
 Für die Navigation von einer Seite auf die nächste sind ebenfalls die Page Objects zuständig, da sie wissen auf welche Seite ein Link oder ein Formular führt. Die Methode \textit{SubmitValidForm} (Zeile 26) gibt ein weiteres Page Object zurück.  
 
-\subsubsection{Page Factory}
+\subsection{Page Factory}
 Eine \textit{Page Factory} erleitert den Umgang mit einem \textit{Page Object}. Es initialisiert die Elemente eines Page Objects. Der Code kann auf folgende Weise umgebaut werden: 
 
 \begin{lstlisting}
@@ -300,22 +283,92 @@ Auf den Zeilen 13, 35 und 36 werden schlussendlich die Felder verwendet.
 
 Durch die Page Factory wird die Lesbarkeit des Codes verbessert sowie dessen wartbarkeit, da die Elementdefinitionen einheitlich zu beginn der Klasse aufgeführt werden.
 
-\subsection{Architektur}
-\subsubsection{TestRunners}
-\label{sec:umsetzung:implementierung:architektur:testrunners}
-TestRunners treiben die Tests an und sind die Anbindung an die Service-Anbieter (siehe \cref{sec:Recherche:TestingFrameworks} \nameref{sec:Recherche:TestingFrameworks}). Sie sind dafür zuständig, einen passenden und konfigurierten Treiber zu erstellen sowie eine Antwort über Erfolg oder Misserfolg an den Service-Anbieter zu senden.
+\section{Architektur}
+\label{sec:umsetzung:architektur}
+Das Kapitel widmet sich der Architektur. Das Programm ist in einzelne Bereiche, so genannte Namespaces aufgegliedert. Diese werden für sich beschrieben, sowie die Interaktion zwischen ihnen.
 
-Für die Konfiguration eines Treibers können über den Konstruktor ein Browser, eine Browser-Version sowie die Plattform /Betriebsystem übergeben werden. Die möglichen Werte sind im Ordner /Bootstrap/Devices in Objekte gekapselt. Da jedoch jeder Anbieter eigene Werte definiert, müssen dies internen auf jene des Anbieters innerhalb des TestRunners gemapped werden.
+Folgend nun die Übersicht über die Namespaces in Form eines Klassendiagramms:
 
-Um einen Status über den Erfolg oder Misserfolg an den Service-Anbieter zu senden, sind im Interface ITestRunner die zwei Methoden \textit{TestSucceeded} und \textit{FailTestIfNotSucceeded} definiert. Sobald ein Test erfolgreich war wird die erste Methode aufgerufen. Die zweite wird zum Schluss jedes Tests ausgeführt und liefert einen Test-Erfolg an den Service anbieter, wenn TestSucceeded einmal ausgeführt wurde, sonst wird ein Test-Misserfolg gesendet.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/semesterarbeit class diagram - overview.png}
+	\caption{Klassendiagramm Übersicht}
+	\label{fig:umsetzung:architektur}
+\end{figure}
 
-Ein spezieller TestRunner stellt der LocalTestRunner. Dieser führt den Test nicht bei einem Service-Anbieter durch, sondern auf der lokalen Maschine. Demnach muss der Browser, der Browser-Treiber und das Projekt auf dem eigenen Computer lauffähig sein. Dieser wird hauptsächlich für die Entwicklung verwendet da die Tests schneller abgearbeitet werden können. Die Beiden Methoden TestSucceeded und FailTestIfNotSucceeded machen bei diesem TestTreiber nichts.
+\subsection{Tests}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/semesterarbeit class diagram - tests.png}
+	\caption{Klassendiagramm Tests}
+	\label{fig:umsetzung:architektur:tests}
+\end{figure}
+Im Ordner Tests sind die Tests gespeichert. Zur Erstellung des Drivers wird die Klasse \textit{DriverFactory} aus dem Namespace \textit{Bootstrap} benötigt (siehe \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium}) . Für die Interaktion mit dem Browser werden die \textit{Pages} verwendet (siehe \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject}).
 
-\subsubsection{Modules}
-Module sind wiederautauchende Teile einer Page (siehe \cref{sec:umsetzung:implementierung:patterns:pageobject} \nameref{sec:umsetzung:implementierung:patterns:pageobject}). Sie sind im Ordner /Modules definiert. Beispiele dafür sind die Suchformulare der verschiedenen Engines, da diese auf der Start-, auf der Engine-Einstiegs- sowie auf der Suchresultatseite vorkommen.
+Die HappyPath Tests sind in der Datei HappyPath.cs im spezifiziert, die SearchSmokeTests im File SearchSmokeTests.cs und für die Main Tests gibt es für die jeweilige Engine eine eigene Datei (Citytrip.cs und Flight.cs).
+
+Wie im \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium} beschrieben werden die Tests mit C\# umgesetzt und mittels des UnitTest Frameworks NUnit\footcite{NUnit_-_Home_2015-09-26} angetrieben.
+
+\begin{lstlisting}
+[SetUp]
+public void SetUp()
+{
+    driverFactory = new DriverFactory();
+    targetUrl = driverFactory.TargetUrl;
+    driver = driverFactory.GetDriver();
+    wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
+}
+
+[TearDown]
+public void TearDown()
+{
+    driverFactory.FailTestIfNotSucceeded();
+    driver.Quit();
+}
+\end{lstlisting}
+
+Die Methoden SetUp und TearDown werden zu Beginn respektive zum Ende jedes Tests ausgeführt. Die SetUp Methode lädt den Treiber mittels der DriverFactory und erstellt die Klasse \textit{WebDriverWait} (siehe \cref{sec:umsetzung:probleme:timing} \nameref{sec:umsetzung:probleme:timing}). Die TearDown Methode sendet den Status über Erfolg oder Misserfolg an den Service-Anbieter und schliesst den Treiber wenn der Test abgeschlossen ist.
+
+Eine Testmethode wird mit dem \textit{Test} Attribut gekennzeichnet. Diese werden von NUnit erkannt und ausgeführt.
+
+\begin{lstlisting}
+[Test]
+public void Citytrip_ToAmsterdam_FromZurich_Room1_1Adults1Child_Room2_1Adult()
+{
+	// Setup
+	driver.Navigate().GoToUrl(targetUrl);
+	var startPage = new StartPage(driver, wait);
+	
+	// Tests & Assertions
+	...
+	
+	// Teardown
+	driverFactory.TestSucceeded();
+}
+\end{lstlisting}
+
+In jedem Test wird zuerst auf die Startseite Navigiert (Zeile 5) und die \textit{StartPage} instanziiert (Zeile 6).
+
+Danach folgen die Testinstruktionen und die Behauptungen.
+
+Wenn der Test durchläuft, sprich es gab keine Behauptung welche fehlgeschlagen ist, so wird zum Schluss noch \textit{driverFactory.TestSucceeded();} aufgerufen. Dies signalisiert das der Test erfolgreich war was dem Service-Anbieter übermittelt werden kann (weitere Informationen dazu im \cref{sec:umsetzung:architektur:testrunner} \nameref{sec:umsetzung:architektur:testrunner}).
+
+\subsection{Bootstrap}
+\label{sec:umsetzung:architektur:bootstrap}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/semesterarbeit class diagram - bootstrap.png}
+	\caption{Klassendiagramm Bootstrap}
+	\label{fig:umsetzung:architektur:bootstrap}
+\end{figure}
+Das Bootstraping ist dazu da, die Grundlage für den Test bereitzustellen. Dazu gehört die Erstellung des Drivers, die Authentifizierung an der Webseite. Diese Punkte können über eine Konfiguration angepasst werden.
+
+\subsubsection{DriverFactory}
+\label{sec:umsetzung:Architektur:DriverFactory}
+Die DriverFactory ist der Einstiegspunkt in die ganze initialisierung (Bootstrapping) eines Tests und zuständig für die Erstellung eines Treibers. Dazu wird ein TestRunner benötigt (siehe \cref{sec:umsetzung:architektur:testrunner} \nameref{sec:umsetzung:architektur:testrunner}). Welcher erstellt werden soll wird über die Konfiguration (siehe \cref{sec:umsetzung:architektur:bootstrap:konfiguration} \nameref{sec:umsetzung:architektur:bootstrap:konfiguration}) gesteuert. Zusätzlich initialisiert die DriverFactory auch die Authentifizierung, welche durch den \textit{Authenticator} durchgeführt wird.
 
 \subsubsection{Konfiguration}
-\label{sec:umsetzung:Implementierung:Architektur:Konfiguration}
+\label{sec:umsetzung:architektur:bootstrap:konfiguration}
 Es gibt zwei Orte wo die Ausführung konfiguriert werden kann. Dies ist zum einen in den \textit{app.config}-Dateien, sowie über die Kommandozeile.
 
 Die app.config-Dateien sind im obersten Ordner des Projektes abgelegt. Für jede Umgebung (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}) gibt es ein dediziertes File, welche folgenden Aufbau haben:
@@ -334,6 +387,8 @@ Die app.config-Dateien sind im obersten Ordner des Projektes abgelegt. Für jede
 </configuration>
 \end{lstlisting}
 
+Die der app.config kann der Service-Anbieter, die Webseite welche getestet werden soll, sowie den Typ der Authentifizierung festgelegt werden.
+
 Der Browser, die Browser-Version und die Plattform sind für alle Tests die selben und werden über die Kommandozeile-Parameter definiert. Wenn die Test-Suite mit mehreren Konfigurationen getestet werden soll, so muss das Test-Projekt mehrfach mit verschiedenen Parametern ausgeführt werden. Dies wird entsprechend im Bamboo (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}) definiert.
 
 Die Kommandozeile-Parameter haben folgende Form:
@@ -343,7 +398,7 @@ browser=Chrome version=38 platform=Windows8
 Die Werte der Parameter müssen mit den Werten in dem Ordner /Bootstrap/Devices übereinstimmen. Eine Ausnahme ist die Version. In dem genannten Ordner haben diese einen Unterstrich vorangesetzt (zum Beispiel \_7, \_11, etc.), da die Werte in C\# nicht mit einer Zahl beginnen dürfen.
 
 \subsubsection{Authentifizierung}
-\label{sec:umsetzung:Implementierung:Architektur:Authentifizierung}
+\label{sec:umsetzung:architektur:bootstrap:Authentifizierung}
 Es gibt drei verschiedene Arten der Authentifizierung:
 \begin{itemize}
 \item Keine
@@ -357,21 +412,71 @@ BasicAuthentication ist die Authentifizierungsmethode des \Gls{glos:iis} Servers
 \begin{quote}
 	scheme://user:passwort@host
 \end{quote}
-Die DriverFactory (siehe \cref{sec:umsetzung:Implementierung:Architektur:DriverFactory} \nameref{sec:umsetzung:Implementierung:Architektur:DriverFactory}) stellt sicher, dass die Authentifizierung für HTTP sowie für HTTPS durchgeführt wird.
+Die DriverFactory (siehe \cref{sec:umsetzung:Architektur:DriverFactory} \nameref{sec:umsetzung:Architektur:DriverFactory}) stellt sicher, dass die Authentifizierung für HTTP sowie für HTTPS durchgeführt wird.
 
 Der netScaler\footcite{NetScaler} ist ein Application Delivery Controller der Firma Citrix und wird in Hotelplan Gruppe verwendet um unter anderem die Authentifizierung sicherzustellen. Kommt man auf eine vom netScaler geschützten Webseite erscheint eine \Gls{glos:html}-Seite welche die Eingabe eines Passwort verlangt. Die DriverFactory gibt das Passwort ein und leitet den User auf die Startseite weiter. Danach kann mit Testausführung begonnen werden.
 
-\subsubsection{DriverFactory}
-\label{sec:umsetzung:Implementierung:Architektur:DriverFactory}
-Die DriverFactory ist der Einstiegspunkt in die ganze initialisierung (Bootstrapping) eines Tests. Sie ist zuständig für die Konfiguration (siehe \cref{sec:umsetzung:Implementierung:Architektur:Konfiguration} \nameref{sec:umsetzung:Implementierung:Architektur:Konfiguration}), die TestRunners (siehe \cref{sec:umsetzung:implementierung:architektur:testrunners} \nameref{sec:umsetzung:implementierung:architektur:testrunners}) sowie die Authentifizierung (siehe \cref{sec:umsetzung:Implementierung:Architektur:Authentifizierung} \nameref{sec:umsetzung:Implementierung:Architektur:Authentifizierung})
+\subsection{TestRunner}
+\label{sec:umsetzung:architektur:testrunner}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/semesterarbeit class diagram - testrunner.png}
+	\caption{Klassendiagramm TestRunner}
+	\label{fig:umsetzung:architektur:testrunners}
+\end{figure}
+TestRunners treiben die Tests an und sind die Anbindung an die Service-Anbieter (siehe \cref{sec:Recherche:TestingFrameworks} \nameref{sec:Recherche:TestingFrameworks}). Sie sind dafür zuständig, einen passenden und konfigurierten Treiber zu erstellen sowie eine Antwort über Erfolg oder Misserfolg an den Service-Anbieter zu senden.
 
-Bei der erstellung der DriverFactory wird die Konfiguration ausgelesen, der Treiber erstellt sowie die Authentifizierung vorgenommen. Damit ist der Treiber bereit um für einen Test verwendet zu werden.
+Für die Konfiguration eines Treibers können über den Konstruktor ein Browser, eine Browser-Version sowie die Plattform/Betriebsystem übergeben werden. Die möglichen Werte sind im Ordner /Bootstrap/Devices in Objekte gekapselt. Da jedoch jeder Anbieter eigene Werte definiert, müssen dies internen auf jene des Anbieters innerhalb des TestRunners gemapped werden.
+
+Um einen Status über den Erfolg oder Misserfolg an den Service-Anbieter zu senden, sind im Interface ITestRunner die zwei Methoden \textit{TestSucceeded} und \textit{FailTestIfNotSucceeded} definiert. Sobald ein Test erfolgreich war wird die erste Methode aufgerufen. Die zweite wird zum Schluss jedes Tests ausgeführt und liefert einen Test-Erfolg an den Service anbieter, wenn TestSucceeded einmal ausgeführt wurde, sonst wird ein Test-Misserfolg gesendet. Dieser Ablauf wird im folgenden Flow Chart verbildlicht:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/Semesteararbeit flow chart - service anbieter.png}
+	\caption{Flow Chart Service-Anbieter Anbindung}
+	\label{fig:umsetzung:architektur:testrunners:serviceanbieter}
+\end{figure}
+
+Ein spezieller TestRunner stellt der LocalTestRunner. Dieser führt den Test nicht bei einem Service-Anbieter durch, sondern auf der lokalen Maschine. Demnach muss der Browser, der Browser-Treiber und das Projekt auf dem eigenen Computer lauffähig sein. Dieser wird hauptsächlich für die Entwicklung verwendet da die Tests schneller abgearbeitet werden können. Die deiden Methoden TestSucceeded und FailTestIfNotSucceeded machen bei diesem TestTreiber nichts.
+
+\subsection{Pages}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/semesterarbeit class diagram - pages.png}
+	\caption{Klassendiagramm Pages}
+	\label{fig:umsetzung:architektur:pages}
+\end{figure}
+Die funktionsweise der Page Objekte wurde im \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject} bereits erläutert.
+
+Für die Tests ist der Einstieg immer das Objekt \textit{StartPage}. Von der Startseite kann ein \textit{SearchForm} angefordert werden, welches in Form einer konkreten Implementation zurückgegeben wird. Das SearchForm liefert dann eine Suchresultatseite. So angelt man sich weiter vor bis zur letzten Seite.
+
+Das folgende Sequenzdiagramm zeigt den Ablauf am Beispiel der CityTrip Engine:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Semesterarbeit - Sequenzdiagramm - HappyPath CityTrip - Portrait.png}
+	\caption{Squenzdiagramm für den Ablauf eines CityTrip Tests}
+	\label{fig:umsetzung:architektur:pages:sequenz}
+\end{figure}
+
+Dass Diagramm soll aufzeigen, dass man über eine Page oder ein Modul immer eine Seite weiter gelangt. 
+
+\subsection{Modules}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{images/semesterarbeit class diagram - modules.png}
+	\caption{Klassendiagramm Modules}
+	\label{fig:umsetzung:architektur:modules}
+\end{figure}
+Module sind wiederkehrende Teile einer Page (siehe \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject}). Beispiele dafür sind die Suchformulare der verschiedenen Engines, da diese auf der Start-, auf der Engine-Einstiegs- sowie auf der Suchresultatseite vorkommen.
+
+\section{Probleme}
+Bei der Umsetzung gab/gibt es auch Probleme, die in diesem Abschnitt erläutert werden.
 
 \subsection{Timing}
-\label{sec:umsetzung:Implementierung:Architektur:Timing}
-Wichtig für den Erfolg von Selenium Tests sind die Timings. Einige Teile der Webseite brauchen mehr Zeit bis sie geladen sind, da viel Rechenleistung benötigt wird oder sie mit JavaScript nachgeladen werden. Die Pages (siehe \cref{sec:umsetzung:implementierung:patterns:pageobject} \nameref{sec:umsetzung:implementierung:patterns:pageobject}) warten deshalb im Konstruktor, bis die Webseite geladen ist. Dazu wird die Klasse WebDriverWait von Selenium verwendet. Es wird gewartet, bis ein \Gls{glos:html}-Element gefunden wird.
+\label{sec:umsetzung:probleme:timing}
+Wichtig für den Erfolg von Selenium Tests sind die Timings. Einige Teile der Webseite brauchen mehr Zeit bis sie geladen sind, da viel Rechenleistung benötigt wird oder sie mit JavaScript nachgeladen werden. Die Pages (siehe \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject}) warten deshalb im Konstruktor, bis die Webseite geladen ist. Dazu wird die Klasse WebDriverWait von Selenium verwendet. Es wird gewartet, bis ein \Gls{glos:html}-Element gefunden wird.
 
-Die Timings sind sehr aufwändig, da man zu beginn meistens nicht genau weiss, wo die Tests schneller sind als die Webseite. Dies merkt man meistens erst bei der Ausführung und muss danach die Timings nachpflegen, was sehr aufwändig werden kann.
+Die Timings sind sehr aufwändig, da man zu beginn meistens nicht genau weiss, wo die Tests schneller sind als die Webseite. Dies merkt man meistens erst bei der Ausführung und muss danach die Timings nachpflegen, was sehr aufwändig ist.
 
 Ein Beispiel dafür ist die Flug-Konfigurations Seite. Dort ist ein Button erst nach wenigen Sekunden anwählbar.
 Solange er es noch nicht ist hat er die Klasse "`btn-loading"'. 
@@ -395,56 +500,7 @@ public void WaitForResults()
 }
 \end{lstlisting}
 
-Diese Methode wartet, bis der Behälter für die Suchresultate die Klasse "`content-loaded"' besitzt, denn erst dann darf mit dem Test weitergeführt werden.
+Diese Methode wartet, bis der Behälter für die Suchresultate die Klasse "`content-loaded"' besitzt, denn erst dann darf der Test weitergeführt werden.
 
-Die wait.Unitl() Methode nimmt eine \Gls{glos:closure} entgegen.
-
-\subsection{Tests}
-Die HappyPath Tests sind in der Datei HappyPath.cs im Ordner Tests spezifiziert, die SearchSmokeTests im File SearchSmokeTests.cs und für die Main Tests gibt es für die jeweilige Engine eine eigene Datei (Citytrip.cs und Flight.cs).
-
-
-Wie im \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium} beschrieben werden die Tests mit C\# umgesetzt und mittels des UnitTest Frameworks NUnit\footcite{NUnit_-_Home_2015-09-26} angetrieben.
-
-\begin{lstlisting}
-[SetUp]
-public void SetUp()
-{
-    driverFactory = new DriverFactory();
-    targetUrl = driverFactory.TargetUrl;
-    driver = driverFactory.GetDriver();
-    wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
-}
-
-[TearDown]
-public void TearDown()
-{
-    driverFactory.FailTestIfNotSucceeded();
-    driver.Quit();
-}
-\end{lstlisting}
-
-Diese beiden Methoden werden zu Beginn respektive zum Ende jedes Tests ausgeführt. Die SetUp Methode lädt den Treiber (siehe \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium}) und erstellt die Klasse \textit{WebDriverWait} (siehe \cref{sec:umsetzung:Timing} \nameref{sec:umsetzung:Timing}). Die TearDown Methode sendet den Status über Erfolg oder Misserfolg an den Service-Anbieter und schliesst den Treiber wieder.
-
-Die Testmethoden werden mit dem \textit{Test} Attribut gekennzeichnet. Diese werden von NUnit ausgeführt.
-
-\begin{lstlisting}
-[Test]
-public void Citytrip_ToAmsterdam_FromZurich_Room1_1Adults1Child_Room2_1Adult()
-{
-	// Setup
-	driver.Navigate().GoToUrl(targetUrl);
-	var startPage = new StartPage(driver, wait);
-	
-	// Tests & Assertions
-	...
-	
-	// Teardown
-	driverFactory.TestSucceeded();
-}
-\end{lstlisting}
-
-In jedem Test wird zuerst auf die Startseite Navigiert (Zeile 5) und die \textit{StartPage} instanziiert (Zeile 6).
-
-Danach folgen die Testinstruktionen und die Behauptungen.
-
-Wenn der Test durchläuft, sprich es gab keine Behauptung welche fehlgeschlagen ist, so wird zum Schluss noch \textit{driverFactory.TestSucceeded();} aufgerufen. Dies signalisiert das der Test erfolgreich war.
+\subsection{Instabilität der Testumgebung und komplexität der Tests}
+Die Tests sind sehr gross, da der Ablauf von der Such- bis zur letzten Checkout-Seite eingehalten werden muss. Zusätzlich ist die Testumgebung instabil. Dies äussert sich dadurch, dass eine Suche beim ersten Durchlauf keine Resultate liefert oder willkürlich 500 Fehlermeldungen ausgegeben werden. Passiert dies auf irgend einer Seite, schlägt der gesamte Test fehl. Dafür wurde noch keine Lösung gefunden.
