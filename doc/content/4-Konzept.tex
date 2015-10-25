@@ -30,9 +30,8 @@ Die Main Tests überprüfen schlussendlich die Funktionalität (siehe \cref{app:
 
 \subsection{Kunde \& Passagierangaben}
 \label{sec:Konzept:Übersicht:Angaben}
-Im Buchungsprozess müssen die Kunden- \& Passagierangaben ausgefüllt werden. Für alle Tests werden die folgenden Daten verwendet.
- \\
- \\
+Im Buchungsprozess müssen die Kunden- \& Passagierangaben ausgefüllt werden. Für alle Tests werden die folgenden Daten verwendet.\\
+\\  
 Kundendaten:
 \begin{itemize}
 \item Vorname: Han
@@ -44,12 +43,26 @@ Kundendaten:
 \item Telefonnummer: +41 44 200 26 26 
 \end{itemize}
 
+\begin{addmargin*}[0cm]{0\marginwidth}
 Passagierangaben (Geschlecht, Vorname, Name, Geburtsdatum):
+	\begin{itemize}
+	\item Passagier 1: Männlich, Han, Solo, 24.03.1980
+	\item Passagier 2: Weiblich, Leia Organa, Solo, 12.02.1978
+	\item Passagier 3: Männlich, Luke, Skywalker, 07.08.1985
+	\end{itemize}
+\end{addmargin*}
+
+
+\subsection{Datumsangaben}
+Die möglichen Eingabewerte für die Reisedaten sind im \cref{sec:analyse:grenzwertanalyse} \nameref{sec:analyse:grenzwertanalyse} beschrieben.
+Gemäss der Priorisierung der Funktionalität (siehe  \cref{sec:analyse:testabdeckung} \nameref{sec:analyse:testabdeckung}) werden die Grenzwerte der Reisedaten nicht im Umfang dieses Projektes getestet. Deshalb werden fix folgende Daten verwendet:
+
 \begin{itemize}
-\item Passagier 1: Männlich, Han, Solo, 24.03.1980
-\item Passagier 2: Weiblich, Leia Organa, Solo, 12.02.1978
-\item Passagier 3: Männlich, Luke, Skywalker, 07.08.1985
+\item Startdatum: 3 Monate in die Zukunft, erster Tag des Monats.
+\item Enddatum: 3 Monate in die Zukunft, dritter Tag des Monats.
 \end{itemize}
+\vspace{0 mm}
+Die obigen Reisedaten sind dynamisch angegeben, da keine fixen Werte definiert werden können. Ansonsten würde spätestens in einem Jahr, wenn das fixe Datum überschritten wurde, die Tests fehlschlagen.
 
 \section{Happy Path}
 Der Happy Path testet, ob beim standard Szenario keine Fehler auftreten. Es werden demnach jede Engine einmal durchlaufen mit gültigen Angaben. Dies soll überprüfen ob keine grundlegenden Fehler vorhanden sind.

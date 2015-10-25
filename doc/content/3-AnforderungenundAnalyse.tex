@@ -89,5 +89,115 @@ Für jeden Test wird eine neue \Gls{glos:virtualMachine} gestartet, was Zeit bea
 
 Je nachdem wie lange die Tests benötigen kann über die Anzahl der Browser, auf denen die Tests laufen gelassen werden sollen, die Kosten gesteuert werden.
 
-\subsection{Testabdeckung}
+\section{Testabdeckung}
+\label{sec:analyse:testabdeckung}
 Ein weitere nicht funktionale Anforderung ist die Testabdeckung. Eine Abdeckung von 100\% ist anzustreben, jedoch innerhalb des Projekts nicht realistisch. Deshalb wurde mit den Testpersonen der Travel.ch Webseite beschlossen, dass alle Anforderungen im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} mit einer Priorität von 8 oder höher zu testen sind. Der Rest wird nach der Arbeit realisiert
+
+\section{Grenzwertanalyse}
+\label{sec:analyse:grenzwertanalyse}
+Dieser Abschnitt befasst sich mit der Grenzwertanalyse\footcite{Dynamisches_Software-Testverfahren__Wikipedia_2015-10-25} der Suchparameter.
+
+\subsection{Abflughafen}
+Bei der CityTrip Engine gibt es folgende feste Anzahl an möglichen Abflughäfen.
+\begin{itemize}
+\item Zürich
+\item Basel-Mülhausen
+\item Genève-Cointrin
+\item Bern-Belp
+\item Lugano
+\end{itemize}
+
+Die Flüge Engine gibt keine Abflughafen vor. Es kann von allen möglichen Abreiseorte gewählt werden.
+Beim Buchen eines Hotels ist diese Auswahl hinfällig, da nur ein Reiseziel gewählt werden muss und kein Abflughafen.
+
+\subsection{Passagierangaben}
+Die Passagierangaben sind für die Engines CityTrip und Hotels die selben, jedoch für Flüge unterschiedlich, da keine Zimmerbelegung angegeben werden muss. Nachfolgend sind deshalb die möglichen Werte für CityTrip und Hotels zusammengefasst.\\
+\\  
+\noindent CityTrip und Hotels:
+\begin{itemize}
+\item Minimum Anzahl an Zimmer: 1
+\item Maximum Anzahl an Zimmer: 3
+\item Minimum Anzahl an erwachsenen Personen: 1
+\item Maximum Anzahl an erwachsenen Personen: 6
+\item Minimum Anzahl an Kinder: 0
+\item Maximum Anzahl an Kinder: 4
+\item Maximum Alter der Kinder: 18
+\end{itemize}
+
+\subsection{Datumsangaben}
+Für jede Engine muss ein Start- und ein Enddatum ausgewählt werden. Diese werden über eine Kalenderauswahl eingegeben. Dabei gibt es pro Engine verschiedene Bereiche, aus denen die Daten ausgewählt werden können.\\
+\\  
+\noindent CityTrip:
+\begin{itemize}
+\item Frühstes Datum: Heute + 3 Tage
+\item Letztes Datum: Heute + 1 Jahr - 1 Tag
+\item Kürzeste Aufenthaltsdauer: 1 Tag
+\end{itemize}
+\vspace{0 mm}
+Flug:
+\begin{itemize}
+\item Frühstes Datum: Heute + 3 Tage
+\item Letztes Datum: Heute + 1 Jahr
+\item Kürzeste Aufenthaltsdauer: 1 Tag
+\end{itemize}
+\vspace{0 mm}
+Hotel:
+\begin{itemize}
+\item Frühstes Datum: Heute
+\item Letztes Datum: Heute + 2 Jahre
+\item Kürzeste Aufenthaltsdauer: 1 Tag
+\end{itemize}
+
+\subsection{Erweiterte Suche}
+In der erweiterten Suche gibt es weitere Suchparameter, welche fakultativ für die Verfeinerung der Resultate angegeben werden können:
+
+\subsubsection{Hotelklasse}
+Die Hotelklasse kann bei CityTrip und Hotel gewählt werden. Von den folgenden Werten können einer oder mehrere selektiert werden:
+\begin{itemize}
+\item 0 Stern
+\item 1 Stern
+\item 2 Stern
+\item 3 Stern
+\item 4 Stern
+\item 5 Stern
+\end{itemize}
+
+\subsubsection{Bewertungen}
+Die Bewertungen können bei CityTrip und Hotel gewählt werden. Von den folgenden Werten kann einer selektiert werden:
+\begin{itemize}
+\item Alle
+\item Hervorragend: 9+
+\item Sehr Gut: 8+
+\item Gut: 7+
+\item Ansprechend: 6+
+\item Ohne Bewertung
+\end{itemize}
+
+\subsubsection{Verpflegung}
+Die Verpflegung kann bei CityTrip und Hotel gewählt werden. Von den folgenden Werten können einer oder mehrere selektiert werden:
+\begin{itemize}
+\item Ohne Mahlzeit
+\item Frühstück
+\item Halbpension
+\item Vollpension
+\item All-inclusive
+\end{itemize}
+
+\subsubsection{Flugoptionen}
+Die Flugoptionen kann bei CityTrip und Flug gewählt werden. Von den folgenden Werten können einer oder mehrere selektiert werden:
+\begin{itemize}
+\item Direktflug
+\item Mit Gepäck
+\item Ohne Gepäck
+\end{itemize}
+
+\subsubsection{Verbindungsoptionen}
+Die Verbindungsoptionen kann bei Flug gewählt werden. Von den folgenden Werten kann einer selektiert werden:
+\begin{itemize}
+\item Hin-/Rückflug
+\item Andere Rückflugstrecke
+\item Nur Hinflug
+\end{itemize}
+
+\subsubsection{Airline}
+Die Airline kann bei Flug gewählt werden. Dabei handelt es sich um Airlines oder Allianzen\footcite{Airline_alliance}, welche auch mit einander nach belieben kombiniert werden können. Der Benutzer kann keine, eine oder mehrere Optionen selektieren. Die gesamte Liste der Airlines ist im \cref{app:airlines} \nameref{app:airlines} aufgeführt.
