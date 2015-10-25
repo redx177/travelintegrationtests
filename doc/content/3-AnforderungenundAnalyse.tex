@@ -3,7 +3,7 @@
 
 \chapter{Anforderungen und Analyse}
 \label{sec:analyse}
-In diesem Kapitel werden die Anforderungen analysiert und erläutert.
+In diesem Kapitel werden die Anforderungen analysiert und erläutert. Dazu werden die die Stakeholder definiert, der Systemkontext umrissen sowie die Anforderungen mittels des Anforderungsdreiecks aufgezeigt. 
 
 \section{Stakeholder}
 Es gibt folgende Stakeholder an das Projekt:
@@ -67,6 +67,7 @@ Es gibt folgendes Anforderungsdreieck an die Testsuite:
 	\caption{Anforderungsdreieck}
 	\label{fig:analyse:Anforderungsdreieck}
 \end{figure}
+Die Funktionalität und die Browserabdeckung sind funktionale Anforderungen. Bei den Kosten und der Zeit handelt es sich hingegen um nicht funktionale Anforderungen.
 
 Je mehr Funktionalität abgedeckt wird, desto länger dauern die Test. Und für jeden Browser müssen nochmals alle Tests durchgeführt werden. Deshalb stehen "`Kosten / Zeit"' im Widerspruch mit der Funktionalität und der Browserabdeckung.
 
@@ -87,3 +88,6 @@ Kosten \& Zeit sind wichtig, da die Tests oft gestartet werden müssen und desha
 Für jeden Test wird eine neue \Gls{glos:virtualMachine} gestartet, was Zeit beansprucht. Deshalb wird versucht, die Anzahl der Testfälle zu minimieren, um trotzdem die gesamte Funktionalität abdecken zu können.
 
 Je nachdem wie lange die Tests benötigen kann über die Anzahl der Browser, auf denen die Tests laufen gelassen werden sollen, die Kosten gesteuert werden.
+
+\subsection{Testabdeckung}
+Ein weitere nicht funktionale Anforderung ist die Testabdeckung. Eine Abdeckung von 100\% ist anzustreben, jedoch innerhalb des Projekts nicht realistisch. Deshalb wurde mit den Testpersonen der Travel.ch Webseite beschlossen, dass alle Anforderungen im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} mit einer Priorität von 8 oder höher zu testen sind. Der Rest wird nach der Arbeit realisiert
