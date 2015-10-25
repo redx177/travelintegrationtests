@@ -3,8 +3,64 @@
 
 \chapter{Anforderungen und Analyse}
 \label{sec:analyse}
+In diesem Kapitel werden die Anforderungen analysiert und erläutert.
 
-Es gibt folgende Anforderungen an die Testsuite:
+\section{Stakeholder}
+Es gibt folgende Stakeholder an das Projekt:
+\begin{itemize}
+\item ZHAW
+\item Travelwindow AG - Business
+\item Travelwindow AG - Entwickler
+\end{itemize}
+
+In den folgenden Abschnitten werden die Stakeholder und deren Rolle beschrieben sowie ihre Anforderungen ans Projekt erläutert.
+
+\subsection{ZHAW}
+Umgesetzt wird das Projekt für die \gls{zhaw}. Erwartet wird ein konzeptioneller- und ein Umsetzungsteil. Hauptschwerpunkt ist auf dem Umsetzungsteil zu legen.
+
+Der konzeptionelle Teil der Arbeit ist diese Dokumentation. Sie hat die Form eines technischen Berichtes (Format: A4, weiss, einseitig bedruckt). Zusätzlich muss das Projekt in einer 20 minütigen Präsentation vorgestellt werden.
+
+Der Umsetzungsteil ist die zu erstellende Software. Die Architektur der Arbeit muss dem Niveau eines Batchelor Studiums sein. Sprich es muss eine durchdachte und den Projektumständen angepassten Aufbau aufweisen. Unzureichend ist eine Lösung die keine Struktur aufweist, welche nur schwer zu verstehen und nachzuvollziehen ist.
+
+In der Startphase des Projektes muss ein Kick-Off mit der ZHAW stattfinden. Darin wird das Thema besprochen und über dessen Ausführung entschieden. Gegen Ende der Arbeit gibt es ein Design-Review um der Stand und die Qualität des Projektes zu überprüfen. Wenn die Arbeit beendet ist muss diese Abgegeben und Präsentiert werden.
+
+Die Wichtigkeit des Stakeholders ist hoch, da die Schule die Arbeit bewertet und ein Erfolg von deren Entscheidung abhängig ist.
+
+Vertreter für die \gls{zhaw} ist Mathias Bachmann, welcher das Projekt betreut und bei den Zwischenterminen und der Abschlusspräsentation anwesend sein wird.
+
+\subsection{Travelwindow AG - Business}
+Das Business der Travelwindow AG ist der Auftraggeber des Projektes, dessen Ziel es ist, den Testaufwand zu minimieren sowie die Qualität der Arbeit zu steigern. Erwartet wird eine Lösung, welche die verschiedenen Systeme der Infrastruktur testen kann (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}).
+
+Das Business stellt Entwicklungszeit zur Verfügung und erwartet dafür eine lauffähige Software, welche die höchstpriorisierten Punkte der Funktionalität abdeckt (siehe \cref{sec:analyse:Funktionalität} \nameref{sec:analyse:Funktionalität}).
+
+Die Wichtigkeit dieses Stakeholders ist sehr hoch, da dessen Zufriedenheit entscheiden ist für den fortbestand der Lösung. Deshalb wird das Business wöchentlich und mündlich von den Entwicklern über dessen fortschritt informiert.
+
+Vertreter für die Travelwindow AG ist David Zahorsky und Carla Fijnvandraat. Herr Zahorsky ist der Vorgesetzte und verantwortlich für die Qualität der Umsetzung. Frau Finvandraat ist Release Mangager und stellt die Qualität Webseite sicher. Da sie für das manuelle Testen verantwortlich ist sollte ihre Arbeit durch dieses Projekt erleichtert werden.
+
+\subsection{Travelwindow AG - Entwickler}
+Die Entwickler der Travelwindow AG sind für das weiterführen des Projektes zuständig. Für sie ist wichtig, dass die Lösung einfach und verständlich aufgebaut. Weiter wird erwartet, dass eine Dokumentation besteht, welche die gesamte Funktionalität der Webseite beschreibt sowie Auskunft darüber gibt, welche Punkte bereits getestet sind (siehe \cref{sec:analyse:Funktionalität} \nameref{sec:analyse:Funktionalität}).
+
+Es ist noch Unklar, wer das Projekt weiterführen wird. Deshalb muss vorerst noch niemand dieser Stakeholdergruppe informiert werden und die Wichtigkeit des Stakeholders ist niedrig. Die Liste mit den Funktionalitäten ist jedoch zu erstellen und zu pflegen.
+
+\section{Systemkontext}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Semesterarbeit Systemkontext.png}
+	\caption{Systemkontext}
+	\label{fig:analyse:systemkontext}
+\end{figure}
+Der Systemkontext besteht hauptsächlich aus den beiden Systemen \textit{Integrationstests} und \textit{Travel.ch Webseite}. Die Integrationstests werden während diesem Projekt entwickelt und Testen die Webseite Travel.ch.
+
+Zusätzlich müssen die Tests in den \textit{Deployment Prozess} integriert werden, weshalb dieser auch zum Systemkontext gezählt werden muss. Weitere Informationen zu diesem Prozess sind im \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur} und im \cref{sec:umsetzung:architektur:bootstrap:konfiguration} \nameref{sec:umsetzung:architektur:bootstrap:konfiguration} zu finden.
+
+Der Test Prozess wird vor jedem Deployment der Travel.ch Webseite durchgeführt. Die Integrationstests haben Einfluss darauf, da sie den diese Arbeit durch Automatisation erleichtern sollen (siehe \cref{sec:desc:targets} \nameref{sec:desc:targets}).
+
+Während dem \textit{Entwicklungsprozess} für die Travel.ch Webseite nach dem Projekt müssen die Funktionalitäten, welche im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} aufgeführt sind, weiter gepflegt werden. Dadurch weiss eine Testperson, welche Funktionalitäten automatisch überprüft werden und nicht mehr manuell überprüft werden müssen.
+
+Nicht Teil des Systemkontext sind betroffene Netzwerkdienste, welche für die Testdurchführung betroffen sind. Diese liegen ausserhalb des Einflussbereiches der Entwickler und werden innerhalb der Firma von einer anderen Abteilung gepflegt.
+
+\section{Anforderungsdreieck}
+Es gibt folgendes Anforderungsdreieck an die Testsuite:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\textwidth]{images/triangle.png}
@@ -16,16 +72,16 @@ Je mehr Funktionalität abgedeckt wird, desto länger dauern die Test. Und für 
 
 Diese Anforderungen sind in den nächsten Abschnitten beschrieben.
 
-\section{Funktionalität}
+\subsection{Funktionalität}
 \label{sec:analyse:Funktionalität}
 Die gesamte Funktionalität der Webseite, inklusive der Priorisierung, ist im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} aufgelistet. Die Liste wurde im Wiki von der Hotelplan Management AG erstellt. Diese soll auch nach der Arbeit weiter gepflegt werden und wurde deshalb so aufgebaut, dass sie sehr Übersichtlich ist und einfach bearbeitet und erweitert werden kann.
 
-Vor dieser Arbeit gab es keine Dokumente, welche die Funktionalität der Webseite beschrieb. Deshalb musste die gesamte Funktionalität durch analyse der bestehenden Seite rekonstruiert werden (reverse engineering).
+Vor dieser Arbeit gab es keine Dokumente, welche die Funktionalität der Webseite beschrieb. Deshalb musste die gesamte Funktionalität durch Analyse der bestehenden Seite rekonstruiert werden (reverse engineering).
 
-\section{Browserabdeckung}
+\subsection{Browserabdeckung}
 Im \cref{sec:Recherche:TestingFrameworks:Prototyp} \nameref{sec:Recherche:TestingFrameworks:Prototyp} sind die meist verwendeten Browser aufgelistet. Der Vorteil an den Service-Anbietern ist, dass es sehr leicht ist eine Testsuite auf einem weiteren Webbrowser auszuführen. Es ist zu eruieren wie lange die Tests brauchen um durchzulaufen. Dann kann entschieden werden, im Betracht der Kosten, auf wie vielen Browsern die Testsuite durchgeführt wird. Diese Entscheidung wird mit dem Business der Travelwindow AG getroffen, da sie den Kostenrahmen der Tests bestimmen.
 
-\section{Kosten \& Zeit}
+\subsection{Kosten \& Zeit}
 Kosten \& Zeit sind wichtig, da die Tests oft gestartet werden müssen und deshalb nicht zu lange dauern sollten. Die Service-Anbietern rechnen pro Minute ab, welche die Tests auf ihren Systemen laufen. 
 
 Für jeden Test wird eine neue \Gls{glos:virtualMachine} gestartet, was Zeit beansprucht. Deshalb wird versucht, die Anzahl der Testfälle zu minimieren, um trotzdem die gesamte Funktionalität abdecken zu können.
