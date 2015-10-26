@@ -14,7 +14,7 @@
 
 Dieses Kapitel beschreibt die technischen Aspekte, wie die Testfälle aus dem \cref{sec:konzept} \nameref{sec:konzept} umgesetzt wurden.
 
-Zuerst wird der Einsatz von Selenium sowie die Infrastruktur der Travelwindow AG beschrieben, um einen Überblick zu verschaffen. Danach folgten die eingesetzten Design Patterns sowie eine Beschreibung der Architektur und schlussendlich werden die Probleme beschrieben, die während der Entwicklung auftraten.
+Zuerst wird der Einsatz von Selenium sowie die Infrastruktur der Travelwindow AG beschrieben, um einen Überblick zu verschaffen. Danach folgten die eingesetzten Design Patterns, der Zustandsgraph der Webseite sowie eine Beschreibung der Architektur. Abschliessend werden die Probleme beschrieben, die während der Entwicklung auftraten.
 
 \section{Selenium}
 \label{sec:umsetzung:selenium}
@@ -283,6 +283,32 @@ Auf den Zeilen 13, 35 und 36 werden schlussendlich die Felder verwendet.
 
 Durch die Page Factory wird die Lesbarkeit des Codes verbessert sowie dessen wartbarkeit, da die Elementdefinitionen einheitlich zu beginn der Klasse aufgeführt werden.
 
+\section{Zustandsgraph}
+\label{sec:umsetzung:zustandsgraph}
+Bei den Tests gibt es Zustandsübergänge welche eingehalten werden müssen. Im Beispiel der travel.ch sind das die einzelnen Webseite, durch welche sich man bewegen muss. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Automated Testing Ablauf2.png}
+	\caption{Zustandsdiagramm der travel.ch Webseite}
+	\label{fig:umsetzung:zustandsgraph}
+\end{figure}
+
+Gestartet wird auf der Startseite oder der Engine spezifichen Einstiegsseiten. Von dort aus gelangt man auf eine entsprechende Auswahl Seite. So angelt man sich vor bis man zum letzten Status gelangt ist und die Buchung abschliesst.
+
+Diese Zustandsübergänge müssen von den Tests eingehalten werden. Dass nachfolgende Sequenzdiagramm\footcite{sequence_diagram} zeigt den Ablauf des CityTrip Tests.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/Semesterarbeit - Sequenzdiagramm - HappyPath CityTrip - Portrait.png}
+	\caption{Squenzdiagramm über den Ablauf des CityTrip Tests}
+	\label{fig:umsetzung:zustandsgraph:sequenz}
+\end{figure}
+
+Die einzelnen Lifelines\footcite{sequence_diagram} stellen die Pages oder Modules dar, welche benutzt werden. Die Reihenfolge entspricht jener aus dem obigen Zustandsgraphen. Deshalb muss bei jedem Test auf der \textit{StartPage} oder auf der Engine Einstiegsseite begonnen werden.
+
+Da ein Zustandsübergang dem laden einer Webseite entspricht, ist dieser Vorgang nicht sofort, sondern er dauert einige Sekunden. Die Dauer ist dabei unterschiedlich. Die Tests warten bis zu 10 Sekunden, bis eine Seite geladen ist. Dies sollte generell ausreichen. Eine Ausnahme bilden die Auswahl Pages. Diese müssen warten, bis die Suchresultate geladen sind was erheblich länger dauern kann. Abhängig davon, ob die Resultate aus einem Cache\footcite{Cache} generiert werden oder Live abgefragt werden müssen. Die Auswahl-Seiten warten deshalb bis zu 30 Sekunden.
+
 \section{Architektur}
 \label{sec:umsetzung:architektur}
 Das Kapitel widmet sich der Architektur. Das Programm ist in einzelne Bereiche, so genannte Namespaces aufgegliedert. Diese werden für sich beschrieben, sowie die Interaktion zwischen ihnen.
@@ -299,7 +325,7 @@ Folgend nun die Übersicht über die Namespaces in Form eines Klassendiagramms:
 \subsection{Tests}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{images/semesterarbeit class diagram - tests.png}
+	\includegraphics[width=0.8\textwidth]{images/semesterarbeit class diagram - tests.png}
 	\caption{Klassendiagramm Tests}
 	\label{fig:umsetzung:architektur:tests}
 \end{figure}
@@ -357,7 +383,7 @@ Wenn der Test durchläuft, sprich es gab keine Behauptung welche fehlgeschlagen 
 \label{sec:umsetzung:architektur:bootstrap}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{images/semesterarbeit class diagram - bootstrap.png}
+	\includegraphics[width=0.8\textwidth]{images/semesterarbeit class diagram - bootstrap.png}
 	\caption{Klassendiagramm Bootstrap}
 	\label{fig:umsetzung:architektur:bootstrap}
 \end{figure}
@@ -420,7 +446,7 @@ Der netScaler\footcite{NetScaler} ist ein Application Delivery Controller der Fi
 \label{sec:umsetzung:architektur:testrunner}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{images/semesterarbeit class diagram - testrunner.png}
+	\includegraphics[width=0.8\textwidth]{images/semesterarbeit class diagram - testrunner.png}
 	\caption{Klassendiagramm TestRunner}
 	\label{fig:umsetzung:architektur:testrunners}
 \end{figure}
@@ -450,20 +476,13 @@ Die funktionsweise der Page Objekte wurde im \cref{sec:umsetzung:patterns:pageob
 
 Für die Tests ist der Einstieg immer das Objekt \textit{StartPage}. Von der Startseite kann ein \textit{SearchForm} angefordert werden, welches in Form einer konkreten Implementation zurückgegeben wird. Das SearchForm liefert dann eine Suchresultatseite. So angelt man sich weiter vor bis zur letzten Seite.
 
-Das folgende Sequenzdiagramm zeigt den Ablauf am Beispiel der CityTrip Engine:
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{images/Semesterarbeit - Sequenzdiagramm - HappyPath CityTrip - Portrait.png}
-	\caption{Squenzdiagramm für den Ablauf eines CityTrip Tests}
-	\label{fig:umsetzung:architektur:pages:sequenz}
-\end{figure}
 
-Dass Diagramm soll aufzeigen, dass man über eine Page oder ein Modul immer eine Seite weiter gelangt. 
+Die Abbildung \ref{fig:umsetzung:zustandsgraph:sequenz} zeigt das Sequenzdiagramm des CityTrip Tests. Die Lifelines entsprechen den Objekten im Page Namespace, welche in der Abbildung \ref{fig:umsetzung:architektur:pages} entnommen werden können. Eine Page oder ein Modul muss immer eine weitere Page zurückliefern, für die im Zustandsgraphen eine Verbindung besteht.
 
 \subsection{Modules}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\textwidth]{images/semesterarbeit class diagram - modules.png}
+	\includegraphics[width=0.8\textwidth]{images/semesterarbeit class diagram - modules.png}
 	\caption{Klassendiagramm Modules}
 	\label{fig:umsetzung:architektur:modules}
 \end{figure}
@@ -503,4 +522,6 @@ public void WaitForResults()
 Diese Methode wartet, bis der Behälter für die Suchresultate die Klasse "`content-loaded"' besitzt, denn erst dann darf der Test weitergeführt werden.
 
 \subsection{Instabilität der Testumgebung und komplexität der Tests}
-Die Tests sind sehr gross, da der Ablauf von der Such- bis zur letzten Checkout-Seite eingehalten werden muss. Zusätzlich ist die Testumgebung instabil. Dies äussert sich dadurch, dass eine Suche beim ersten Durchlauf keine Resultate liefert oder willkürlich 500 Fehlermeldungen ausgegeben werden. Passiert dies auf irgend einer Seite, schlägt der gesamte Test fehl. Dafür wurde noch keine Lösung gefunden.
+Die Tests sind sehr gross, da der Ablauf von der Such- bis zur letzten Checkout-Seite eingehalten werden muss. Ersichtlich ist dies am Zustandsgraphen welche im \cref{sec:umsetzung:zustandsgraph} \nameref{sec:umsetzung:zustandsgrapht} aufgeführt ist.
+
+Zusätzlich ist die Testumgebung instabil. Dies äussert sich dadurch, dass eine Suche beim ersten Durchlauf keine Resultate liefert oder willkürlich 500 Fehlermeldungen ausgegeben werden. Passiert dies auf irgend einer Seite, schlägt der gesamte Test fehl. Dafür wurde noch keine Lösung gefunden.
