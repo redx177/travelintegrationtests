@@ -22,11 +22,22 @@ Die Tests werden in drei Kategorien unterteilt:
 \item Main Tests
 \end{itemize}
 
-Wenn die Tests ausgeführt werden, sollen als erstes die Happy Paths\footcite{Happy_path_-_Wikipedia_the_free_encyclopedia_2015-07-30} überprüft werden. Dabei wird der gesamte Such- und Buchungungsprozess pro Engine einmal durchlaufen, ohne eine Auswahl zu treffen oder auf Fehler zu überprüfen. Der Test ist erfolgreich wenn die letzte Seite des Buchungsprozesses erreicht werden kann. Damit wird sichergestellt dass die Webseite im standartdurchlauf keine Fehler produziert.
+Bei den Happy Path Tests wird der gesamte Such- und Buchungungsprozess pro Engine einmal durchlaufen, ohne eine Auswahl zu treffen oder auf Fehler zu überprüfen. Der Test ist erfolgreich wenn die letzte Seite des Buchungsprozesses erreicht werden kann. Damit wird sichergestellt dass die Webseite im Standartdurchlauf keine Fehler produziert.
 
-Danach folgen die Smoke- und Main Tests. Die Smoke Tests führen eine Suche für die in der \cref{sec:Recherche:Zielgruppe:top10} \nameref{sec:Recherche:Zielgruppe:top10} definierten Destinationen aus und überprüfen, ob Resultate geliefert werden.
+Die Smoke Tests führen eine Suche für die in der \cref{sec:Recherche:Zielgruppe:top10} \nameref{sec:Recherche:Zielgruppe:top10} definierten Destinationen aus und überprüfen, ob Resultate geliefert werden.
 
-Die Main Tests überprüfen schlussendlich die Funktionalität (siehe \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten}) der Webseite.
+Main Tests überprüfen schlussendlich die Funktionalität gemäss den Funktionalitäten im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten}).
+
+\subsection{Reihenfolge der Tests}
+Die wichtigsten Kriterien für eine Buchungsplattform sind folgende:
+\begin{itemize}
+\item Kunde kann buchen
+\item Kunde kann suchen
+\item Rest der Funktionalitäten
+\end{itemize}
+Punkt eins wird von den Happy Path Tests überprüft. Sie versuchen auf dem direktesten Weg eine Buchung abzuschliessen. Als zweites werden die Smoke Tests durchgeführt, da sie testen ob ein Kunde für die Top 10 Destinationen Resultate finden kann. Schlussendlich werden die Main Tests gestartet um den Rest der Webseite zu testen.
+
+Innerhalb einer dieser drei Testkategorien wird keine weitere Reihenfolge eingehalten.
 
 \subsection{Kunde \& Passagierangaben}
 \label{sec:Konzept:Übersicht:Angaben}
