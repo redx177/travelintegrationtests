@@ -3,14 +3,14 @@
 
 \chapter{Anforderungen und Analyse}
 \label{sec:analyse}
-In diesem Kapitel werden die Anforderungen analysiert und erläutert. Dazu werden die die Stakeholder definiert, der Systemkontext umrissen sowie die Anforderungen mittels des Anforderungsdreiecks aufgezeigt. 
+In diesem Kapitel werden die funktionalen und nicht funktionalen Anforderungen aufgeführt und die Befunde aus der Recherche analysiert. Dazu werden die Stakeholder definiert, der Systemkontext umrissen sowie die Anforderungen mittels des Anforderungsdreiecks aufgezeigt. Für die Testumsetzung wird schlussendlich noch eine Grenzwertanalyse durchgeführt.
 
 \section{Stakeholder}
 Es gibt folgende Stakeholder an das Projekt:
 \begin{itemize}
 \item ZHAW
-\item Travelwindow AG - Business
-\item Travelwindow AG - Entwickler
+\item travelwindow AG - Business
+\item travelwindow AG - Entwickler
 \end{itemize}
 
 In den folgenden Abschnitten werden die Stakeholder und deren Rolle beschrieben sowie ihre Anforderungen ans Projekt erläutert.
@@ -28,17 +28,17 @@ Die Wichtigkeit des Stakeholders ist hoch, da die Schule die Arbeit bewertet und
 
 Vertreter für die \gls{zhaw} ist Mathias Bachmann, welcher das Projekt betreut und bei den Zwischenterminen und der Abschlusspräsentation anwesend sein wird.
 
-\subsection{Travelwindow AG - Business}
-Das Business der Travelwindow AG ist der Auftraggeber des Projektes, dessen Ziel es ist, den Testaufwand zu minimieren sowie die Qualität der Arbeit zu steigern. Erwartet wird eine Lösung, welche die verschiedenen Systeme der Infrastruktur testen kann (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}).
+\subsection{travelwindow AG - Business}
+Das Business der travelwindow AG ist der Auftraggeber des Projektes, dessen Ziel es ist, den Testaufwand zu minimieren sowie die Qualität der Arbeit zu steigern. Erwartet wird eine Lösung, welche die verschiedenen Systeme der Infrastruktur testen kann (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}).
 
 Das Business stellt Entwicklungszeit zur Verfügung und erwartet dafür eine lauffähige Software, welche die höchstpriorisierten Punkte der Funktionalität abdeckt (siehe \cref{sec:analyse:Funktionalität} \nameref{sec:analyse:Funktionalität}).
 
 Die Wichtigkeit dieses Stakeholders ist sehr hoch, da dessen Zufriedenheit entscheiden ist für den fortbestand der Lösung. Deshalb wird das Business wöchentlich und mündlich von den Entwicklern über dessen fortschritt informiert.
 
-Vertreter für die Travelwindow AG ist David Zahorsky und Carla Fijnvandraat. Herr Zahorsky ist der Vorgesetzte und verantwortlich für die Qualität der Umsetzung. Frau Finvandraat ist Release Mangager und stellt die Qualität Webseite sicher. Da sie für das manuelle Testen verantwortlich ist sollte ihre Arbeit durch dieses Projekt erleichtert werden.
+Vertreter für die travelwindow AG ist David Zahorsky und Carla Fijnvandraat. Herr Zahorsky ist der Vorgesetzte und verantwortlich für die Qualität der Umsetzung. Frau Finvandraat ist Release Mangager und stellt die Qualität Webseite sicher. Da sie für das manuelle Testen verantwortlich ist sollte ihre Arbeit durch dieses Projekt erleichtert werden.
 
-\subsection{Travelwindow AG - Entwickler}
-Die Entwickler der Travelwindow AG sind für das weiterführen des Projektes zuständig. Für sie ist wichtig, dass die Lösung einfach und verständlich aufgebaut. Weiter wird erwartet, dass eine Dokumentation besteht, welche die gesamte Funktionalität der Webseite beschreibt sowie Auskunft darüber gibt, welche Punkte bereits getestet sind (siehe \cref{sec:analyse:Funktionalität} \nameref{sec:analyse:Funktionalität}).
+\subsection{travelwindow AG - Entwickler}
+Die Entwickler der travelwindow AG sind für das weiterführen des Projektes zuständig. Für sie ist wichtig, dass die Lösung einfach und verständlich aufgebaut. Weiter wird erwartet, dass eine Dokumentation besteht, welche die gesamte Funktionalität der Webseite beschreibt sowie Auskunft darüber gibt, welche Punkte bereits getestet sind (siehe \cref{sec:analyse:Funktionalität} \nameref{sec:analyse:Funktionalität}).
 
 Es ist noch Unklar, wer das Projekt weiterführen wird. Deshalb muss vorerst noch niemand dieser Stakeholdergruppe informiert werden und die Wichtigkeit des Stakeholders ist niedrig. Die Liste mit den Funktionalitäten ist jedoch zu erstellen und zu pflegen.
 
@@ -49,13 +49,13 @@ Es ist noch Unklar, wer das Projekt weiterführen wird. Deshalb muss vorerst noc
 	\caption{Systemkontext}
 	\label{fig:analyse:systemkontext}
 \end{figure}
-Der Systemkontext besteht hauptsächlich aus den beiden Systemen \textit{Integrationstests} und \textit{Travel.ch Webseite}. Die Integrationstests werden während diesem Projekt entwickelt und Testen die Webseite Travel.ch.
+Der Systemkontext besteht hauptsächlich aus den beiden Systemen \textit{Integrationstests} und \textit{travel.ch Webseite}. Die Integrationstests werden während diesem Projekt entwickelt und Testen die Webseite travel.ch.
 
 Zusätzlich müssen die Tests in den \textit{Deployment Prozess} integriert werden, weshalb dieser auch zum Systemkontext gezählt werden muss. Weitere Informationen zu diesem Prozess sind im \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur} und im \cref{sec:umsetzung:architektur:bootstrap:konfiguration} \nameref{sec:umsetzung:architektur:bootstrap:konfiguration} zu finden.
 
-Der Test Prozess wird vor jedem Deployment der Travel.ch Webseite durchgeführt. Die Integrationstests haben Einfluss darauf, da sie den diese Arbeit durch Automatisation erleichtern sollen (siehe \cref{sec:desc:targets} \nameref{sec:desc:targets}).
+Der Test Prozess wird vor jedem Deployment der travel.ch Webseite durchgeführt. Die Integrationstests haben Einfluss darauf, da sie den diese Arbeit durch Automatisation erleichtern sollen (siehe \cref{sec:desc:targets} \nameref{sec:desc:targets}).
 
-Während dem \textit{Entwicklungsprozess} für die Travel.ch Webseite nach dem Projekt müssen die Funktionalitäten, welche im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} aufgeführt sind, weiter gepflegt werden. Dadurch weiss eine Testperson, welche Funktionalitäten automatisch überprüft werden und nicht mehr manuell überprüft werden müssen.
+Während dem \textit{Entwicklungsprozess} für die travel.ch Webseite nach dem Projekt müssen die Funktionalitäten, welche im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} aufgeführt sind, weiter gepflegt werden. Dadurch weiss eine Testperson, welche Funktionalitäten automatisch überprüft werden und nicht mehr manuell überprüft werden müssen.
 
 Nicht Teil des Systemkontext sind betroffene Netzwerkdienste, welche für die Testdurchführung betroffen sind. Diese liegen ausserhalb des Einflussbereiches der Entwickler und werden innerhalb der Firma von einer anderen Abteilung gepflegt.
 
@@ -69,33 +69,39 @@ Es gibt folgendes Anforderungsdreieck an die Testsuite:
 \end{figure}
 Die Funktionalität und die Browserabdeckung sind funktionale Anforderungen. Bei den Kosten und der Zeit handelt es sich hingegen um nicht funktionale Anforderungen.
 
-Je mehr Funktionalität abgedeckt wird, desto länger dauern die Test. Und für jeden Browser müssen nochmals alle Tests durchgeführt werden. Deshalb stehen "`Kosten / Zeit"' im Widerspruch mit der Funktionalität und der Browserabdeckung.
+Je mehr Funktionalität abgedeckt wird, desto länger dauern die Tests. Und für jeden Browser müssen nochmals alle Tests durchgeführt werden. Deshalb stehen "`Kosten / Zeit"' im Widerspruch mit der Funktionalität und der Browserabdeckung.
 
 Diese Anforderungen sind in den nächsten Abschnitten beschrieben.
 
 \subsection{Funktionalität}
 \label{sec:analyse:Funktionalität}
-Die gesamte Funktionalität der Webseite, inklusive der Priorisierung, ist im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} aufgelistet. Die Liste wurde im Wiki von der Hotelplan Management AG erstellt. Diese soll auch nach der Arbeit weiter gepflegt werden und wurde deshalb so aufgebaut, dass sie sehr Übersichtlich ist und einfach bearbeitet und erweitert werden kann.
+Die gesamte Funktionalität der Webseite, inklusive der Priorisierung, ist im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} aufgelistet. Die Liste wurde im Wiki von der Hotelplan Management AG erstellt. Diese soll auch nach der Arbeit weiter gepflegt werden und wurde deshalb so aufgebaut, dass sie sehr übersichtlich ist und einfach bearbeitet und erweitert werden kann.
 
 Vor dieser Arbeit gab es keine Dokumente, welche die Funktionalität der Webseite beschrieb. Deshalb musste die gesamte Funktionalität durch Analyse der bestehenden Seite rekonstruiert werden (reverse engineering).
 
+Ziel ist es, die gesamte Funktionalität der Webseite zu testen.
+
 \subsection{Browserabdeckung}
-Im \cref{sec:Recherche:Zielgruppe} \nameref{sec:Recherche:Zielgruppe} sind die meist verwendeten Browser aufgelistet. Der Vorteil an den Service-Anbietern ist, dass es sehr leicht ist eine Testsuite auf einem weiteren Webbrowser auszuführen. Es ist zu eruieren wie lange die Tests brauchen um durchzulaufen. Dann kann entschieden werden, im Betracht der Kosten, auf wie vielen Browsern die Testsuite durchgeführt wird. Diese Entscheidung wird mit dem Business der Travelwindow AG getroffen, da sie den Kostenrahmen der Tests bestimmen.
+Im \cref{sec:Recherche:Zielgruppe} \nameref{sec:Recherche:Zielgruppe} sind die meist verwendeten Browser aufgelistet. Der Vorteil der Service-Anbieter ist, dass es sehr leicht ist eine Testsuite auf einem weiteren Webbrowser auszuführen. 
 
-\subsection{Kosten \& Zeit}
-Kosten \& Zeit sind wichtig, da die Tests oft gestartet werden müssen und deshalb nicht zu lange dauern sollten. Die Service-Anbietern rechnen pro Minute ab, welche die Tests auf ihren Systemen laufen. 
+Wenn möglich sollten alle Browser aus der Recherche geprüft werden. Es ist jedoch zu eruieren wie lange die Tests brauchen, um durchzulaufen. Dann kann entschieden werden, im Betracht der Kosten, auf wie vielen Browsern die Testsuite durchgeführt wird. Diese Entscheidung wird mit dem Business der travelwindow AG getroffen, da sie den Kostenrahmen der Tests bestimmen.
 
-Für jeden Test wird eine neue \Gls{glos:virtualMachine} gestartet, was Zeit beansprucht. Deshalb wird versucht, die Anzahl der Testfälle zu minimieren, um trotzdem die gesamte Funktionalität abdecken zu können.
+\subsection{Kosten und Zeit}
+Die Laufzeit der Test bestimmt die anfallenden kosten, da die Service-Anbieter pro Minute abrechnen, welche die Tests auf ihren Systemen laufen. Die Kosten, und demnach die Zeit, sollten so klein wie möglich gehalten werden. Je höher jedoch die Browserabdeckung und die getestete Funktionalität ist, desto länger dauern die Tests.
 
-Je nachdem wie lange die Tests benötigen kann über die Anzahl der Browser, auf denen die Tests laufen gelassen werden sollen, die Kosten gesteuert werden.
+Je nachdem, wie lange die Tests benötigen, kann über die Anzahl der Browser, auf denen die Tests laufen gelassen werden sollen, die Kosten gesteuert werden.
 
-\section{Testabdeckung}
+\subsection{Kompromis}
 \label{sec:analyse:testabdeckung}
-Ein weitere nicht funktionale Anforderung ist die Testabdeckung. Eine Abdeckung von 100\% ist anzustreben, jedoch innerhalb des Projekts nicht realistisch. Deshalb wurde mit den Testpersonen der Travel.ch Webseite beschlossen, dass alle Anforderungen im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} mit einer Priorität von 8 oder höher zu testen sind. Der Rest wird nach der Arbeit realisiert
+Um ein Gleichgewicht zwischen Funktionalität, Browserabdeckung und "`Kosten \& Zeit"' zu waren wurde mit dem Business von travel.ch entschieden, dass alle Anforderungen im \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten} mit einer Priorität von 8 oder höher zu testen sind. Zusätzlich wurde festgelegt, dass die beiden Browserversionen Safari 8.0 und Internet Explorer 11.0 getestet werden sollen.
+
+Dadurch sollen die Testpersonen entlastet werden, da die wichtigsten Funktionalitäten getestet werden. Eine Abdeckung von 100\% ist anzustreben, jedoch innerhalb des Projekts nicht realistisch.
+
+Falls sich nach dem Projekt die Tests als hilfreich herausstellen wird das Budget erhöht und die Browserabdeckung kann erweitert werden.
 
 \section{Grenzwertanalyse}
 \label{sec:analyse:grenzwertanalyse}
-Dieser Abschnitt befasst sich mit der Grenzwertanalyse\footcite{Dynamisches_Software-Testverfahren__Wikipedia_2015-10-25} der Suchparameter.
+Dieser Abschnitt befasst sich mit der Grenzwertanalyse\footcite{Dynamisches_Software-Testverfahren__Wikipedia_2015-10-25} der Suchparameter. Diese soll alle zu testenden Parameter liefern, welche in den Suchmasken der travel.ch Webseite eingegeben werden können.
 
 \subsection{Abflughafen}
 Bei der CityTrip Engine gibt es folgende feste Anzahl an möglichen Abflughäfen.
@@ -107,7 +113,7 @@ Bei der CityTrip Engine gibt es folgende feste Anzahl an möglichen Abflughäfen
 \item Lugano
 \end{itemize}
 
-Die Flüge Engine gibt keine Abflughafen vor. Es kann von allen möglichen Abreiseorte gewählt werden.
+Die Flug Engine gibt keine Abflughafen vor. Es kann von allen möglichen Abreiseorte gewählt werden.
 Beim Buchen eines Hotels ist diese Auswahl hinfällig, da nur ein Reiseziel gewählt werden muss und kein Abflughafen.
 
 \subsection{Passagierangaben}

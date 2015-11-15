@@ -1,10 +1,10 @@
 \chapter{Recherche}
 
-In diesem Kapitel werden die Rahmenbedingungen, die verschiedene Testing Frameworks (Service-Anbieter) sowie die Zielgruppe recherchiert.
+In diesem Kapitel werden die Rahmenbedingungen, die verschiedenen Testing Frameworks (Service-Anbieter) sowie die Zielgruppen recherchiert.
 
 \section{Rahmenbedingungen}
 \label{sec:Recherche:Rahmenbedingungen}
-Getestet werden soll die Webseite der Firma \textit{travelwindow AG}, welche unter \url{http://www.travel.ch} erreichbar ist. Die Seite ist mit C\# implementiert, weshalb auch die Tests in dieser Programmiersprache umgesetzt werden sollen.
+Getestet werden soll die Webseite der Firma travelwindow AG, welche unter http://www.travel.ch erreichbar ist. Die Seite ist mit C\# implementiert, weshalb auch die Tests in dieser Programmiersprache umgesetzt werden sollen.
 
 \subsection{Infrastruktur}
 \label{sec:Recherche:Rahmenbedingungen:Infrastruktur}
@@ -18,15 +18,15 @@ Bei der Entwicklung wird jeder Checkin in das Versionierungssystem (siehe \cref{
 
 \subsection{Tooling}
 \label{sec:Recherche:Rahmenbedingungen:Tooling}
-Der Sourcecode der Softare ist auf einem eigenen \gls{svn}\footcite{Apache_Subversion_2015-07-26} Versioniert. Es ist jedoch eine Umstellung auf GIT\footcite{Git_2015-07-26} geplannt, weshalb neuer Sourcecode fortan nur noch auf dem GIT Hosting Dienst BitBucket\footcite{Git_and_Mercurial_code_management_for_teams_2015-07-26} gespeichert werden soll.
+Der Sourcecode der Softare ist auf einem eigenen \gls{svn}\footcite{Apache_Subversion_2015-07-26} versioniert. Es ist jedoch eine Umstellung auf GIT\footcite{Git_2015-07-26} geplant, weshalb neuer Sourcecode fortan nur noch auf dem GIT Hosting Dienst BitBucket\footcite{Git_and_Mercurial_code_management_for_teams_2015-07-26} gespeichert werden soll.
 
-Als Continuous Integration Server wird Bamboo\footcite{Bamboo_2015-07-26} eingesetzt. Dieser Kompiliert den Sourcecode und ist dafür verantwortlich, eine Version auf die Umgebungen Test, Quality und Production zu laden.
+Als Continuous Integration Server wird Bamboo\footcite{Bamboo_2015-07-26} eingesetzt. Dieser kompiliert den Sourcecode und ist dafür verantwortlich, eine Version auf die Umgebungen Test, Quality und Production zu laden.
 
 Das Tooling ist genauer beschrieben im \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}.
 
 \section{Testing Framework}
 \label{sec:Recherche:TestingFrameworks}
-Der defacto Standart für Integrationstests von Benutzeroberfläche ist Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-07-26}\footcite{Happy_10th_Birthday_Selenium_ThoughtWorks_2015-07-26}. Code für dieses Framework kann in C\# programmiert werden, welcher einen Webbrowser startet und Benutzereingaben simuliert. Dadurch können repetitive Tests automatisiert und auf verschiedenen Browsern durchgeführt werden.
+Der defacto Standart für Integrationstests von Benutzeroberfläche ist Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-07-26}\footcite{Happy_10th_Birthday_Selenium_ThoughtWorks_2015-07-26}. Der Code für dieses Framework kann in C\# programmiert werden, welcher einen Webbrowser startet und Benutzereingaben simuliert. Dadurch können repetitive Tests automatisiert und auf verschiedenen Browsern durchgeführt werden.
 
 \section{Lösungswege: Lokal oder Service-Anbieter}
 \label{sec:Recherche:loesungswege}
@@ -44,7 +44,7 @@ Als Service-Anbieter Tests wurden zwei Kandidaten näher in Betracht gezogen. Sa
 
 Beide Anbieter verfügen über 500 verschiedene Betriebsystem/Browser Konfigurationen\footcite{Platforms_2015-07-26}\footcite{OS_Browser_Configurations_for_Cross_Browser_Compatibility_Testing_2015-07-26}. Beide können automatisierte Tests ausführen und liefern als Resultat ein Video der Durchführung sowie Screenshots der einzelnen Tests.
 
-Bezahlt werden die Service-Anbieter pro Minute, die ein Test auf ihren System läuft. Vom Preis her unterscheiden sie sich nicht markant\footcite{Sauce_Labs_Pricing_2015-07-26}\footcite{Test_your_site_on_all_browsers_2015-07-26}. SauceLabs hat das kleinste Packet mit 120 Minuten Automatisierten Tests für \$12/Monat. Beide Anbieten verrechnen für 10 Stunden Testing \$49/Monat. Bei den teureren Packet für \$149/Monat bietet CrossBrowserTesting mit 2000- mehr als Sauclabs mit 1800 Minuten.
+Bezahlt werden die Service-Anbieter pro Minute, die ein Test auf ihren System läuft. Vom Preis her unterscheiden sie sich nicht markant\footcite{Sauce_Labs_Pricing_2015-07-26}\footcite{Test_your_site_on_all_browsers_2015-07-26}. SauceLabs hat das kleinste Packet mit 120 Minuten automatisierten Tests für \$12/Monat. Beide Anbieter verrechnen für 10 Stunden Testing \$49/Monat. Beim teureren Packet für \$149/Monat bietet CrossBrowserTesting mit 2000- mehr als Sauclabs mit 1800 Minuten.
 
 Um sich zwischen den beiden Varianten, der lokalen Ausführung der Test und deren Auslagerung an einen Serivce-Anbieter, zu entscheiden, wurde ein Prototyp entwickelt welcher im nächsten Kapitel vorgestellt wird.
 
@@ -76,9 +76,9 @@ Bei den Service Anbietern kann man beim Aufruf mitgeben, welche Betriebsystem/Br
 Auf Zeile 5 und 6 wird das Betriebsystem beziehungsweise der Browser gesetzt. Um weitere Konfigurationen zu testen müssen lediglich diese Werte angepasst werden.
 
 \subsubsection{Zeit}
-Der Test startet die travel.ch Seite und gibt einen Wert in das Suchformular ein. Dann wartet es bis Suchvorschläge angezeigt werden. Der Test ist erfolgreich wenn mehr als mindestens ein Vorschlag vorhanden ist.
+Der Test startet die travel.ch Seite und gibt einen Wert in das Suchformular ein. Dann wartet es bis Suchvorschläge angezeigt werden. Der Test ist erfolgreich wenn mindestens ein Vorschlag vorhanden ist.
 
-Der Test wurde 10x lokal und 10x beim Service-Anbieter ausgeführt:
+Der Test wurde zehnmal lokal sowie beim Service-Anbieter ausgeführt:
 \begin{table}[H] 
 	\caption{Testlaufzeiten}
 	\centering
@@ -115,13 +115,14 @@ Das Aufsetzten und die Pflege der Umgebung ist eine klare stärke der Service-An
 
 Die lokale Ausführung hingegeben benötigt für ersteres mehr Aufwand, dafür laufen die Tests mit einem Faktor 3 schneller.
 
-Nach Absprache mit dem business der Travelwindow AG wurde entschieden, dass der Lösungsweg mit den  Service-Anbieter eingeschlagen werden soll. Der Aufwand zum Aufsetzen und Pflege der Umgebung ist geringer und die Kosten können besser kalkuliert werden. Sollte die Laufzeiten ein Problem darstellen, so kann eine parallele Ausführung der Tests in Betracht gezogen werden. 
+Nach Absprache mit dem Business der travelwindow AG wurde entschieden, dass der Lösungsweg mit den  Service-Anbieter eingeschlagen werden soll. Der Aufwand zum Aufsetzen und Pflege der Umgebung ist geringer und die Kosten können besser kalkuliert werden. Sollte die Laufzeiten ein Problem darstellen, so kann eine parallele Ausführung der Tests in Betracht gezogen werden. 
 
 \section{Zielgruppe}
 \label{sec:Recherche:Zielgruppe}
 Die Zielgruppe sind die Benutzer der Webseite, beziehungsweise die verschiedenen Browser, welche sie verwenden, sowie die Destinationen für die sie eine Reise buchen möchten. Denn für diese müssen Tests geschrieben werden.
 
-Auf \textit{travel.ch} wird Google Analytics eingesetzt. Die Auswertung des letzten halben Jahres (25.02.2015 - 25.07.2015) ergab das folgende Browserversionen am meisten verwendet wurden:
+\subsection{Browserverteilung}
+Auf travel.ch wird Google Analytics eingesetzt. Die Auswertung des letzten halben Jahres (25.02.2015 - 25.07.2015) ergab, dass folgende Browserversionen am meisten verwendet wurden:
 \begin{itemize}
 \item Safari: 32.61\%
 	\begin{itemize}
@@ -145,6 +146,7 @@ Auf \textit{travel.ch} wird Google Analytics eingesetzt. Die Auswertung des letz
 	\end{itemize}
 \end{itemize}
 
+\subsection{Top 10 Destinationen}
 Die Webseite ist in drei Bereiche aufgeteilt: Citytrip (Flug \& Hotel), Flug, Hotel. Folgend nun die zehn meist gesuchten Destinationen:
 \begin{table}[H] 
 	\caption{Top 10 Destinationen}

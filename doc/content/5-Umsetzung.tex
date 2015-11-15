@@ -14,7 +14,7 @@
 
 Dieses Kapitel beschreibt die technischen Aspekte, wie die Testfälle aus dem \cref{sec:konzept} \nameref{sec:konzept} umgesetzt wurden.
 
-Zuerst wird der Einsatz von Selenium sowie die Infrastruktur der Travelwindow AG beschrieben, um einen Überblick zu verschaffen. Danach folgten die eingesetzten Design Patterns, der Zustandsgraph der Webseite sowie eine Beschreibung der Architektur. Abschliessend werden die Probleme beschrieben, die während der Entwicklung auftraten.
+Zuerst wird der Einsatz von Selenium sowie die Infrastruktur der travelwindow AG beschrieben, um einen Überblick zu verschaffen. Danach folgten die eingesetzten Design Patterns, der Zustandsgraph der Webseite sowie eine Beschreibung der Architektur. Abschliessend werden die Probleme beschrieben, die während der Entwicklung auftraten.
 
 \section{Selenium}
 \label{sec:umsetzung:selenium}
@@ -23,7 +23,7 @@ Angetrieben werden Selenium Tests mittels UnitTests. Diese können von Testtreib
 
 Selenium selber ist in Java implementiert und bietet eine eigene \Gls{glos:ide} mit dem Namen Selenium IDE\footcite{Selenium_IDE_Plugins_2015-09-26}, welche ein Plugin für den Firefox\footcite{Download_Firefox__Free_Web_Browser__Mozilla_2015-09-26} darstellt. Damit können Aktionen im Browser aufgezeichnet werden und danach als Test automatisiert durchgeführt werden. Die gesamte Software ist Open Source unter der \textit{Apache License 2.0} erhältlich\footcite{Selenium_software_-_Wikipedia,_the_free_encyclopedia_2015-09-26}.
 
-Die gesamte Webseitenentwiclung der Firma Travelwindow AG findet in der Programmiersprache C\# statt. Aus Gründen der Konsistenz wurde entschieden, dass auch die Tests in C\# umgesetzt werden sollen. 
+Die gesamte Webseitenentwiclung der Firma travelwindow AG findet in der Programmiersprache C\# statt. Aus Gründen der Konsistenz wurde entschieden, dass auch die Tests in C\# umgesetzt werden sollen. 
 Selenium WebDriver\footcite{Selenium_WebDriver_2015-09-26} ist ein Aufsatz auf Selenium, welcher eine API bietet damit mit verschiedenen Programmiersprachen Tests umgesetzt werden können. Vollständig unterstützt werden die Sprachen Python, Ruby, Java und C\#. 
 
 \subsection{Beispiele}
@@ -88,12 +88,12 @@ Falls nötig kann JavaScript Code ausgeführt werden.
 
 \section{Infrastruktur}
 \label{sec:umsetzung:infrastruktur}
-Dieser Abschnitt beschreibt die Infrastruktur der Travelwindow AG.
+Dieser Abschnitt beschreibt die Infrastruktur der travelwindow AG.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/trv infrastructure.png}
-	\caption{Travelwindow AG Infrastruktur}
+	\caption{travelwindow AG Infrastruktur}
 	\label{fig:umsetzung:infrastruktur}
 \end{figure}
 
@@ -110,6 +110,7 @@ Die erste ist für die Entwickler. Die zweite für den Kunden zum Testen und die
 Soll eine Version der Webseite auf eine Umgebung hochgeladen werden, so kann der Prozess auf dem Build Server gestartet werden, wodurch eine Revision vom Bamboo Server auf die entsprechende Umgebung hochgeladen wird. Als Deployment Server wird Octopus\footcite{Octopus_Deploy_2015-09-28} eingesetzt.
 
 \section{Design Patterns}
+\label{sec:umsetzung:patterns}
 Es werden die beiden Design Patterns \textit{Page Object} und \textit{Page Factory} vorgestellt. Die Verwendung soll anhand eines Beispieles erläutert werden. Dazu soll folgender Test optimiert werden:
 
 \begin{lstlisting}        
@@ -522,6 +523,6 @@ public void WaitForResults()
 Diese Methode wartet, bis der Behälter für die Suchresultate die Klasse "`content-loaded"' besitzt, denn erst dann darf der Test weitergeführt werden.
 
 \subsection{Instabilität der Testumgebung und komplexität der Tests}
-Die Tests sind sehr gross, da der Ablauf von der Such- bis zur letzten Checkout-Seite eingehalten werden muss. Ersichtlich ist dies am Zustandsgraphen welche im \cref{sec:umsetzung:zustandsgraph} \nameref{sec:umsetzung:zustandsgrapht} aufgeführt ist.
+Die Tests sind sehr gross, da der Ablauf von der Such- bis zur letzten Checkout-Seite eingehalten werden muss. Ersichtlich ist dies am Zustandsgraphen welche im \cref{sec:umsetzung:zustandsgraph} \nameref{sec:umsetzung:zustandsgrapht} aufgeführt ist. Wenn in diesem Ablauf irgendwo ein Fehler auftritt ist der gesamte Test fehlgeschlagen. Dies ist häufig der Fall auf der Suchresultatseite, da dort Daten direkt vom Anbieter abgefragt werden und keine vordefinierten Antworten zurückgeliefert werden können. Dadurch kann es auftreten, dass kein Suchresulat vorhanden ist mit welchem getestet werden kann.
 
 Zusätzlich ist die Testumgebung instabil. Dies äussert sich dadurch, dass eine Suche beim ersten Durchlauf keine Resultate liefert oder willkürlich 500 Fehlermeldungen ausgegeben werden. Passiert dies auf irgend einer Seite, schlägt der gesamte Test fehl. Dafür wurde noch keine Lösung gefunden.

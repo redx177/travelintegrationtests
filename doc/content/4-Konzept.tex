@@ -8,7 +8,7 @@ Um die Kosten zu minimieren werden möglichst wenig Testfälle spezifiziert, jed
 Eine Übersicht der Testfälle wurde im Wiki von Hotelplan erstellt und wird zum Verständnis dort gepflegt. Die Liste ist im \cref{app:Testfälle} \nameref{app:Testfälle} unter "`Test Cases"' beigefügt.
 
 \section{Übersicht}
-Die Seite der \textit{travelwindow AG} besteht aus drei Bereichen (auch Engines genannt):
+Die Seite der travelwindow AG besteht aus drei Bereichen (auch Engines genannt):
 \begin{itemize}
 \item Citytrip (Flug \& Hotel)
 \item Flug
@@ -22,7 +22,7 @@ Die Tests werden in drei Kategorien unterteilt:
 \item Main Tests
 \end{itemize}
 
-Bei den Happy Path Tests wird der gesamte Such- und Buchungungsprozess pro Engine einmal durchlaufen, ohne eine Auswahl zu treffen oder auf Fehler zu überprüfen. Der Test ist erfolgreich wenn die letzte Seite des Buchungsprozesses erreicht werden kann. Damit wird sichergestellt dass die Webseite im Standartdurchlauf keine Fehler produziert.
+Bei den Happy Path Tests wird der gesamte Such- und Buchungungsprozess pro Engine einmal durchlaufen, ohne eine Auswahl zu treffen, oder auf Fehler zu überprüfen. Der Test ist erfolgreich, wenn die letzte Seite des Buchungsprozesses erreicht werden kann. Damit wird sichergestellt, dass die Webseite im Standartdurchlauf keine Fehler produziert.
 
 Die Smoke Tests führen eine Suche für die in der \cref{sec:Recherche:Zielgruppe:top10} \nameref{sec:Recherche:Zielgruppe:top10} definierten Destinationen aus und überprüfen, ob Resultate geliefert werden.
 
@@ -41,7 +41,7 @@ Innerhalb einer dieser drei Testkategorien wird keine weitere Reihenfolge eingeh
 
 \subsection{Kunde \& Passagierangaben}
 \label{sec:Konzept:Übersicht:Angaben}
-Im Buchungsprozess müssen die Kunden- \& Passagierangaben ausgefüllt werden. Für alle Tests werden die folgenden Daten verwendet.\\
+Im Buchungsprozess müssen die Kunden- und Passagierangaben ausgefüllt werden. Für alle Tests werden folgenden Daten verwendet:\\
 \\  
 Kundendaten:
 \begin{itemize}
@@ -76,7 +76,7 @@ Gemäss der Priorisierung der Funktionalität (siehe  \cref{sec:analyse:testabde
 Die obigen Reisedaten sind dynamisch angegeben, da keine fixen Werte definiert werden können. Ansonsten würde spätestens in einem Jahr, wenn das fixe Datum überschritten wurde, die Tests fehlschlagen.
 
 \section{Happy Path}
-Der Happy Path testet, ob beim standard Szenario keine Fehler auftreten. Es werden demnach jede Engine einmal durchlaufen mit gültigen Angaben. Dies soll überprüfen ob keine grundlegenden Fehler vorhanden sind.
+Der Happy Path testet, ob beim Standard Szenario keine Fehler auftreten. Jede Engine wird einmal durchlaufen und es werden nur gültige Eingaben vorgenommen. Dies soll überprüfen, ob keine grundlegenden Fehler vorhanden sind.
 \subsection{Citytrip}
 \begin{table}[H] 
 	\caption{Testspezifikation: Happy Path - Citytrip}
@@ -223,11 +223,11 @@ Der Happy Path testet, ob beim standard Szenario keine Fehler auftreten. Es werd
 
 \section{Smoke Tests}
 \label{sec:konzept:smoketests}
-Smoke Tests führen eine Aktion durch und schauen lediglich, ob kein Fehler aufgetreten ist. Der Begriff rührt daher, dass eine Maschine gestartet und getestet wurde, ob sie nicht beginnt zu rauchen\footcite{Smoke_testing_software_-_Wikipedia_the_free_encyclopedia_2015-08-01}
+Smoke Tests führen eine Aktion durch und schauen lediglich, ob kein Fehler aufgetreten ist. Der Begriff rührt daher, dass eine Maschine gestartet und getestet wurde, ob sie nicht beginnt zu rauchen\footcite{Smoke_testing_software_-_Wikipedia_the_free_encyclopedia_2015-08-01}.
 
 Bei den folgenden Smoke Tests werden pro Engine die jeweiligen Top 10 (siehe \cref{sec:Recherche:Zielgruppe:top10} \nameref{sec:Recherche:Zielgruppe:top10}) Destinationen gesucht und überprüft, ob Suchresultate geliefert werden.
 
-Die Tests sind pro Engine immer gleich aufgebaut. Sprich die Suchparameter sind dieselben und auch die Verifikation ob kein Fehler aufgetreten ist äquivalent. Das einzige was sich unterscheidet sind die Destinationen. Daher wird jeweils nur der Test für die erste Destination ausführlich spezifiziert. Für die restlichen 9 gilt der selbe Ablauf.
+Die Tests sind pro Engine immer gleich aufgebaut. Die Suchparameter sind dieselben und auch die Verifikation, ob kein Fehler auftraten, ist äquivalent. Das Einzige, was sich unterscheidet, sind die Destinationen. Daher wird jeweils nur der Test für die erste Destination ausführlich spezifiziert. Für die restlichen 9 gilt der selbe Ablauf.
 
 \subsection{Citytrip}
 \begin{table}[H] 
@@ -322,7 +322,7 @@ Die Tests sind pro Engine immer gleich aufgebaut. Sprich die Suchparameter sind 
 \end{table}
 
 \section{Main Tests}
-Bei den Happy Paths wird überprüft, ob die Funktionalität der Webseite gemäss Spezifikation (siehe \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten}) funktioniert. Die Funktionalitäten im Anhang sind priorisieriert und werden gemäss dieser umgesetzt. Begonnen wurde mit der höchsten Zahl.
+Bei den Happy Paths wird überprüft, ob die Funktionalität der Webseite gemäss Spezifikation (siehe \cref{app:Funktionalitäten} \nameref{app:Funktionalitäten}) umgesetzt wurde. Die Funktionalitäten im Anhang sind priorisieriert und werden gemäss dieser umgesetzt. Begonnen wurde mit der höchsten Zahl.
 
 \subsection{Citytrip}
 
@@ -360,9 +360,9 @@ Bei den Happy Paths wird überprüft, ob die Funktionalität der Webseite gemäs
 				
 		\multirow{1}{*}{Flug Konfigurationsseite} & Warte bis die Seite geladen ist \\ \cline{2-2}
 		& Warte bis der "`Weiter"' Button anwählbar ist \\ \cline{2-2}
-		& Suche ein Flug welcher mehrere Hinflüge hat und wähle den zweiten aus \\ \cline{2-2}
+		& Suche ein Flug, welcher mehrere Hinflüge hat und wähle den zweiten aus \\ \cline{2-2}
 		& Überprüfe ob sich in der Übersicht die Airline, das Datum und der Preis korrekt angepasst haben\\ \cline{2-2}
-		& Suche ein Flug welcher mehrere Rückflüge hat und wähle den zweiten aus \\ \cline{2-2}
+		& Suche ein Flug, welcher mehrere Rückflüge hat und wähle den zweiten aus \\ \cline{2-2}
 		& Überprüfe ob sich in der Übersicht die Airline, das Datum und der Preis korrekt angepasst haben\\ \cline{2-2}
 	\end{tabularx} 
 \end{table}
