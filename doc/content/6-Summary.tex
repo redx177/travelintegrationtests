@@ -15,26 +15,3 @@ Ein Grossteil der Arbeit war die Funktionalität zu definieren, da diese aus der
 Mit der gewünschten Funktionlität und der Browserabdeckung konnte mit dem Konzept begonnen werden. Zuerst wurden die Tests in die drei Bereiche "`Happy Path"', "`Smoke Tests"' und "`Main Tests"' aufgeteilt. Danach die Eingabeparameter definiert und schlussendlich die zu implementierenden Tests spezifiziert.
 
 Schlussendlich konnte mit der Entwicklung begonnen werden. Es wurden die beiden Design Patterns "`Page Object"' und "`Page Factory"' eingesetzt, welche die Lesbarkeit der Tests markant erleichterte (siehe \cref{sec:umsetzung:patterns} \nameref{sec:umsetzung:patterns}).
-
-\section{Recherche}
-Zu Beginn wurde eine Recherche durchgeführt. Als Grundlage für die Entwicklung mussten die Rahmenbedingungen festgelegt und die Ziele definiert werden.
-
-Für die Umsetzung gab es die Möglichkeit, die Tests auf einem externen Service Provider auszuführen. Dieser ermöglicht es die Tests in der Cloud zu starten. Alternativ können sie auch auf einem Rechner innerhalb der Firma ausgeführt werden. Um sich für eine Variante zu entscheiden wurde ein Prototypen erstellt. Wegen der flexibilität und der kostentransparenz wurde die Variante mit den Service-Providern gewählt.
-
-Als letztes wurde die Zielgruppe der Webseite analysiert. Dazu wurden die Browserverteilung und die Top 10 Destinationen pro Engine definiert. Die meisten Besucher der Webseite nutzen den Safari (32.61\%), den Internet Explorer (26.62) und den Chrome (21.14\%). Dies sind die Browser, auf denen die Tests schlussendlich durchgeführt wurden.
-
-\section{Anforderungen und Analyse}
-Dieses Kapitel befasst sich mit der Anforderungen und analysiert die Befunde aus der Recherche. Dazu wurden die Stakeholder eruiert sowie deren Rollen und Anforderungen an das Projekt definiert.
-
-Anschliessend wurden die Anforderungen aufgeführt und die Befunde aus der Recherche analysiert. Die drei Anforderungen wurden in einem Dreieck dargestellt, da sie sich gegenseitig beeinflussen. Diese sind die Funktionalität, die Browserabdeckung und die "`Kosten \& Zeit"'. Für die ersten beiden ist ein möglichst hoher und für letzteres ein niedriger Wert anzustreben. Da sich die Anforderungen gegenseitig Beeinflussen musste ein Kompromiss gefunden werden. Es wurde Entschieden, dass alle Funktionalitäten mit einer Priorität mit 8 oder höher zu testen sind und diese auf zwei Browser ausgeführt werden. Dadurch sollen die Kosten klein gehalten werden. Bei Projekterfolg soll die Funktionalität und die Browserabdeckung sukzessive erhöht werden.
-
-Für das Konzept benötigte es noch die validen Eingabeparameter der Suchformulare, weshalb noch eine Grenzwertanalyse durchgeführt wurde. 
-
-\section{Konzept}
-Der Hauptteil des Konzept stellen die Spezifikationen der verschiedenen Tests dar. Diese sind in drei Testarten, Happy Path, Smoke Tests und Main Tests, unterteilt. Die Spezifikation umfasst die Ausführung, die erwarteten Resultate sowie allfällige Nachbedingungen
-
-
-\section{Umsetzung}
-Das Hauptziel der Arbeit war das Spezifizieren und Umsetzen der Tests für die travel.ch Webseite. Die Implementierung war grösstenteils einfach. Selenium bietet eine gute Grundlage um mit einer Webseite zu interagieren. Die einzige Schwierigkeit bestand darin, das Timing für die diversen Elemente einzurichten, welche nachträglich geladen werden. Mittlerweile sind diese Probleme jedoch Behoben.
-
-
