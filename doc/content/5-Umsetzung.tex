@@ -522,7 +522,14 @@ public void WaitForResults()
 
 Diese Methode wartet, bis der Behälter für die Suchresultate die Klasse "`content-loaded"' besitzt, denn erst dann darf der Test weitergeführt werden.
 
-\subsection{Instabilität der Testumgebung und komplexität der Tests}
-Die Tests sind sehr gross, da der Ablauf von der Such- bis zur letzten Checkout-Seite eingehalten werden muss. Ersichtlich ist dies am Zustandsgraphen welche im \cref{sec:umsetzung:zustandsgraph} \nameref{sec:umsetzung:zustandsgrapht} aufgeführt ist. Wenn in diesem Ablauf irgendwo ein Fehler auftritt ist der gesamte Test fehlgeschlagen. Dies ist häufig der Fall auf der Suchresultatseite, da dort Daten direkt vom Anbieter abgefragt werden und keine vordefinierten Antworten zurückgeliefert werden können. Dadurch kann es auftreten, dass kein Suchresulat vorhanden ist mit welchem getestet werden kann.
+\subsection{Komplexität der Tests}
+\label{sec:umsetzung:probleme:komplexität}
+Die Tests sind sehr gross, da der Ablauf von der Such- bis zur letzten Checkout-Seite eingehalten werden muss. Ersichtlich ist dies am Zustandsgraphen welche im \cref{sec:umsetzung:zustandsgraph} \nameref{sec:umsetzung:zustandsgrapht} aufgeführt ist. Wenn in diesem Ablauf irgendwo ein Fehler auftritt ist der gesamte Test fehlgeschlagen. Dies ist häufig der Fall auf der Suchresultatseite, da dort Daten direkt vom Anbieter abgefragt werden und keine vordefinierten Antworten (Stubs) zurückgeliefert werden können. Dadurch kann es auftreten, dass kein Suchresulat vorhanden ist mit welchem getestet werden kann.
 
-Zusätzlich ist die Testumgebung instabil. Dies äussert sich dadurch, dass eine Suche beim ersten Durchlauf keine Resultate liefert oder willkürlich 500 Fehlermeldungen ausgegeben werden. Passiert dies auf irgend einer Seite, schlägt der gesamte Test fehl. Dafür wurde noch keine Lösung gefunden.
+Als Lösung können Stubs eingesetzt werden\footcite{Stubs}. Da die Webseite jedoch noch nicht über solch einen Mechanismus verfügt und die Datenobjekte sehr gross sind, kann dies nicht mehr im Umfang dieser Arbeit erledigt werden.
+
+\subsection{Instabilität der Testumgebung}
+\label{sec:umsetzung:probleme:stabilität}
+Zusätzlich ist die Testumgebung instabil. Dies äussert sich dadurch, dass eine Suche beim ersten Durchlauf keine Resultate liefert oder willkürlich 500 Fehlermeldungen ausgegeben werden. Passiert dies auf irgend einer Seite, schlägt der gesamte Test fehl. 
+
+Im Moment gibt es firmen-itern ein weiteres Projekt, dass die bestehenden Server durch neue ablöst. Danach sollten die Tests nochmals durchgeführt werden um zu überprüfen ob sie auf den neuen Infrastruktur stabiler laufen.
