@@ -1,5 +1,5 @@
 travelintegrationtests
 ========================
 
-ZHAW Semesterarbeit - Travel.ch Integrationstests
+ZHAW Semesterarbeit - Travel.ch Integrationstests.
 by Simon Lang

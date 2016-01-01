@@ -4,7 +4,7 @@ In diesem Kapitel werden die Rahmenbedingungen, die verschiedenen Testing Framew
 
 \section{Rahmenbedingungen}
 \label{sec:Recherche:Rahmenbedingungen}
-Getestet werden soll die Webseite der Firma travelwindow AG, welche unter http://www.travel.ch erreichbar ist. Die Seite ist mit C\# implementiert, weshalb auch die Tests in dieser Programmiersprache umgesetzt werden sollen.
+Getestet werden soll die Webseite der Firma travelwindow AG, die unter http://www.travel.ch erreichbar ist. Die Seite ist mit C\# implementiert, weshalb auch die Tests in dieser Programmiersprache umgesetzt werden sollen.
 
 \subsection{Infrastruktur}
 \label{sec:Recherche:Rahmenbedingungen:Infrastruktur}
@@ -14,24 +14,24 @@ Es gibt folgende drei Umgebungen:
 \item Quality
 \item Production
 \end{itemize}
-Bei der Entwicklung wird jeder Checkin in das Versionierungssystem (siehe \cref{sec:Recherche:Rahmenbedingungen:Tooling} \nameref{sec:Recherche:Rahmenbedingungen:Tooling}) automatisch auf die Test-Umgebung aufgespielt. Sobald ein Stand erreicht ist, welcher vom Business der travelwindow AG getestet werden soll, wird diese Version auf die Quality-Umgebung geladen. Sobald diese fertig mit dem Testen sind, wird diese Version auf die Production-Umgebung gespielt und ist damit Live.
+Bei der Entwicklung wird jeder Checkin in das Versionierungssystem (siehe \cref{sec:Recherche:Rahmenbedingungen:Tooling} \nameref{sec:Recherche:Rahmenbedingungen:Tooling}) automatisch auf die Test-Umgebung aufgespielt. Sobald ein Stand erreicht ist, der vom Business der travelwindow AG getestet werden soll, wird diese Version auf die Quality-Umgebung geladen. Sobald diese mit dem Testen fertig sind, wird diese Version auf die Production-Umgebung gespielt und ist damit live.
 
 \subsection{Tooling}
 \label{sec:Recherche:Rahmenbedingungen:Tooling}
-Der Sourcecode der Softare ist auf einem eigenen \gls{svn}\footcite{Apache_Subversion_2015-07-26} versioniert. Es ist jedoch eine Umstellung auf GIT\footcite{Git_2015-07-26} geplant, weshalb neuer Sourcecode fortan nur noch auf dem GIT Hosting Dienst BitBucket\footcite{Git_and_Mercurial_code_management_for_teams_2015-07-26} gespeichert werden soll.
+Der Sourcecode der Softare ist auf einem eigenen \gls{svn}\footcite{Apache_Subversion_2015-07-26} Server versioniert. Es ist jedoch eine Umstellung auf GIT\footcite{Git_2015-07-26} geplant, weshalb neuer Sourcecode fortan nur noch auf dem GIT Hosting Dienst BitBucket\footcite{Git_and_Mercurial_code_management_for_teams_2015-07-26} gespeichert werden soll.
 
-Als Continuous Integration Server wird Bamboo\footcite{Bamboo_2015-07-26} eingesetzt. Dieser kompiliert den Sourcecode und ist dafür verantwortlich, eine Version auf die Umgebungen Test, Quality und Production zu laden.
+Als Continuous Integration Server wird Bamboo\footcite{Bamboo_2015-07-26} eingesetzt. Dieser kompiliert den Sourcecode und ist dafür verantwortlich eine Version auf die Umgebungen Test, Quality und Production zu laden.
 
-Das Tooling ist genauer beschrieben im \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}.
+Das Tooling ist genauer im \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur} beschrieben.
 
 \section{Testing Framework}
 \label{sec:Recherche:TestingFrameworks}
-Der defacto Standart für Integrationstests von Benutzeroberfläche ist Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-07-26}\footcite{Happy_10th_Birthday_Selenium_ThoughtWorks_2015-07-26}. Der Code für dieses Framework kann in C\# programmiert werden, welcher einen Webbrowser startet und Benutzereingaben simuliert. Dadurch können repetitive Tests automatisiert und auf verschiedenen Browsern durchgeführt werden.
+Der defacto Standart für Integrationstests von Benutzeroberfläche ist Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-07-26}\footcite{Happy_10th_Birthday_Selenium_ThoughtWorks_2015-07-26}. Der Code für dieses Framework kann in C\# programmiert werden, wodurch es einen Webbrowser startet und Benutzereingaben simuliert. Dadurch können repetitive Tests automatisiert und auf verschiedenen Browsern durchgeführt werden.
 
 \section{Lösungswege: Lokal oder Service-Anbieter}
 \label{sec:Recherche:loesungswege}
 Die Tests können entweder auf einer eigens aufgesetzten Umgebung durchgeführt, oder an einen Service ausgelagert werden, welcher die Tests ausführt. 
-Der Vorteil solcher Services liegt darin, dass sie virtuelle Umgebungen für die Durchführung der Tests zur Verfügung stellen. Diese sind mit verschiedenen Betriebssystemen und Browser Konfigurationen ausgestattet. Einige Beispiele solcher Zusammenstellungen:
+Der Vorteil solcher Services liegt darin, dass sie virtuelle Umgebungen für die Durchführung der Tests zur Verfügung stellen. Diese sind mit verschiedenen Betriebssystemen und Browser Konfigurationen ausgestattet. Einige Beispiele solcher Zusammenstellungen sind:
 \begin{itemize}
 \item Windows 7, Firefox 39
 \item Windows 8.1, Firefox 39
@@ -40,30 +40,30 @@ Der Vorteil solcher Services liegt darin, dass sie virtuelle Umgebungen für die
 \item Android 4.4, Samsung Galaxy S4
 \end{itemize}
 
-Als Service-Anbieter Tests wurden zwei Kandidaten näher in Betracht gezogen. SauceLabs\footcite{Sauce_Labs_2015-07-26} und CrossBrowserTesting\footcite{Cross_Browser_Testing_2015-07-26}, da diese zwei als Hauptsponsor des Selenium Projekts auf deren Homepage aufgeführt wurden\footcite{Seleniumhq}
+Als Service-Anbieter-Tests wurden zwei Kandidaten näher in Betracht gezogen. SauceLabs\footcite{Sauce_Labs_2015-07-26} und CrossBrowserTesting\footcite{Cross_Browser_Testing_2015-07-26}, da diese zwei als Hauptsponsor des Selenium Projekts auf deren Homepage aufgeführt wurden\footcite{Seleniumhq}.
 
-Beide Anbieter verfügen über 500 verschiedene Betriebsystem/Browser Konfigurationen\footcite{Platforms_2015-07-26}\footcite{OS_Browser_Configurations_for_Cross_Browser_Compatibility_Testing_2015-07-26}. Beide können automatisierte Tests ausführen und liefern als Resultat ein Video der Durchführung sowie Screenshots der einzelnen Tests.
+Beide Anbieter verfügen über 500 verschiedene Betriebsystem-/Browser-Konfigurationen\footcite{Platforms_2015-07-26}\footcite{OS_Browser_Configurations_for_Cross_Browser_Compatibility_Testing_2015-07-26}. Beide können automatisierte Tests ausführen und liefern als Resultat ein Video der Durchführung sowie Screenshots der einzelnen Tests.
 
-Bezahlt werden die Service-Anbieter pro Minute, die ein Test auf ihren System läuft. Vom Preis her unterscheiden sie sich nicht markant\footcite{Sauce_Labs_Pricing_2015-07-26}\footcite{Test_your_site_on_all_browsers_2015-07-26}. SauceLabs hat das kleinste Packet mit 120 Minuten automatisierten Tests für \$12/Monat. Beide Anbieter verrechnen für 10 Stunden Testing \$49/Monat. Beim teureren Packet für \$149/Monat bietet CrossBrowserTesting mit 2000- mehr als Sauclabs mit 1800 Minuten.
+Die Tests laufen auf den Systemen der Service-Anbieter, welche pro Minute Laufzeit einen Betrag verrechnen. Vom Preis her unterscheiden sie sich nicht markant\footcite{Sauce_Labs_Pricing_2015-07-26}\footcite{Test_your_site_on_all_browsers_2015-07-26}. SauceLabs hat das kleinste Paket mit 120 Minuten automatisierten Tests für \$12/Monat. Beide Anbieter verrechnen für 10 Stunden Testing \$49/Monat. Beim teureren Paket, für \$149/Monat, bietet CrossBrowserTesting mit 2000- mehr als Sauclabs mit 1800 Minuten.
 
-Um sich zwischen den beiden Varianten, der lokalen Ausführung der Test und deren Auslagerung an einen Serivce-Anbieter, zu entscheiden, wurde ein Prototyp entwickelt welcher im nächsten Kapitel vorgestellt wird.
+Um sich zwischen den beiden Varianten der lokalen Ausführung der Test und deren Auslagerung an einen Serivce-Anbieter zu entscheiden, wurde ein Prototyp entwickelt, welcher im nächsten Kapitel vorgestellt wird.
 
 \section{Lösungswege: Prototyp}
 Der Prototyp soll eine Grundlage bieten, um sich zwischen den vorgestellten Lösungswegen (siehe \cref{sec:Recherche:loesungswege} \nameref{sec:Recherche:loesungswege}) zu entscheiden. Dieser kann die Tests lokal durchführen, oder sie an einen Service-Anbieter auslagern.
 
-Erwartet wird, dass das vorbereiten für die lokale Ausführung mehr Zeit in Anspruch nimmt, da zuerst die Treiber für die verschiedenen zu Browser eingerichtet werden müssen. Es werden sowohl Desktop wie auch Mobile Internetclients unterstützt werden. Das Aufsetzten und Pflegen verschiedener Servern mit verschiedenen Betriebssystemen, Browsern und Emulatoren für mobile Endgeräte ist aufwändig und benötigt viel Knowhow. Auch deren Pflege sollte mehr Zeit beanspruchen. Dafür ist die Ausführung der Tests kostenlos.
+Erwartet wird, dass das Vorbereiten für die lokale Ausführung mehr Zeit in Anspruch nimmt, da zuerst die Treiber für die verschiedenen Browser eingerichtet werden müssen. Es werden sowohl Desktop, wie auch Mobile Internetclients unterstützt. Das Aufsetzten und Pflegen verschiedener Server mit diversen Betriebssystemen, Browsern und Emulatoren für mobile Endgeräte ist aufwändig und benötigt viel Knowhow. Auch deren Pflege sollte mehr Zeit beanspruchen. Dafür ist die Ausführung der Tests kostenlos.
 
-Bei den Service-Anbietern sollte die Ausführung einfacher einzurichten sein, da die Browser schon vorkonfiguriert auf deren Systemen installiert sind. Jedoch wird die Testausführung in Rechnung gestellt. 
+Bei den Service-Anbietern sollte die Ausführung einfacher einzurichten sein, da die Browser schon vorkonfiguriert auf deren Systemen installiert sind. Die Testausführung wird jedoch in Rechnung gestellt. 
 
-Die obigen Annahmen sollten durch den Prototyp bestätigt oder wiederlegt werden. Der Quellcode des Programms ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
+Die obigen Annahmen sollten durch den Prototyp bestätigt, oder widerlegt werden. Der Quellcode des Programms ist im BitBucket unter \url{https://bitbucket.org/soultemptation/tw-systemtests-prototype} einsehbar.
 
 \subsection{Auswertung}
-Getestet wurde die lokale Ausführung auf dem Server mit dem Firefox Browser, und die Anbindung der Service-Anbieter SauceLabs und CrossBrowserTesting. 
+Getestet wurde die lokale Ausführung auf dem Server mit dem Firefox Browser und die Anbindung der Service-Anbieter SauceLabs und CrossBrowserTesting. 
 
 \subsubsection{Aufsetzen}
-Das Aufsetzen des Firefox Browsers war einfach jedoch Zeitintensiv. Java muss auf dem Server vorhanden sein und der Selenium RC Server muss installiert werden. Möchte man die Test zusätzlich auf anderen Betriebsystemen ausführen, so steigt der Aufwand rasant an, da jede Betriebsystem/Browser Konfiguration muss separat aufgesetzt werden\footcite{Selenium_Linux}. An Aufwand hat es drei Stunden Arbeit und zwei Stunden Recherche gekostet.
+Das Aufsetzen des Firefox Browsers war einfach, jedoch zeitintensiv. Java muss auf dem Server vorhanden sein und der Selenium RC Server muss installiert werden. Möchte man die Tests zusätzlich auf anderen Betriebsystemen ausführen, so steigt der Aufwand rasant an, da jede Betriebssystem-/Browser-Konfiguration separat aufgesetzt werden muss\footcite{Selenium_Linux}. An Aufwand hat es drei Stunden Arbeit und zwei Stunden Recherche gekostet.
 
-Bei den Service Anbietern kann man beim Aufruf mitgeben, welche Betriebsystem/Browser kombination man testen möchte. Der folgende Code ist ein Ausschnitt aus dem Prototypen:
+Bei den Service-Anbietern kann man beim Aufruf mitgeben, welche Betriebsystem-/Browserkombination man testen möchte. Der folgende Code ist ein Ausschnitt aus dem Prototypen:
 
 \begin{lstlisting}
     var commandExecutorUri = new Uri("`http://ondemand.saucelabs.com/wd/hub"');
@@ -73,10 +73,10 @@ Bei den Service Anbietern kann man beim Aufruf mitgeben, welche Betriebsystem/Br
     desiredCapabilites.SetCapability("`platform"', "`Windwos8"'); // operating system to use
     desiredCapabilites.SetCapability("`browser"', "`Firefox25"'); // supply sauce labs username
 \end{lstlisting}
-Auf Zeile 5 und 6 wird das Betriebsystem beziehungsweise der Browser gesetzt. Um weitere Konfigurationen zu testen müssen lediglich diese Werte angepasst werden.
+Auf Zeile fünf und sechs wird das Betriebsystem, beziehungsweise der Browser, gesetzt. Um weitere Konfigurationen zu testen, müssen lediglich diese Werte angepasst werden.
 
 \subsubsection{Zeit}
-Der Test startet die travel.ch Seite und gibt einen Wert in das Suchformular ein. Dann wartet es bis Suchvorschläge angezeigt werden. Der Test ist erfolgreich wenn mindestens ein Vorschlag vorhanden ist.
+Der Test startet die travel.ch-Seite und gibt einen Wert in das Suchformular ein. Dann wartet es bis Suchvorschläge angezeigt werden. Der Test ist erfolgreich, wenn mindestens ein Vorschlag vorhanden ist.
 
 Der Test wurde zehnmal lokal sowie beim Service-Anbieter ausgeführt:
 \begin{table}[H] 
@@ -103,26 +103,26 @@ Der Test wurde zehnmal lokal sowie beim Service-Anbieter ausgeführt:
 			10 & 16.55 Sekunden & 57.29 Sekunden & 58.52 Sekunden \\ \hline 
 	\end{tabular} 
 \end{table}
-Durchschnittlich macht dass eine Laufzeit von 17.81 Sekunden für die lokale Ausführung, 56.73 bei SauceLabs und 59.22 bei CrossBrowserTesting.
+Durchschnittlich macht das eine Laufzeit von 17.81 Sekunden für die lokale Ausführung, 56.73 bei SauceLabs und 59.22 bei CrossBrowserTesting.
 
-Die Service-Anbieter ermöglichen es, zwei Tests parallel auszuführen. Dadurch kann die Laufzeit eines einzelnen Tests nicht verändert werden, die ganze Test-Suite wird jedoch in der Hälfte der Zeit abgearbeitet.
+Die Service-Anbieter ermöglichen es zwei Tests parallel auszuführen. Dadurch kann die Laufzeit eines einzelnen Tests nicht verändert werden. Die ganze Test-Suite wird jedoch in der Hälfte der Zeit abgearbeitet.
 
 \subsubsection{Kosten}
-Die Kosten sind schwer vergleichbar. Bei den Service-Anbieter wird nach der Laufzeit der Tests abgerechnet (siehe \cref{sec:Recherche:loesungswege} \nameref{sec:Recherche:loesungswege}). Für die lokale Ausführung wird die Arbeitszeit bezahlt, welche für die Installation und Wartung der Server und Browser benötigt wird. Zusätzlich fallen Lizenzkosten an für die zu installierende Software auf den Servern und es wird teures Expertenwissen in diesem Bereich benötigt. Im speziellen wenn auf mobilen Endgeräten getestet werden muss.
+Die Kosten sind schwer vergleichbar. Bei den Service-Anbieten wird nach der Laufzeit der Tests abgerechnet (siehe \cref{sec:Recherche:loesungswege} \nameref{sec:Recherche:loesungswege}). Für die lokale Ausführung wird die Arbeitszeit bezahlt, welche für die Installation und Wartung der Server und Browser benötigt wird. Zusätzlich fallen Lizenzkosten für die zu installierende Software auf den Servern an und es wird teures Expertenwissen in diesem Bereich benötigt. Vor allem, wenn auf mobilen Endgeräten getestet werden muss.
 
 \subsubsection{Entscheid}
-Das Aufsetzten und die Pflege der Umgebung ist eine klare stärke der Service-Anbieter. Dafür haben sie die Schwäche bei den Testlaufzeiten. 
+Das Aufsetzten und die Pflege der Umgebung ist eine klare Stärke der Service-Anbieter. Dafür haben sie die Schwäche bei den Testlaufzeiten. 
 
-Die lokale Ausführung hingegeben benötigt für ersteres mehr Aufwand, dafür laufen die Tests mit einem Faktor 3 schneller.
+Die lokale Ausführung hingegen benötigt für ersteres mehr Aufwand, dafür laufen die Tests mit einem Faktor 3 schneller.
 
-Nach Absprache mit dem Business der travelwindow AG wurde entschieden, dass der Lösungsweg mit den  Service-Anbieter eingeschlagen werden soll. Der Aufwand zum Aufsetzen und Pflege der Umgebung ist geringer und die Kosten können besser kalkuliert werden. Sollte die Laufzeiten ein Problem darstellen, so kann eine parallele Ausführung der Tests in Betracht gezogen werden. 
+Nach Absprache mit dem Business der travelwindow AG wurde entschieden, dass der Lösungsweg mit den Service-Anbieten eingeschlagen werden soll. Der Aufwand zum Aufsetzen und Pflegen der Umgebung ist geringer und die Kosten können besser kalkuliert werden. Sollten die Laufzeiten ein Problem darstellen, so kann eine parallele Ausführung der Tests in Betracht gezogen werden. 
 
 \section{Zielgruppe}
 \label{sec:Recherche:Zielgruppe}
-Die Zielgruppe sind die Benutzer der Webseite, beziehungsweise die verschiedenen Browser, welche sie verwenden, sowie die Destinationen für die sie eine Reise buchen möchten. Denn für diese müssen Tests geschrieben werden.
+Die Zielgruppe sind die Benutzer der Webseite, beziehungsweise die verschiedenen Browser, die sie verwende, sowie die Destinationen für die sie eine Reise buchen möchten. Denn für diese müssen Tests geschrieben werden.
 
 \subsection{Browserverteilung}
-Auf travel.ch wird Google Analytics eingesetzt. Die Auswertung des letzten halben Jahres (25.02.2015 - 25.07.2015) ergab, dass folgende Browserversionen am meisten verwendet wurden:
+Auf travel.ch wird Google Analytics eingesetzt. Die Auswertung des letzten halben Jahres (25.02.2015 - 25.07.2015) hat ergeben, dass folgende Browserversionen am meisten verwendet wurden:
 \begin{itemize}
 \item Safari: 32.61\%
 	\begin{itemize}
@@ -147,7 +147,7 @@ Auf travel.ch wird Google Analytics eingesetzt. Die Auswertung des letzten halbe
 \end{itemize}
 
 \subsection{Top 10 Destinationen}
-Die Webseite ist in drei Bereiche aufgeteilt: Citytrip (Flug \& Hotel), Flug, Hotel. Folgend nun die zehn meist gesuchten Destinationen:
+Die Webseite ist in drei Bereiche aufgeteilt: Citytrip (Flug \& Hotel), Flug und Hotel. Folgend nun die zehn meist gesuchten Destinationen:
 \begin{table}[H] 
 	\caption{Top 10 Destinationen}
 	\centering

@@ -14,28 +14,29 @@
 
 Dieses Kapitel beschreibt die technischen Aspekte, wie die Testfälle aus dem \cref{sec:konzept} \nameref{sec:konzept} umgesetzt wurden.
 
-Zuerst wird der Einsatz von Selenium sowie die Infrastruktur der travelwindow AG beschrieben, um einen Überblick zu verschaffen. Danach folgten die eingesetzten Design Patterns, der Zustandsgraph der Webseite sowie eine Beschreibung der Architektur. Abschliessend werden die Probleme beschrieben, die während der Entwicklung auftraten.
+Zuerst wird der Einsatz von Selenium sowie die Infrastruktur der travelwindow AG beschrieben, um einen Überblick zu verschaffen. Danach folgten die eingesetzten Design Patterns, der Zustandsgraph der Webseite sowie eine Beschreibung der Architektur. Abschliessend werden die Probleme beschrieben, die während der Entwicklung aufgetreten sind.
 
 \section{Selenium}
 \label{sec:umsetzung:selenium}
-Die Testfälle werden mit Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-09-26} implementiert. Dieses automatisiert Browser, sprich es wird als erstes einer aufgestartet, danach Testschritte ausgeführt und schlussendlich einige Behauptungen aufgestellt. Sind diese korrekt so ist der Test erfolgreich. Wenn nicht schlägt der Test fehl. 
-Angetrieben werden Selenium Tests mittels UnitTests. Diese können von Testtreibern ausgeführt werden und erlauben die Überprüfung von Behauptungen.t
+Die Testfälle werden mit dem Selenium\footcite{Selenium_-_Web_Browser_Automation_2015-09-26} Framework implementiert. 
+Es startet einen Browser, führt Testschritte aus und stellt Behauptungen auf. Sind diese Annahmen korrekt, so ist der Test erfolgreich. Wenn nicht, schlägt er fehl. 
+Angetrieben werden Selenium Tests mittels UnitTests. Diese können von Testtreibern ausgeführt werden und erlauben die Überprüfung von Behauptungen.
 
-Selenium selber ist in Java implementiert und bietet eine eigene \Gls{glos:ide} mit dem Namen Selenium IDE\footcite{Selenium_IDE_Plugins_2015-09-26}, welche ein Plugin für den Firefox\footcite{Download_Firefox__Free_Web_Browser__Mozilla_2015-09-26} darstellt. Damit können Aktionen im Browser aufgezeichnet werden und danach als Test automatisiert durchgeführt werden. Die gesamte Software ist Open Source unter der \textit{Apache License 2.0} erhältlich\footcite{Selenium_software_-_Wikipedia_the_free_encyclopedia_2015-09-26}.
+Selenium selber ist in Java implementiert und bietet eine eigene \Gls{glos:ide} mit dem Namen Selenium IDE\footcite{Selenium_IDE_Plugins_2015-09-26}, welche ein Plugin für den Firefox\footcite{Download_Firefox__Free_Web_Browser__Mozilla_2015-09-26} darstellt. Damit können Aktionen im Browser aufgezeichnet und danach als Test automatisiert durchgeführt werden. Die gesamte Software ist Open Source unter der \textit{Apache License 2.0} erhältlich\footcite{Selenium_software_-_Wikipedia_the_free_encyclopedia_2015-09-26}.
 
 Die gesamte Webseitenentwiclung der Firma travelwindow AG findet in der Programmiersprache C\# statt. Aus Gründen der Konsistenz wurde entschieden, dass auch die Tests in C\# umgesetzt werden sollen. 
-Selenium WebDriver\footcite{Selenium_WebDriver_2015-09-26} ist ein Aufsatz auf Selenium, welcher eine API bietet damit mit verschiedenen Programmiersprachen Tests umgesetzt werden können. Vollständig unterstützt werden die Sprachen Python, Ruby, Java und C\#. 
+Selenium WebDriver\footcite{Selenium_WebDriver_2015-09-26} ist ein Aufsatz auf Selenium, welcher eine API bietet, mit verschiedenen Programmiersprachen Tests umgesetzt werden können. Vollständig unterstützt werden die Sprachen Python, Ruby, Java und C\#. 
 
 \subsection{Beispiele}
 Hier sollen einige Beispiele dafür aufgezeigt werden, wie über Selenium mit dem Browser interagiert werden kann.
 
-Um einen Browser zu starten muss ein entsprechender Driver instantiiert werden. Im folgenden Code wird ein Firefox aufgerufen.
+Um einen Browser zu starten, muss ein entsprechender Driver instantiiert werden. Im folgenden Code wird ein Firefox aufgerufen.
 \lstset{language=csh}
 \begin{lstlisting}
 	IWebDriver driver = new FirefoxDriver();
 \end{lstlisting}
 
-Um auf eine Webseite zu navigieren muss dies dem Driver übermittelt werden:
+Um auf eine Webseite zu navigieren, muss dies dem Driver übermittelt werden:
 \begin{lstlisting}
 	driver.Navigate().GoToUrl(targetUrl);
 \end{lstlisting}
@@ -97,7 +98,7 @@ Dieser Abschnitt beschreibt die Infrastruktur der travelwindow AG.
 	\label{fig:umsetzung:infrastruktur}
 \end{figure}
 
-Als \Gls{glos:vcs} wird BitBucket\footcite{Git_and_Mercurial_code_management_for_teams_2015-07-26} von Atlassian eingesetzt. Der Code wird bei jeder Änderung vom Build Server heruntergeladen und Compiliert, wodurch überprüft wird ob keine syntaktischen Fehler vorhanden sind. Dabei wird jeweils eine Revision angelegt. Auf dem Build Server läuft Bamboo\footcite{Bamboo_2015-07-26}, welches ebenfalls von Atlassian hergestellt wird. 
+Als \Gls{glos:vcs} wird BitBucket\footcite{Git_and_Mercurial_code_management_for_teams_2015-07-26} von Atlassian eingesetzt. Der Code wird bei jeder Änderung vom Build Server heruntergeladen und compiliert, wodurch überprüft wird, ob keine syntaktischen Fehler vorhanden sind. Dabei wird jeweils eine Revision angelegt. Auf dem Build Server läuft Bamboo\footcite{Bamboo_2015-07-26}, welches ebenfalls von Atlassian hergestellt wird. 
 
 Es gibt folgende drei Umgebungen:
 \begin{itemize}
@@ -105,13 +106,13 @@ Es gibt folgende drei Umgebungen:
 \item Quality
 \item Production
 \end{itemize}
-Die erste ist für die Entwickler. Die zweite für den Kunden zum Testen und die letzte ist jene Umgebung, welche von den Kunden verwendet wird.
+Die Erste ist für die Entwickler. Die Zweite für den Kunden zum Testen und die Letzte ist jene Umgebung, welche von den Kunden verwendet wird.
 
 Soll eine Version der Webseite auf eine Umgebung hochgeladen werden, so kann der Prozess auf dem Build Server gestartet werden, wodurch eine Revision vom Bamboo Server auf die entsprechende Umgebung hochgeladen wird. Als Deployment Server wird Octopus\footcite{Octopus_Deploy_2015-09-28} eingesetzt.
 
 \section{Design Patterns}
 \label{sec:umsetzung:patterns}
-Es werden die beiden Design Patterns \textit{Page Object} und \textit{Page Factory} vorgestellt. Die Verwendung soll anhand eines Beispieles erläutert werden. Dazu soll folgender Test optimiert werden:
+Es werden die Design Patterns \textit{Page Object} und \textit{Page Factory} vorgestellt. Die Verwendung soll anhand eines Beispiels erläutert werden. Dazu soll folgender Test optimiert werden:
 
 \begin{lstlisting}        
 public class CityTrip
@@ -138,13 +139,13 @@ public class CityTrip
 }
 \end{lstlisting}
 
-Der Test gibt eine Destination in ein Suchformular ein, sendet das Formular ab und überprüft ob, ob mind. ein Resultat gefunden wurde.
+Der Test gibt eine Destination in ein Suchformular ein, sendet das Formular ab und überprüft, ob mindestens ein Resultat gefunden wurde.
 
 \subsection{Page Object}
 \label{sec:umsetzung:patterns:pageobject}
-Das Page Object Design Pattern gibt vor, dass Webseiten in Objekten im Code repräsentiert werden sollen\footcite{PageObjects}. Diese Objekte werden Page Objects genannt. Sie kapseln die Logik, um mit einer Webseite zu interagieren, weg. Zum Beispiel das selektieren eines \gls{dom} Elements oder das drücken eines Buttons.
+Das Page Object Design Pattern gibt vor, dass Webseiten in Objekten im Code repräsentiert werden sollen\footcite{PageObjects}. Diese Objekte werden Page Objects genannt. Sie kapseln die Logik, um mit einer Webseite zu interagieren, weg. Zum Beispiel das Selektieren eines \gls{dom} Elements oder das Drücken eines Buttons.
 
-Das Design Pattern auf das in der Kapiteleinführung gegebene Beispiel angewendet ergibt folgender Code:
+Das Design Pattern auf dem in der Kapiteleinführung gegebenen Beispiel angewendet, ergibt folgenden Code:
 \begin{lstlisting}
 public class CityTrip
 {	    	
@@ -207,10 +208,10 @@ Die Testmethode \textit{SearchReturnsResults} (Zeile 4) ist aufgeräumt und übe
 
 Dazu gekommen sind die beiden Page Objects \textit{StartPage} (Zeile 17) und \textit{SearchResultPage} (Zeile 35). Sie beinhalten die jeweiligen CSS Selektoren für die entsprechende Seite.
 
-Für die Navigation von einer Seite auf die nächste sind ebenfalls die Page Objects zuständig, da sie wissen auf welche Seite ein Link oder ein Formular führt. Die Methode \textit{SubmitValidForm} (Zeile 26) gibt ein weiteres Page Object zurück.  
+Für die Navigation von einer Seite auf die Nächste sind ebenfalls die Page Objects zuständig, da sie das Wissen besitzen, auf welche Seite ein Link, oder ein Formular führt. Die Methode \textit{SubmitValidForm} (Zeile 26) gibt ein weiteres Page Object zurück.  
 
 \subsection{Page Factory}
-Eine \textit{Page Factory} erleitert den Umgang mit einem \textit{Page Object}. Es initialisiert die Elemente eines Page Objects. Der Code kann auf folgende Weise umgebaut werden: 
+Eine \textit{Page Factory} erleichtert den Umgang mit einem \textit{Page Object}. Es initialisiert die Elemente eines Page Objects. Der Code kann auf folgende Weise umgebaut werden: 
 
 \begin{lstlisting}
 public class CityTrip
@@ -276,17 +277,17 @@ public class SearchResultPage
 }
 \end{lstlisting}
 
-Als erstes wurde auf den Zeilen 21-25 sowie 47-48 Felder mit einer Annotation eingefügt. Diese Teilen der PageFactory mit, wie die Elemente gefunden werden sollen. 
+Als Erstes wurde auf den Zeilen 21-25 sowie 47-48 Felder mit einer Annotation eingefügt. Diese Teilen der PageFactory mit, wie die Elemente gefunden werden sollen. 
 
 Im zweiten Schritt wird auf den Zeilen 30 und 55 die PageFactory aufgerufen, welche die für die Felder entsprechenden Elemente im \gls{dom} sucht.
 
 Auf den Zeilen 13, 35 und 36 werden schlussendlich die Felder verwendet.
 
-Durch die Page Factory wird die Lesbarkeit des Codes verbessert sowie dessen wartbarkeit, da die Elementdefinitionen einheitlich zu beginn der Klasse aufgeführt werden.
+Durch die Page Factory wird die Lesbarkeit des Codes verbessert sowie dessen Wartbarkeit, da die Elementdefinitionen einheitlich zu Beginn der Klasse aufgeführt werden.
 
 \section{Zustandsgraph}
 \label{sec:umsetzung:zustandsgraph}
-Bei den Tests gibt es Zustandsübergänge welche eingehalten werden müssen. Im Beispiel der travel.ch sind das die einzelnen Webseite, durch welche sich man bewegen muss. 
+Bei den Tests gibt es Zustandsübergänge, die eingehalten werden müssen. Im Beispiel der travel.ch sind das die einzelnen Webseiten, durch welche sich man bewegen muss. 
 
 \begin{figure}[H]
 	\centering
@@ -295,9 +296,9 @@ Bei den Tests gibt es Zustandsübergänge welche eingehalten werden müssen. Im 
 	\label{fig:umsetzung:zustandsgraph}
 \end{figure}
 
-Gestartet wird auf der Startseite oder der Engine spezifichen Einstiegsseiten. Von dort aus gelangt man auf eine entsprechende Auswahl Seite. So angelt man sich vor bis man zum letzten Status gelangt ist und die Buchung abschliesst.
+Gestartet wird auf der Startseite, oder den Engine spezifischen Einstiegsseiten. Von dort aus gelangt man auf eine entsprechende-Auswahl Seite. So angelt man sich vor bis man zum letzten Status gelangt ist und die Buchung abschliesst.
 
-Diese Zustandsübergänge müssen von den Tests eingehalten werden. Dass nachfolgende Sequenzdiagramm\footcite{sequence_diagram} zeigt den Ablauf des CityTrip Tests.
+Diese Zustandsübergänge müssen von den Tests eingehalten werden. Das nachfolgende Sequenzdiagramm\footcite{sequence_diagram} zeigt den Ablauf des CityTrip Tests.
 
 \begin{figure}[H]
 	\centering
@@ -306,13 +307,13 @@ Diese Zustandsübergänge müssen von den Tests eingehalten werden. Dass nachfol
 	\label{fig:umsetzung:zustandsgraph:sequenz}
 \end{figure}
 
-Die einzelnen Lifelines\footcite{sequence_diagram} stellen die Pages oder Modules dar, welche benutzt werden. Die Reihenfolge entspricht jener aus dem obigen Zustandsgraphen. Deshalb muss bei jedem Test auf der \textit{StartPage} oder auf der Engine Einstiegsseite begonnen werden.
+Die einzelnen Lifelines\footcite{sequence_diagram} stellen die Pages oder Modules dar, die benutzt werden. Die Reihenfolge entspricht jener aus dem obigen Zustandsgraphen. Deshalb muss bei jedem Test auf der \textit{StartPage}, oder auf der Engine Einstiegsseite begonnen werden.
 
-Da ein Zustandsübergang dem laden einer Webseite entspricht, ist dieser Vorgang nicht sofort, sondern er dauert einige Sekunden. Die Dauer ist dabei unterschiedlich. Die Tests warten bis zu 10 Sekunden, bis eine Seite geladen ist. Dies sollte generell ausreichen. Eine Ausnahme bilden die Auswahl Pages. Diese müssen warten, bis die Suchresultate geladen sind was erheblich länger dauern kann. Abhängig davon, ob die Resultate aus einem Cache\footcite{Cache} generiert werden oder Live abgefragt werden müssen. Die Auswahl-Seiten warten deshalb bis zu 30 Sekunden.
+Da ein Zustandsübergang dem Laden einer Webseite entspricht, ist dieser Vorgang nicht sofort, sondern dauert einige Sekunden. Die Dauer ist dabei unterschiedlich. Die Tests warten bis zu zehn Sekunden bis eine Seite geladen ist. Dies sollte generell ausreichen. Eine Ausnahme bilden die Auswahl-Pages. Diese müssen warten bis die Suchresultate geladen sind, was erheblich länger dauern kann. Abhängig davon, ob die Resultate aus einem Cache\footcite{Cache} generiert werden, oder Live abgefragt werden müssen. Die Auswahl-Seiten warten deshalb bis zu 30 Sekunden.
 
 \section{Architektur}
 \label{sec:umsetzung:architektur}
-Das Kapitel widmet sich der Architektur. Das Programm ist in einzelne Bereiche, so genannte Namespaces aufgegliedert. Diese werden für sich beschrieben, sowie die Interaktion zwischen ihnen.
+Das Kapitel widmet sich der Architektur. Das Programm ist in einzelne Bereiche, so genannte Namespaces, aufgegliedert. Diese werden für sich beschrieben sowie die Interaktion zwischen ihnen.
 
 Folgend nun die Übersicht über die Namespaces in Form eines Klassendiagramms:
 
@@ -330,11 +331,11 @@ Folgend nun die Übersicht über die Namespaces in Form eines Klassendiagramms:
 	\caption{Klassendiagramm Tests}
 	\label{fig:umsetzung:architektur:tests}
 \end{figure}
-Im Ordner Tests sind die Tests gespeichert. Zur Erstellung des Drivers wird die Klasse \textit{DriverFactory} aus dem Namespace \textit{Bootstrap} benötigt (siehe \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium}) . Für die Interaktion mit dem Browser werden die \textit{Pages} verwendet (siehe \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject}).
+Im Ordner Tests sind die Tests gespeichert. Zur Erstellung des Drivers wird die Klasse \textit{DriverFactory} aus dem Namespace \textit{Bootstrap} benötigt (siehe \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium}). Für die Interaktion mit dem Browser werden die \textit{Pages} verwendet (siehe \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject}).
 
-Die HappyPath Tests sind in der Datei HappyPath.cs im spezifiziert, die SearchSmokeTests im File SearchSmokeTests.cs und für die Main Tests gibt es für die jeweilige Engine eine eigene Datei (Citytrip.cs und Flight.cs).
+Die HappyPath Tests sind in der Datei HappyPath.cs spezifiziert, die SearchSmokeTests im File SearchSmokeTests.cs und für die Main Tests gibt es für die jeweilige Engine eine eigene Datei (Citytrip.cs und Flight.cs).
 
-Wie im \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium} beschrieben werden die Tests mit C\# umgesetzt und mittels des UnitTest Frameworks NUnit\footcite{NUnit_-_Home_2015-09-26} angetrieben.
+Wie im \cref{sec:umsetzung:selenium} \nameref{sec:umsetzung:selenium} beschrieben, werden die Tests mit C\# umgesetzt und mittels des UnitTest Frameworks NUnit\footcite{NUnit_-_Home_2015-09-26} angetrieben.
 
 \begin{lstlisting}
 [SetUp]
@@ -354,7 +355,7 @@ public void TearDown()
 }
 \end{lstlisting}
 
-Die Methoden SetUp und TearDown werden zu Beginn respektive zum Ende jedes Tests ausgeführt. Die SetUp Methode lädt den Treiber mittels der DriverFactory und erstellt die Klasse \textit{WebDriverWait} (siehe \cref{sec:umsetzung:probleme:timing} \nameref{sec:umsetzung:probleme:timing}). Die TearDown Methode sendet den Status über Erfolg oder Misserfolg an den Service-Anbieter und schliesst den Treiber wenn der Test abgeschlossen ist.
+Die Methoden SetUp und TearDown werden zu Beginn, respektive zum Ende jedes Tests, ausgeführt. Die SetUp Methode lädt den Treiber mittels der DriverFactory und erstellt die Klasse \textit{WebDriverWait} (siehe \cref{sec:umsetzung:probleme:timing} \nameref{sec:umsetzung:probleme:timing}). Die TearDown Methode sendet den Status über Erfolg, oder Misserfolg an den Service-Anbieter und schliesst den Treiber, wenn der Test abgeschlossen ist.
 
 Eine Testmethode wird mit dem \textit{Test} Attribut gekennzeichnet. Diese werden von NUnit erkannt und ausgeführt.
 
@@ -374,11 +375,11 @@ public void Citytrip_ToAmsterdam_FromZurich_Room1_1Adults1Child_Room2_1Adult()
 }
 \end{lstlisting}
 
-In jedem Test wird zuerst auf die Startseite Navigiert (Zeile 5) und die \textit{StartPage} instanziiert (Zeile 6).
+In jedem Test wird zuerst auf die Startseite navigiert (Zeile 5) und die \textit{StartPage} instanziiert (Zeile 6).
 
 Danach folgen die Testinstruktionen und die Behauptungen.
 
-Wenn der Test durchläuft, sprich es gab keine Behauptung welche fehlgeschlagen ist, so wird zum Schluss noch \textit{driverFactory.TestSucceeded();} aufgerufen. Dies signalisiert das der Test erfolgreich war was dem Service-Anbieter übermittelt werden kann (weitere Informationen dazu im \cref{sec:umsetzung:architektur:testrunner} \nameref{sec:umsetzung:architektur:testrunner}).
+Wenn der Test durchläuft, gab es keine Behauptungen, welche fehlgeschlagen sind. Dann wird zum Schluss \textit{driverFactory.TestSucceeded();} aufgerufen, um zu signalisieren, dass der Test erfolgreich war. Diese Nachricht wird dem Service-Anbieter übermittelt (weitere Informationen dazu im \cref{sec:umsetzung:architektur:testrunner} \nameref{sec:umsetzung:architektur:testrunner}).
 
 \subsection{Bootstrap}
 \label{sec:umsetzung:architektur:bootstrap}
@@ -392,13 +393,13 @@ Das Bootstraping ist dazu da, die Grundlage für den Test bereitzustellen. Dazu 
 
 \subsubsection{DriverFactory}
 \label{sec:umsetzung:Architektur:DriverFactory}
-Die DriverFactory ist der Einstiegspunkt in die ganze initialisierung (Bootstrapping) eines Tests und zuständig für die Erstellung eines Treibers. Dazu wird ein TestRunner benötigt (siehe \cref{sec:umsetzung:architektur:testrunner} \nameref{sec:umsetzung:architektur:testrunner}). Welcher erstellt werden soll wird über die Konfiguration (siehe \cref{sec:umsetzung:architektur:bootstrap:konfiguration} \nameref{sec:umsetzung:architektur:bootstrap:konfiguration}) gesteuert. Zusätzlich initialisiert die DriverFactory auch die Authentifizierung, welche durch den \textit{Authenticator} durchgeführt wird.
+Die DriverFactory ist der Einstiegspunkt in die ganze Initialisierung (Bootstrapping) eines Tests und zuständig für die Erstellung eines Treibers. Dazu wird ein TestRunner benötigt (siehe \cref{sec:umsetzung:architektur:testrunner} \nameref{sec:umsetzung:architektur:testrunner}). Welcher erstellt werden soll, wird über die Konfiguration (siehe \cref{sec:umsetzung:architektur:bootstrap:konfiguration} \nameref{sec:umsetzung:architektur:bootstrap:konfiguration}) gesteuert. Zusätzlich initialisiert die DriverFactory auch die Authentifizierung, welche durch den \textit{Authenticator} durchgeführt wird.
 
 \subsubsection{Konfiguration}
 \label{sec:umsetzung:architektur:bootstrap:konfiguration}
-Es gibt zwei Orte wo die Ausführung konfiguriert werden kann. Dies ist zum einen in den \textit{app.config}-Dateien, sowie über die Kommandozeile.
+Es gibt zwei Orte, wo die Ausführung konfiguriert werden kann. Dies ist zum einen in den \textit{app.config}-Dateien sowie über die Kommandozeile.
 
-Die app.config-Dateien sind im obersten Ordner des Projektes abgelegt. Für jede Umgebung (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}) gibt es ein dediziertes File, welche folgenden Aufbau haben:
+Die app.config-Dateien sind im obersten Ordner des Projektes abgelegt. Für jede Umgebung (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}) gibt es ein dediziertes File, welches folgenden Aufbau hat:
 
 \lstset{language=xml}
 \begin{lstlisting}
@@ -414,7 +415,7 @@ Die app.config-Dateien sind im obersten Ordner des Projektes abgelegt. Für jede
 </configuration>
 \end{lstlisting}
 
-Die der app.config kann der Service-Anbieter, die Webseite welche getestet werden soll, sowie den Typ der Authentifizierung festgelegt werden.
+In der app.config kann der Service-Anbieter, die zu testende Webseite sowie der Typ der Authentifizierung festgelegt werden.
 
 Der Browser, die Browser-Version und die Plattform sind für alle Tests die selben und werden über die Kommandozeile-Parameter definiert. Wenn die Test-Suite mit mehreren Konfigurationen getestet werden soll, so muss das Test-Projekt mehrfach mit verschiedenen Parametern ausgeführt werden. Dies wird entsprechend im Bamboo (siehe \cref{sec:umsetzung:infrastruktur} \nameref{sec:umsetzung:infrastruktur}) definiert.
 
@@ -433,15 +434,15 @@ Es gibt drei verschiedene Arten der Authentifizierung:
 \item netScaler
 \end{itemize}
 
-Keine Authentifizierung wird für die lokale Testausführung verwendet. Sprich wenn der Test auf dem eigenen Rechner ausgeführt werden soll.
+Es wird keine Authentifizierung für die lokale Testausführung auf dem eigenen Rechner verwendet. 
 
-BasicAuthentication ist die Authentifizierungsmethode des \Gls{glos:iis} Servers. Kommt man auf eine entsprechend Konfigurierte Webseite wird man vom Browser zur Eingabe eines Benutzernamens und Passwort aufgefordert. Alternativ können die beiden Werte auch über die \gls{url} mitgegeben werden in folgender Form:
+BasicAuthentication ist die Authentifizierungsmethode des \Gls{glos:iis} Servers. Kommt man auf eine entsprechend konfigurierte Webseite, wird man vom Browser zur Eingabe eines Benutzernamens und Passwort aufgefordert. Alternativ können die beiden Werte auch über die \gls{url} in folgender Form mitgegeben werden:
 \begin{quote}
 	scheme://user:passwort@host
 \end{quote}
 Die DriverFactory (siehe \cref{sec:umsetzung:Architektur:DriverFactory} \nameref{sec:umsetzung:Architektur:DriverFactory}) stellt sicher, dass die Authentifizierung für HTTP sowie für HTTPS durchgeführt wird.
 
-Der netScaler\footcite{NetScaler} ist ein Application Delivery Controller der Firma Citrix und wird in Hotelplan Gruppe verwendet um unter anderem die Authentifizierung sicherzustellen. Kommt man auf eine vom netScaler geschützten Webseite erscheint eine \Gls{glos:html}-Seite welche die Eingabe eines Passwort verlangt. Die DriverFactory gibt das Passwort ein und leitet den User auf die Startseite weiter. Danach kann mit Testausführung begonnen werden.
+Der netScaler\footcite{NetScaler} ist ein Application Delivery Controller der Firma Citrix und wird in Hotelplan Gruppe verwendet, um unter anderem die Authentifizierung sicherzustellen. Kommt man auf eine vom netScaler geschützten Webseite, erscheint eine \Gls{glos:html}-Seite, welche die Eingabe eines Passwort verlangt. Die DriverFactory gibt das Passwort ein und leitet den User auf die Startseite weiter. Danach kann mit Testausführung begonnen werden.
 
 \subsection{TestRunner}
 \label{sec:umsetzung:architektur:testrunner}
@@ -451,11 +452,11 @@ Der netScaler\footcite{NetScaler} ist ein Application Delivery Controller der Fi
 	\caption{Klassendiagramm TestRunner}
 	\label{fig:umsetzung:architektur:testrunners}
 \end{figure}
-TestRunners treiben die Tests an und sind die Anbindung an die Service-Anbieter (siehe \cref{sec:Recherche:TestingFrameworks} \nameref{sec:Recherche:TestingFrameworks}). Sie sind dafür zuständig, einen passenden und konfigurierten Treiber zu erstellen sowie eine Antwort über Erfolg oder Misserfolg an den Service-Anbieter zu senden.
+TestRunners treiben die Tests an und sind die Anbindung an die Service-Anbieter (siehe \cref{sec:Recherche:TestingFrameworks} \nameref{sec:Recherche:TestingFrameworks}). Sie sind dafür zuständig einen passenden und konfigurierten Treiber zu erstellen sowie eine Antwort über Erfolg, oder Misserfolg an den Service-Anbieter zu senden.
 
-Für die Konfiguration eines Treibers können über den Konstruktor ein Browser, eine Browser-Version sowie die Plattform/Betriebsystem übergeben werden. Die möglichen Werte sind im Ordner /Bootstrap/Devices in Objekte gekapselt. Da jedoch jeder Anbieter eigene Werte definiert, müssen dies internen auf jene des Anbieters innerhalb des TestRunners gemapped werden.
+Für die Konfiguration eines Treibers können über den Konstruktor ein Browser, eine Browser-Version sowie die Plattform/Betriebsystem übergeben werden. Die möglichen Werte sind im Ordner /Bootstrap/Devices in Objekte gekapselt. Da jedoch jeder Anbieter eigene Werte definiert, müssen die Internen auf jene des Anbieters innerhalb des TestRunners gemapped werden.
 
-Um einen Status über den Erfolg oder Misserfolg an den Service-Anbieter zu senden, sind im Interface ITestRunner die zwei Methoden \textit{TestSucceeded} und \textit{FailTestIfNotSucceeded} definiert. Sobald ein Test erfolgreich war wird die erste Methode aufgerufen. Die zweite wird zum Schluss jedes Tests ausgeführt und liefert einen Test-Erfolg an den Service anbieter, wenn TestSucceeded einmal ausgeführt wurde, sonst wird ein Test-Misserfolg gesendet. Dieser Ablauf wird im folgenden Flow Chart verbildlicht:
+Um einen Status über den Erfolg, oder Misserfolg an den Service-Anbieter zu senden, sind im Interface ITestRunner die zwei Methoden \textit{TestSucceeded} und \textit{FailTestIfNotSucceeded} definiert. Sobald ein Test erfolgreich war, wird die erste Methode aufgerufen. Die Zweite wird zum Schluss jeden Tests ausgeführt und liefert einen Test-Erfolg an den Service-Anbieter, wenn TestSucceeded einmal ausgeführt wurde, sonst wird ein Test-Misserfolg gesendet. Dieser Ablauf wird im Folgenden Flow Chart verbildlicht:
 
 \begin{figure}[H]
 	\centering
@@ -464,7 +465,7 @@ Um einen Status über den Erfolg oder Misserfolg an den Service-Anbieter zu send
 	\label{fig:umsetzung:architektur:testrunners:serviceanbieter}
 \end{figure}
 
-Ein spezieller TestRunner stellt der LocalTestRunner. Dieser führt den Test nicht bei einem Service-Anbieter durch, sondern auf der lokalen Maschine. Demnach muss der Browser, der Browser-Treiber und das Projekt auf dem eigenen Computer lauffähig sein. Dieser wird hauptsächlich für die Entwicklung verwendet da die Tests schneller abgearbeitet werden können. Die deiden Methoden TestSucceeded und FailTestIfNotSucceeded machen bei diesem TestTreiber nichts.
+Der LocalTestRunner stellt einen speziellen TestRunner dar. Dieser führt den Test nicht bei einem Service-Anbieter durch, sondern auf der lokalen Maschine. Demnach muss der Browser, der Browser-Treiber und das Projekt auf dem eigenen Computer lauffähig sein. Dieser wird hauptsächlich für die Entwicklung verwendet, da die Tests schneller abgearbeitet werden können. Die beiden Methoden TestSucceeded und FailTestIfNotSucceeded machen bei diesem TestTreiber nichts.
 
 \subsection{Pages}
 \begin{figure}[H]
@@ -473,12 +474,12 @@ Ein spezieller TestRunner stellt der LocalTestRunner. Dieser führt den Test nic
 	\caption{Klassendiagramm Pages}
 	\label{fig:umsetzung:architektur:pages}
 \end{figure}
-Die funktionsweise der Page Objekte wurde im \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject} bereits erläutert.
+Die Funktionsweise der Page Objekte wurde im \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject} bereits erläutert.
 
 Für die Tests ist der Einstieg immer das Objekt \textit{StartPage}. Von der Startseite kann ein \textit{SearchForm} angefordert werden, welches in Form einer konkreten Implementation zurückgegeben wird. Das SearchForm liefert dann eine Suchresultatseite. So angelt man sich weiter vor bis zur letzten Seite.
 
 
-Die Abbildung \ref{fig:umsetzung:zustandsgraph:sequenz} zeigt das Sequenzdiagramm des CityTrip Tests. Die Lifelines entsprechen den Objekten im Page Namespace, welche in der Abbildung \ref{fig:umsetzung:architektur:pages} entnommen werden können. Eine Page oder ein Modul muss immer eine weitere Page zurückliefern, für die im Zustandsgraphen eine Verbindung besteht.
+Die Abbildung \ref{fig:umsetzung:zustandsgraph:sequenz} zeigt das Sequenzdiagramm des CityTrip Tests. Die Lifelines entsprechen den Objekten im Page Namespace, welche in der Abbildung \ref{fig:umsetzung:architektur:pages} entnommen werden können. Eine Page, oder ein Modul muss immer eine weitere Page zurückliefern, für die im Zustandsgraphen eine Verbindung besteht.
 
 \subsection{Modules}
 \begin{figure}[H]
@@ -490,16 +491,15 @@ Die Abbildung \ref{fig:umsetzung:zustandsgraph:sequenz} zeigt das Sequenzdiagram
 Module sind wiederkehrende Teile einer Page (siehe \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject}). Beispiele dafür sind die Suchformulare der verschiedenen Engines, da diese auf der Start-, auf der Engine-Einstiegs- sowie auf der Suchresultatseite vorkommen.
 
 \section{Probleme}
-Bei der Umsetzung gab/gibt es auch Probleme, die in diesem Abschnitt erläutert werden.
+Bei der Umsetzung gab und gibt es auch Probleme, die in diesem Abschnitt erläutert werden.
 
 \subsection{Timing}
 \label{sec:umsetzung:probleme:timing}
-Wichtig für den Erfolg von Selenium Tests sind die Timings. Einige Teile der Webseite brauchen mehr Zeit bis sie geladen sind, da viel Rechenleistung benötigt wird oder sie mit JavaScript nachgeladen werden. Die Pages (siehe \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject}) warten deshalb im Konstruktor, bis die Webseite geladen ist. Dazu wird die Klasse WebDriverWait von Selenium verwendet. Es wird gewartet, bis ein \Gls{glos:html}-Element gefunden wird.
+Wichtig für den Erfolg von Selenium Tests sind die Timings. Einige Teile der Webseite brauchen mehr Zeit bis sie geladen sind, da viel Rechenleistung benötigt wird, oder sie mit JavaScript nachgeladen werden müssen. Die Pages (siehe \cref{sec:umsetzung:patterns:pageobject} \nameref{sec:umsetzung:patterns:pageobject}) warten deshalb im Konstruktor bis die Webseite geladen ist. Dazu wird die Klasse WebDriverWait von Selenium verwendet. Es wird gewartet bis ein \Gls{glos:html}-Element gefunden wird.
 
-Die Timings sind sehr aufwändig, da man zu beginn meistens nicht genau weiss, wo die Tests schneller sind als die Webseite. Dies merkt man meistens erst bei der Ausführung und muss danach die Timings nachpflegen, was sehr aufwändig ist.
+Die Timings sind sehr aufwändig, da man zu Beginn meistens nicht genau weiss, wo die Tests schneller sind als die Webseite. Dies merkt man meistens erst bei der Ausführung und muss danach die Timings nachpflegen, was sehr aufwändig ist.
 
-Ein Beispiel dafür ist die Flug-Konfigurations Seite. Dort ist ein Button erst nach wenigen Sekunden anwählbar.
-Solange er es noch nicht ist hat er die Klasse "`btn-loading"'. 
+Ein Beispiel dafür ist die Flug-Konfigurations-Seite. Dort ist ein Button erst nach wenigen Sekunden anwählbar. Bis dahin hat er die Klasse "`btn-loading"'.
 
 \lstset{language=csh}
 \begin{lstlisting}
@@ -509,9 +509,9 @@ public void WaitForPageToBeReady()
 }
 \end{lstlisting}
 
-Mit diesem Code wird sichergestellt, dass gewartet wird bis der Button die Klasse nicht mehr hat.
+Mit diesem Code wird sichergestellt, dass gewartet wird bis der Button die Klasse "`btn-loading"' nicht mehr hat.
 
-Auf der Flugresultat Seite werden die Flüge über JavaScript nachgeladen, weshalb gewartet werden muss bis eine Antwort eingetroffen ist und diese in dem Browser dargestellt wird.
+Auf der Flugresultat-Seite werden die Flüge über JavaScript nachgeladen, weshalb gewartet werden muss bis eine Antwort eingetroffen ist und diese in dem Browser dargestellt wird.
 
 \begin{lstlisting}
 public void WaitForResults()
@@ -520,16 +520,16 @@ public void WaitForResults()
 }
 \end{lstlisting}
 
-Diese Methode wartet, bis der Behälter für die Suchresultate die Klasse "`content-loaded"' besitzt, denn erst dann darf der Test weitergeführt werden.
+Diese Methode wartet bis der Behälter für die Suchresultate die Klasse "`content-loaded"' besitzt, da erst dann der Test weitergeführt werden darf.
 
 \subsection{Komplexität der Tests}
 \label{sec:umsetzung:probleme:komplexität}
-Die Tests sind sehr gross, da der Ablauf von der Such- bis zur letzten Checkout-Seite eingehalten werden muss. Ersichtlich ist dies am Zustandsgraphen welche im \cref{sec:umsetzung:zustandsgraph} \nameref{sec:umsetzung:zustandsgrapht} aufgeführt ist. Wenn in diesem Ablauf irgendwo ein Fehler auftritt ist der gesamte Test fehlgeschlagen. Dies ist häufig der Fall auf der Suchresultatseite, da dort Daten direkt vom Anbieter abgefragt werden und keine vordefinierten Antworten (Stubs) zurückgeliefert werden können. Dadurch kann es auftreten, dass kein Suchresulat vorhanden ist mit welchem getestet werden kann.
+Die Tests sind sehr gross, da der Ablauf von der Such- bis zur letzten Checkout-Seite eingehalten werden muss. Ersichtlich ist dies am Zustandsgraphen, der im \cref{sec:umsetzung:zustandsgraph} \nameref{sec:umsetzung:zustandsgraph} aufgeführt ist. Wenn in diesem Ablauf irgendwo ein Fehler auftritt, ist der gesamte Test fehlgeschlagen. Dies ist häufig der Fall auf der Suchresultatseite, da dort Daten direkt vom Anbieter abgefragt werden und keine vordefinierten Antworten (Stubs) zurückgeliefert werden können. Dadurch kann es auftreten, dass kein Suchresulat vorhanden ist mit welchem getestet werden kann.
 
-Als Lösung können Stubs eingesetzt werden\footcite{Stubs}. Da die Webseite jedoch noch nicht über solch einen Mechanismus verfügt und die Datenobjekte sehr gross sind, kann dies nicht mehr im Umfang dieser Arbeit erledigt werden.
+Als Lösung können Stubs\footcite{Stubs} eingesetzt werden. Da die Webseite jedoch noch nicht über solch einen Mechanismus verfügt und die Datenobjekte sehr gross sind, kann dies nicht mehr im Umfang dieser Arbeit erledigt werden.
 
 \subsection{Instabilität der Testumgebung}
 \label{sec:umsetzung:probleme:stabilität}
-Zusätzlich ist die Testumgebung instabil. Dies äussert sich dadurch, dass eine Suche beim ersten Durchlauf keine Resultate liefert oder willkürlich 500 Fehlermeldungen ausgegeben werden. Passiert dies auf irgend einer Seite, schlägt der gesamte Test fehl. 
+Zusätzlich ist die Testumgebung instabil. Dies äussert sich dadurch, dass eine Suche beim ersten Durchlauf keine Resultate liefert, oder willkürlich 500 Fehlermeldungen auftreten. Passiert dies auf irgend einer Seite, schlägt der gesamte Test fehl. 
 
-Im Moment gibt es firmen-itern ein weiteres Projekt, dass die bestehenden Server durch neue ablöst. Danach sollten die Tests nochmals durchgeführt werden um zu überprüfen ob sie auf den neuen Infrastruktur stabiler laufen.
+Im Moment gibt es firmenitern ein weiteres Projekt, das die bestehenden Server durch neue ablöst. Danach sollten die Tests nochmals durchgeführt werden, um zu überprüfen, ob sie auf der neuen Infrastruktur stabiler laufen.

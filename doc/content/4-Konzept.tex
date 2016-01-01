@@ -3,9 +3,9 @@
 \label{sec:konzept}
 Dieses Kapitel spezifiziert die umzusetzenden Testfälle. Diese beinhalten die Ausführung, die erwarteten Resultate sowie allfällige Nachbedingungen. Die Vorbedingungen sind für alle Testfälle gleich, da jeder in einer neuen virtuellen Maschine (siehe \Gls{glos:virtualMachine}) gestartet wird und somit keine \Glspl{glos:session} und \Glspl{glos:httpcookie} vorhanden sind.
 
-Um die Kosten zu minimieren werden möglichst wenig Testfälle spezifiziert, jedoch trotzdem die gesamte Funktionalität der Webseite überprüft werden kann. Weitere Details dazu sind im \cref{sec:analyse} \nameref{sec:analyse} aufgeführt.
+Um die Kosten zu minimieren, werden möglichst wenig Testfälle spezifiziert, jedoch trotzdem die gesamte Funktionalität der Webseite überprüft. Weitere Details dazu sind im \cref{sec:analyse} \nameref{sec:analyse} aufgeführt.
 
-Eine Übersicht der Testfälle wurde im Wiki von Hotelplan erstellt und wird zum Verständnis dort gepflegt. Die Liste ist im \cref{app:Testfälle} \nameref{app:Testfälle} unter "`Test Cases"' beigefügt.
+Eine Übersicht der Testfälle wurde im \Gls{glos:wiki} von der Hotelplan Management AG erstellt und wird zum Verständnis dort gepflegt. Die Liste ist im \cref{app:Testfälle} \nameref{app:Testfälle} unter "`Test Cases"' beigefügt.
 
 \section{Übersicht}
 Die Seite der travelwindow AG besteht aus drei Bereichen (auch Engines genannt):
@@ -35,7 +35,7 @@ Die wichtigsten Kriterien für eine Buchungsplattform sind folgende:
 \item Kunde kann suchen
 \item Rest der Funktionalitäten
 \end{itemize}
-Punkt eins wird von den Happy Path Tests überprüft. Sie versuchen auf dem direktesten Weg eine Buchung abzuschliessen. Als zweites werden die Smoke Tests durchgeführt, da sie testen ob ein Kunde für die Top 10 Destinationen Resultate finden kann. Schlussendlich werden die Main Tests gestartet um den Rest der Webseite zu testen.
+Punkt eins wird von den Happy Path Tests überprüft. Sie versuchen auf dem direktesten Weg eine Buchung abzuschliessen. Als Zweites werden die Smoke Tests durchgeführt, da sie testen, ob ein Kunde für die Top 10 Destinationen Resultate finden kann. Schlussendlich werden die Main Tests gestartet, um den Rest der Webseite zu testen.
 
 Innerhalb einer dieser drei Testkategorien wird keine weitere Reihenfolge eingehalten.
 
@@ -66,7 +66,7 @@ Passagierangaben (Geschlecht, Vorname, Name, Geburtsdatum):
 
 \subsection{Datumsangaben}
 Die möglichen Eingabewerte für die Reisedaten sind im \cref{sec:analyse:grenzwertanalyse} \nameref{sec:analyse:grenzwertanalyse} beschrieben.
-Gemäss der Priorisierung der Funktionalität (siehe  \cref{sec:analyse:testabdeckung} \nameref{sec:analyse:testabdeckung}) werden die Grenzwerte der Reisedaten nicht im Umfang dieses Projektes getestet. Deshalb werden fix folgende Daten verwendet:
+Gemäss der Priorisierung der Funktionalität (siehe  \cref{sec:analyse:testabdeckung} \nameref{sec:analyse:testabdeckung}) werden die Grenzwerte der Reisedaten nicht im Umfang dieses Projektes getestet. Deshalb werden folgende Daten fix verwendet:
 
 \begin{itemize}
 \item Startdatum: 3 Monate in die Zukunft, erster Tag des Monats.
@@ -90,11 +90,11 @@ Der Happy Path testet, ob beim Standard Szenario keine Fehler auftreten. Jede En
 
 \section{Smoke Tests}
 \label{sec:konzept:smoketests}
-Smoke Tests führen eine Aktion durch und schauen lediglich, ob kein Fehler aufgetreten ist. Der Begriff rührt daher, dass eine Maschine gestartet und getestet wurde, ob sie nicht beginnt zu rauchen\footcite{Smoke_testing_software_-_Wikipedia_the_free_encyclopedia_2015-08-01}.
+Smoke Tests führen eine Aktion durch und schauen lediglich, ob keine Fehler aufgetreten sind. Der Begriff rührt daher, dass eine Maschine gestartet und getestet wurde, ob sie nicht beginnt zu rauchen\footcite{Smoke_testing_software_-_Wikipedia_the_free_encyclopedia_2015-08-01}.
 
 Bei den folgenden Smoke Tests werden pro Engine die jeweiligen Top 10 (siehe \cref{sec:Recherche:Zielgruppe:top10} \nameref{sec:Recherche:Zielgruppe:top10}) Destinationen gesucht und überprüft, ob Suchresultate geliefert werden.
 
-Die Tests sind pro Engine immer gleich aufgebaut. Die Suchparameter sind dieselben und auch die Verifikation, ob kein Fehler auftraten, ist äquivalent. Das Einzige, was sich unterscheidet, sind die Destinationen. Daher wird jeweils nur der Test für die erste Destination ausführlich spezifiziert. Für die restlichen 9 gilt der selbe Ablauf.
+Die Tests sind pro Engine immer gleich aufgebaut. Die Suchparameter sind dieselben und auch die Fehlerverifikation ist äquivalent. Das Einzige, was sich unterscheidet, sind die Destinationen. Daher wird jeweils nur der Test für die erste Destination ausführlich spezifiziert. Für die Restlichen neun gilt der selbe Ablauf.
 
 \includepdf[scale=0.8,pages=1,pagecommand=\subsection{Citytrip}]{./../Testspezifikation: Smoke Tests - Citytrip.pdf}
 
